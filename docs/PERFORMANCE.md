@@ -302,7 +302,7 @@ Release APKs (R8, resource shrinking), as gated:
 
 | APK | Size | Dex, uncompressed |
 | --- | ---: | ---: |
-| `launcher-release.apk` | 7,953,856 bytes (7.6 MB) | 574,168 bytes in 2 files |
+| `launcher-release.apk` | 8,032,653 bytes (7.7 MB) | 623,596 bytes in 2 files |
 | `airplay-release.apk` | 529,594 bytes (517 KB) | 401,104 bytes in 2 files |
 
 The launcher's size is almost all the 24 bundled backdrop photos
@@ -310,8 +310,11 @@ The launcher's size is almost all the 24 bundled backdrop photos
 about 21 KB to the receiver APK and 46 KB to the launcher APK (10.6 KB of
 it dex), and the classic RAOP support for Music on a Mac about 10.6 KB to
 the receiver APK, and the Inputs menu about 19 KB to the launcher APK
-(14.5 KB of it dex), measured on CI. Each APK has two dex files
-because R8 puts the startup profile's classes in the first one.
+(14.5 KB of it dex), measured on CI. Rozan 0.1.1 added about 77 KB to the
+launcher APK (48 KB of it dex): automatic updates (the `update` package,
+14 KB of dex on its own), the AirPlay, backdrop credit and licence screens,
+and the warning row. Each APK has two dex files because R8 puts the startup
+profile's classes in the first one.
 
 ## Emulator caveats
 

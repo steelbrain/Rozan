@@ -20,12 +20,12 @@
   "apk": {
     "launcher": {
       "apk_bytes": {
-        "budget": 8113152,
-        "measured": 7953856
+        "budget": 8194048,
+        "measured": 8032653
       },
       "dex_bytes": {
-        "budget": 590848,
-        "measured": 574168
+        "budget": 640000,
+        "measured": 623596
       }
     },
     "airplay": {
