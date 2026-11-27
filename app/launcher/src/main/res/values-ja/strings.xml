@@ -43,6 +43,8 @@
     <string name="settings_receiver_name_invalid">名前は空にできません。以前の名前のままです。</string>
     <string name="settings_airplay_wake">接続時にテレビをオンにする</string>
     <string name="settings_airplay_pin_hint">新しい接続のたびに、この画面に PIN が表示されます。</string>
+    <string name="settings_airplay_app_installed">別アプリの Rozan AirPlay がインストールされています</string>
+    <string name="settings_airplay_app_installed_summary">そのアプリは不要です。Rozan には AirPlay が組み込まれており、別アプリなしで動作します。両方がインストールされていると、受信できるのはどちらか一方だけです。選択すると Rozan AirPlay アプリをアンインストールします。</string>
     <string name="settings_overlay">他のアプリの上に重ねて表示</string>
     <string name="settings_overlay_allowed">許可済み</string>
     <string name="settings_overlay_not_allowed">許可しない</string>
@@ -51,9 +53,11 @@
     <string name="settings_section_about">このアプリについて</string>
     <string name="settings_version">バージョン</string>
     <string name="settings_license">ライセンス</string>
+    <string name="settings_source_code">ソースコード</string>
     <string name="settings_notices">オープンソース ライセンス</string>
     <string name="settings_notices_summary">Rozan に含まれるライブラリのライセンス</string>
     <string name="settings_section_credits">背景の写真</string>
+    <string name="settings_credits_summary">各写真の作者、ライセンス、出典</string>
     <string name="settings_credits_loading">読み込んでいます…</string>
     <string name="settings_credits_none">背景の写真がインストールされていません。</string>
     <string name="notices_title">オープンソース ライセンス</string>
@@ -62,4 +66,30 @@
     <plurals name="minutes">
         <item quantity="other">%d 分</item>
     </plurals>
+    <string name="settings_section_updates">アップデート</string>
+    <string name="settings_update_auto">自動的にアップデート</string>
+    <string name="settings_update_off_summary">1 日に 1 回 GitHub で Rozan の新しいリリースを確認してインストールします</string>
+    <string name="settings_update_not_checked">1 日に 1 回確認します。まだ確認していません。</string>
+    <string name="settings_update_up_to_date">1 日に 1 回確認します。最新です: %1$s が最新リリースです（%2$s に確認）。</string>
+    <string name="settings_update_updated">1 日に 1 回確認します。%2$s にバージョン %1$s にアップデートしました。</string>
+    <string name="settings_update_failed">1 日に 1 回確認します。前回の確認（%1$s）に失敗しました: %2$s</string>
+    <string name="settings_update_downloaded">バージョン %1$s をダウンロードして検証しました。</string>
+    <string name="settings_update_waiting_screen">バージョン %1$s をダウンロードしました。他のアプリを開いているときなど、Rozan の画面が表示されていないときにインストールされます。</string>
+    <string name="settings_update_waiting_airplay">バージョン %1$s をダウンロードしました。AirPlay が使われていないときにインストールされます。</string>
+    <string name="settings_update_ask">バージョン %1$s をダウンロードしました。Android で確認が必要です。「アップデートをインストール」を選択してください。</string>
+    <string name="settings_update_installing">バージョン %1$s をインストールしています…</string>
+    <string name="settings_update_failure_network">GitHub に接続できませんでした。</string>
+    <string name="settings_update_failure_server">GitHub が HTTP ステータス %1$d を返しました。</string>
+    <string name="settings_update_failure_release">リリースに Rozan が読み取れるランチャーの APK と SHA256SUMS がありません。</string>
+    <string name="settings_update_failure_checksum">ダウンロードしたファイルがサイズまたは SHA256SUMS と一致しません。</string>
+    <string name="settings_update_failure_package">ダウンロードしたファイルは、同じ鍵で署名された新しい Rozan ではありません。</string>
+    <string name="settings_update_failure_storage">ダウンロードしたファイルを保存できませんでした。空き容量を確認してください。</string>
+    <string name="settings_update_failure_install">Android はアップデートをインストールしませんでした。</string>
+    <string name="settings_update_install">アップデートをインストール（%1$s）</string>
+    <string name="settings_update_install_summary">Android で確認を求められます。インストール中は Rozan が閉じます。</string>
+    <string name="settings_update_permission">不明なアプリのインストール</string>
+    <string name="settings_update_permission_allowed">許可済み</string>
+    <string name="settings_update_permission_not_allowed">許可しない</string>
+    <string name="settings_update_permission_allowed_summary">Rozan はダウンロードしたアップデートをインストールできます。</string>
+    <string name="settings_update_permission_missing_summary">自動アップデートに必要です。許可するには、adb を使用できるパソコンで次のコマンドを実行してください。</string>
 </resources>

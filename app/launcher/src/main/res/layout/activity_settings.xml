@@ -6,7 +6,9 @@
     android:paddingStart="@dimen/rozan_safe_horizontal"
     android:paddingEnd="@dimen/rozan_safe_horizontal">
 
+    <!-- Each screen that uses this layout sets its own title. -->
     <TextView
+        android:id="@+id/settings_heading"
         android:layout_width="@dimen/settings_side_column"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/rozan_safe_vertical"

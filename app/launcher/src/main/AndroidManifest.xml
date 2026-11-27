@@ -8,6 +8,14 @@
     <!-- The "Uninstall" action on app tiles opens the system uninstall dialog. -->
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
     <!--
+      "Update automatically" (update/): installing the downloaded update needs the
+      "install unknown apps" app-op, granted over adb (docs/INSTALL.md, step 4). From
+      API 31 an app that holds it may update itself without asking the user, which
+      from API 33 also needs UPDATE_PACKAGES_WITHOUT_USER_ACTION (a normal permission).
+    -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.UPDATE_PACKAGES_WITHOUT_USER_ACTION" />
+    <!--
       The Home button redirect has to tell activities from dialogs and popups in
       every app that comes to the front (docs/research/home-button-override.md,
       6.4 step 1), which needs every package visible, not only those with a
@@ -60,6 +68,7 @@
         android:icon="@drawable/ic_app"
         android:label="@string/app_name"
         android:localeConfig="@xml/locales_config"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/Theme.Rozan"
         tools:targetApi="33">
@@ -90,6 +99,17 @@
             android:targetActivity=".LauncherSettingsActivity" />
         <activity
             android:name=".OpenSourceNoticesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LicenseActivity"
+            android:exported="false" />
+        <!-- The AirPlay tile's screen: the AirPlay section of the settings on its own. -->
+        <activity
+            android:name=".AirPlaySettingsActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:exported="false" />
+        <activity
+            android:name=".BackdropCreditsActivity"
             android:exported="false" />
 
         <!--
@@ -125,5 +145,21 @@
             android:process=":redirect"
             android:taskAffinity=""
             android:theme="@style/Theme.Rozan.Probe" />
+
+        <!-- "Update automatically" (update/): the daily check and install jobs, and the installer's results. -->
+        <service
+            android:name=".update.UpdateJobService"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <receiver
+            android:name=".update.UpdateInstallReceiver"
+            android:exported="false" />
+        <receiver
+            android:name=".update.UpdateReplacedReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

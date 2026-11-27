@@ -18,4 +18,10 @@
     <color name="rozan_accent">#FF0A84FF</color>
     <color name="rozan_toggle_off">#FF48484A</color>
     <color name="rozan_toggle_off_focused">#FFAEAEB2</color>
+    <!--
+      Warnings only (SettingsWarningView), never decoration: the one colour
+      besides the accent, so a warning cannot be mistaken for an ordinary row.
+    -->
+    <color name="rozan_warning">#FFFFD60A</color>
+    <color name="rozan_warning_tint">#29FFD60A</color>
 </resources>

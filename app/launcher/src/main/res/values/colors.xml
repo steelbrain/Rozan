@@ -9,4 +9,6 @@
     <!-- Dims the whole backdrop while the grid is scrolled past the first row. -->
     <color name="scrim_grid">#B3000000</color>
     <color name="options_panel">#FF2C2C2E</color>
+    <!-- Keeps the screensaver's photo title readable on bright photos. -->
+    <color name="screensaver_caption_shadow">#CC000000</color>
 </resources>

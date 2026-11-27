@@ -739,6 +739,12 @@ double-tap (picture in picture menu on Android 14 TV), CEC One Touch Play and
   ([roles.xml](https://android.googlesource.com/platform/packages/modules/Permission/+/refs/heads/android12-release/PermissionController/res/xml/roles.xml),
   [HomeRoleBehavior.java](https://android.googlesource.com/platform/packages/modules/Permission/+/refs/heads/android12-release/PermissionController/src/com/android/permissioncontroller/role/model/HomeRoleBehavior.java)).
   Whether a TV build shows the role request dialog is UNVERIFIED.
+  Observed on the API 36 Android TV emulator (2026-11-26):
+  `cmd role add-role-holder android.app.role.HOME ai.aneesiqbal.rozan.launcher`
+  succeeds and `get-role-holders` then names Rozan, but `resolve-activity`
+  for `MAIN`/`HOME` still returns `com.google.android.tvlauncher/.MainActivity`
+  (HOME priority 2; Rozan 0) and the Home key still starts it. The role alone
+  does not change what Home opens while the stock launcher is enabled.
 - AOSP TV Settings has no home picker: `android.settings.HOME_SETTINGS` and
   `MANAGE_DEFAULT_APPS_SETTINGS` go to `EmptyStubActivity` on 9, 11 and 14
   ([android11 TvSettings manifest](https://android.googlesource.com/platform/packages/apps/TvSettings/+/refs/heads/android11-release/Settings/AndroidManifest.xml)).
@@ -1120,7 +1126,8 @@ not present on android12-release), so this mode is for Fire OS 7 and 8 only.
 ```kotlin
 val intent = Intent(Intent.ACTION_MAIN)
     .setComponent(ComponentName(this, HomeActivity::class.java))
-    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
+    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED or
+        Intent.FLAG_ACTIVITY_NO_ANIMATION)
     .putExtra(EXTRA_FROM_REDIRECT, true)
 if (homeTypeTask) intent.addCategory(Intent.CATEGORY_HOME) // the only category, see A5
 startActivity(intent)
@@ -1139,6 +1146,20 @@ startActivity(intent)
     about 100 to 150 ms is the smaller harm.
 - Start it from the service's own context; the system binds accessibility
   services with `BIND_ALLOW_BACKGROUND_ACTIVITY_STARTS` (A3).
+- Start it without the open animation (`FLAG_ACTIVITY_NO_ANIMATION`).
+  Observed on the API 36 Android TV emulator (2026-11-26), Home pressed from
+  the TV Settings panel over Rozan: with the default animation the system
+  cross-faded from the stock home to Rozan over about 300 ms, and the stock
+  home was on screen for about 400 ms in all; without it, Rozan replaced the
+  stock home in one frame and the stock home showed for about 35 ms (about
+  50 ms from a full-screen app). When the stock home was already behind the
+  Settings panel, the start arrived during the system's own close animation
+  and the cross-fade (about 300 ms) still played.
+- The flash cannot be removed in redirect mode: the redirect learns of the
+  stock home from its window event, which comes once the stock home has been
+  drawn. Starting Rozan earlier, on `H`, would race the system's own start
+  of the stock home, which the design rules out (no timing dependence). Only
+  native mode removes it.
 - No `performGlobalAction(GLOBAL_ACTION_HOME)` anywhere: it would go through
   the stock home and back into step 8.
 - No self-sent `PendingIntent`: it gains nothing over `startActivity` (A3).

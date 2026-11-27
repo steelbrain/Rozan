@@ -3,7 +3,7 @@
 The home screen and the screensaver show 24 landscape photos that come with
 Rozan. Each one is public domain or CC0. The credits below name every
 photo's author, licence and source, and Rozan's settings show the same
-credits under "Backdrop photos".
+credits under About > "Backdrop photos".
 
 ## Licences
 

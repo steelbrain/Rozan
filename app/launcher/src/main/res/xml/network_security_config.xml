@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The launcher's only HTTP requests are the updater's (update/), to GitHub over
+  HTTPS: no cleartext, and only the system's certificate authorities.
+  Debug builds replace this file (src/debug) to reach a test server on 127.0.0.1.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

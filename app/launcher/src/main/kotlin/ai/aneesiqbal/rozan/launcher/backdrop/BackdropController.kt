@@ -30,6 +30,8 @@ class BackdropController(
     private val scope: CoroutineScope,
     private val fallback: () -> Drawable,
     private val listener: Listener,
+    /** Called with the photo that is now on screen (see [shownImage]). */
+    private val onPhotoShown: (BackdropImage?) -> Unit = {},
 ) : FloatAnimator.Listener {
     /** Observes whether a photo now covers the whole screen. */
     fun interface Listener {
@@ -47,6 +49,16 @@ class BackdropController(
     private var height = 0
     private var started = false
     private var lastChange = 0L
+
+    /** The photo in [upper] while it fades in; it becomes [shownImage] halfway through. */
+    private var incoming: BackdropImage? = null
+
+    /**
+     * The photo on screen: the one in [lower], or the incoming one once its crossfade is past the
+     * middle. Null while none is shown or the fallback is.
+     */
+    var shownImage: BackdropImage? = null
+        private set
 
     /** Time between photo changes. */
     var intervalMs: Long = DEFAULT_INTERVAL_MS
@@ -97,6 +109,8 @@ class BackdropController(
         stop()
         upper.bitmap = null
         lower.bitmap = null
+        incoming = null
+        show(null)
         listener.onCoverageChanged(lower.fallback != null)
     }
 
@@ -115,7 +129,7 @@ class BackdropController(
                 }
                 val image = pick(list)
                 val bitmap = withContext(Background.decode) { source.decode(image, width, height) }
-                if (bitmap != null) crossfadeTo(bitmap) else schedule()
+                if (bitmap != null) crossfadeTo(bitmap, image) else schedule()
             }
     }
 
@@ -129,18 +143,34 @@ class BackdropController(
 
     private fun showFallback() {
         if (lower.fallback == null) lower.fallback = fallback()
+        show(null)
         listener.onCoverageChanged(true)
     }
 
-    private fun crossfadeTo(bitmap: Bitmap) {
+    private fun crossfadeTo(
+        bitmap: Bitmap,
+        image: BackdropImage,
+    ) {
         lastChange = SystemClock.uptimeMillis()
         upper.bitmap = bitmap
         fade.jumpTo(0f)
+        incoming = image
         fade.animateTo(1f)
+    }
+
+    private fun show(image: BackdropImage?) {
+        if (image == shownImage) return
+        shownImage = image
+        onPhotoShown(image)
     }
 
     override fun onValue(value: Float) {
         upper.alpha = value
+        val next = incoming
+        if (next != null && value >= HALFWAY) {
+            incoming = null
+            show(next)
+        }
         if (value >= 1f && upper.bitmap != null) {
             lower.bitmap = upper.bitmap
             upper.bitmap = null
@@ -159,6 +189,7 @@ class BackdropController(
 
     private companion object {
         const val CROSSFADE_MS = 1_500L
+        const val HALFWAY = 0.5f
         const val DEFAULT_INTERVAL_MS = 10 * 60_000L
     }
 }

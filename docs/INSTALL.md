@@ -1,7 +1,8 @@
 # Installing Rozan
 
 Rozan is installed from a computer with adb. This page covers the devices it
-runs on, installing and updating it, making the Home button open it, the
+runs on, installing and updating it, letting it update itself, making the
+Home button open it, the
 standalone [Rozan AirPlay](#rozan-airplay) app, and getting back to the stock
 home screen. The device-specific steps have not yet been tried on TV
 hardware, and menu paths can differ by build.
@@ -20,8 +21,8 @@ Rozan needs Android 9 or later. On Fire TV that means Fire OS 7 or later.
 | Fire TV sticks on Vega OS (4K Select, HD 2nd gen, 4K 3rd gen) | No | |
 | LG webOS, Samsung Tizen, Roku | No | |
 
-The redirect is [step 4](#4-turn-on-the-home-button-redirect); Rozan as the
-default home is [step 5](#5-rozan-as-the-real-default-home).
+The redirect is [step 5](#5-turn-on-the-home-button-redirect); Rozan as the
+default home is [step 6](#6-rozan-as-the-real-default-home).
 
 Roku OS is not Android, so neither Rozan nor Rozan AirPlay runs on it. Most
 Roku TVs and players have AirPlay built in, under Settings > Apple AirPlay
@@ -86,12 +87,13 @@ settings open from the gear at the top right of its home screen.
 Download and check the new release as above, then run the same
 `adb install -r` command. Rozan keeps its settings. Afterwards, check the
 "Home button" and "Show over other apps" rows in Rozan's settings, and redo
-step 3 or step 4 if either has changed.
+step 3 or step 5 if either has changed. Rozan can also install new releases
+itself ([step 4](#4-let-rozan-update-itself)).
 
 An update installs only over a copy signed with the same key. If adb reports
 `INSTALL_FAILED_UPDATE_INCOMPATIBLE`, uninstall Rozan first with
 `adb uninstall ai.aneesiqbal.rozan.launcher`, which deletes its settings, then
-do steps 2 to 4 again.
+do steps 2 to 5 again.
 
 ## 3. Let AirPlay show over other apps
 
@@ -110,13 +112,41 @@ In Rozan's settings, under AirPlay, "Show over other apps" then reads
 take the permission back, run the first command with `default` in place of
 `allow`. [AIRPLAY.md](AIRPLAY.md) describes using the receiver.
 
-## 4. Turn on the Home button redirect
+## 4. Let Rozan update itself
+
+With "Update automatically" on, under Updates in Rozan's settings, Rozan
+checks GitHub once a day for a new release and installs it
+([LAUNCHER.md](LAUNCHER.md#updates)). The switch is off by default. To
+install the updates it downloads, Rozan needs the "install unknown apps"
+permission. It is needed only for automatic updates. Allow it with adb:
+
+```sh
+adb shell appops set ai.aneesiqbal.rozan.launcher REQUEST_INSTALL_PACKAGES allow
+adb shell appops get ai.aneesiqbal.rozan.launcher REQUEST_INSTALL_PACKAGES   # should print allow
+```
+
+In Rozan's settings, under Updates, "Install unknown apps" then reads
+"Allowed". While it reads "Not allowed", the row shows the command above. To
+take the permission back, run the first command with `default` in place of
+`allow`. Android closes Rozan when the permission is taken back.
+
+- On Android 12 and later, Rozan installs an update without asking, at a
+  time when no Rozan screen is showing and AirPlay is not in use.
+- On Android 11 and earlier, which includes Fire OS 7 and 8, Android asks to
+  confirm every update. Rozan downloads and checks the update, then shows
+  "Install update X.Y.Z" under Updates; selecting it opens Android's
+  confirmation.
+
+Installing an update restarts Rozan's processes, as an update with adb does,
+so afterwards check the rows named under [Updating](#updating).
+
+## 5. Turn on the Home button redirect
 
 Rozan's accessibility service, "Rozan home button", opens Rozan whenever Home
 brings up the stock home screen. It can be used on every device that runs
 Rozan, and it is the only way on Fire TV and Google TV, where Rozan cannot
 or should not be the default home
-([step 5](#5-rozan-as-the-real-default-home)). It reads only which app's
+([step 6](#6-rozan-as-the-real-default-home)). It reads only which app's
 screen is in front, and it does not read or block keys. This page calls it
 the redirect.
 
@@ -166,7 +196,7 @@ In Rozan's settings, the "Home button" row reads one of:
 - "Off": the service is turned off, or Home opens a screen that Rozan does
   not replace, such as setup or the system's app chooser. The text under the
   row says which.
-- "Opens Rozan": Rozan is the default home ([step 5](#5-rozan-as-the-real-default-home)),
+- "Opens Rozan": Rozan is the default home ([step 6](#6-rozan-as-the-real-default-home)),
   so the redirect is not needed.
 
 Under the row, Rozan names the stock home screen it replaces, such as
@@ -216,8 +246,12 @@ not running, the section also shows the adb commands that turn it on.
 
 ### What to expect after pressing Home
 
-- On Fire TV the stock home screen shows before Rozan opens: for up to 5
-  seconds on Fire OS 7, and for about 250 ms on Fire OS 8.
+- The stock home screen shows briefly before Rozan opens, because the
+  redirect can only act once the stock home screen is on screen. On the
+  Android TV emulator (API 36) that is about 50 ms; on Fire TV it is up to 5
+  seconds on Fire OS 7 and about 250 ms on Fire OS 8. Where Rozan can be the
+  real default home ([step 6](#6-rozan-as-the-real-default-home)), the
+  system opens Rozan directly and the stock home screen does not show.
 - On Fire TV, the Apps button and the long-press Home panel pass through the
   stock home screen on their way to their own screen, and Rozan leaves them
   alone. A Home press made from them can leave you on the stock home screen.
@@ -229,7 +263,7 @@ not running, the section also shows the adb commands that turn it on.
   over the profile chooser. On Fire TV Edition and Omni TVs, Rozan's own
   Inputs button opens the input list ([LAUNCHER.md](LAUNCHER.md)).
 
-## 5. Rozan as the real default home
+## 6. Rozan as the real default home
 
 - Fire TV: not possible. The stock launcher always takes priority.
   `cmd package set-home-activity` and `cmd role add-role-holder` print
@@ -244,7 +278,7 @@ not running, the section also shows the adb commands that turn it on.
   not need the stock launcher. Home then opens Rozan without the redirect,
   but the stock app list behind long-press Home, the notifications panel and
   the inputs panel are gone. Keep ADB debugging on afterwards: if Rozan stops
-  working, adb is the way back ([step 6](#undo-rozan-as-the-default-home-classic-android-tv)).
+  working, adb is the way back ([step 7](#undo-rozan-as-the-default-home-classic-android-tv)).
 
 On a classic Android TV device, first look at the stock home that the "Home
 button" row in Rozan's settings names. The commands below, and the ones that
@@ -266,7 +300,7 @@ The "Home button" row in Rozan's settings then reads "Opens Rozan".
   PatchWall home app back on about 3 minutes after it is disabled, and
   China-market Xiaomi firmware refuses third-party home apps.
 
-## 6. Recovery
+## 7. Recovery
 
 Rozan never disables, hides or uninstalls the stock launcher itself, so the
 stock home screen is always there to fall back to.
@@ -365,7 +399,10 @@ allowed. Updating works as for the launcher, with its own file name.
 The launcher contains the same receiver, and only one receiver can use port
 7000 at a time. If both apps are installed, turn AirPlay off in the one you
 do not use: "Enable AirPlay" in Rozan's settings, or "AirPlay receiver" in
-Rozan AirPlay.
+Rozan AirPlay. While both are installed, Rozan's AirPlay settings start with
+the warning "A separate Rozan AirPlay app is installed", which says that it
+is not needed because Rozan's built-in AirPlay works without it. Selecting
+the warning opens Android's uninstall confirmation for Rozan AirPlay.
 
 To remove it, run `adb uninstall ai.aneesiqbal.rozan.airplay`, or uninstall
 it under Settings > Apps.

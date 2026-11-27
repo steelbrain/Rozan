@@ -67,9 +67,10 @@ internal class GlassEdge(
         /**
          * Positions along the top-left to bottom-right diagonal for [SHEEN_COLORS]. On a 16:9 tile the
          * top-right corner projects to 0.76 and the bottom-left one to 0.24: the light gathers at the
-         * top-left and bottom-right corners and is nearly gone along the middle of every side.
+         * top-left and bottom-right corners, reaches a little way along the sides from them, and is
+         * nearly gone along the middle of every side.
          */
-        val STOPS = floatArrayOf(0f, 0.1f, 0.3f, 0.7f, 0.9f, 1f)
+        val STOPS = floatArrayOf(0f, 0.14f, 0.36f, 0.64f, 0.86f, 1f)
         val SHEEN_COLORS =
             intArrayOf(
                 0xFFFFFFFF.toInt(),

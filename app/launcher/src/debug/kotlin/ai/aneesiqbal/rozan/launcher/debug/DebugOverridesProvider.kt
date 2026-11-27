@@ -52,6 +52,7 @@ internal class DebugOverridesProvider : ContentProvider() {
         private const val TAG = "LauncherDebug"
         private const val FILE = "debug_overrides"
         private const val KEY_BACKDROP = "backdrop"
+        private const val KEY_UPDATE_URL = "update_url"
 
         /**
          * Stores the pinned [backdrop] file, empty for none, for the next start (synchronously: the caller
@@ -67,11 +68,23 @@ internal class DebugOverridesProvider : ContentProvider() {
             apply(context)
         }
 
-        /** Reads the stored override into [DebugOverrides]. */
+        /** Stores the updater's metadata [url], empty for GitHub's, and applies it at once. */
+        fun storeUpdateUrl(
+            context: Context,
+            url: String,
+        ) {
+            val editor = context.getSharedPreferences(FILE, Context.MODE_PRIVATE).edit()
+            editor.putString(KEY_UPDATE_URL, url)
+            if (!editor.commit()) Log.w(TAG, "could not store the override")
+            apply(context)
+        }
+
+        /** Reads the stored overrides into [DebugOverrides]. */
         fun apply(context: Context) {
             val prefs = context.getSharedPreferences(FILE, Context.MODE_PRIVATE)
             DebugOverrides.backdropFile = prefs.getString(KEY_BACKDROP, null)?.takeIf { it.isNotEmpty() }
-            Log.i(TAG, "overrides: backdrop ${DebugOverrides.backdropFile}")
+            DebugOverrides.updateMetadataUrl = prefs.getString(KEY_UPDATE_URL, null)?.takeIf { it.isNotEmpty() }
+            Log.i(TAG, "overrides: backdrop ${DebugOverrides.backdropFile}, update ${DebugOverrides.updateMetadataUrl}")
         }
     }
 }

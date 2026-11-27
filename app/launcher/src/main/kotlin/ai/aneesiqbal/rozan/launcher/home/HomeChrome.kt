@@ -19,8 +19,9 @@ import android.view.animation.LinearInterpolator
  *   and [gridScrim] dims the whole backdrop. Once that has settled, the
  *   [backdrop] draws itself dimmed instead (see [applyAlpha]).
  * - Screensaver: grid, scrims and the top bar's buttons fade out; the clock
- *   (with its own small top scrim) stays and moves into the corner. [onShown]
- *   runs once that fade has finished.
+ *   (with its own small top scrim) stays and moves into the corner, and the
+ *   photo's title ([caption]) fades in. [onShown] runs once that fade has
+ *   finished.
  */
 class HomeChrome(
     private val grid: TileGridView,
@@ -29,6 +30,8 @@ class HomeChrome(
     /** The top bar's buttons (Inputs, when shown, and the gear), at the end of the bar. */
     private val buttons: View,
     private val clock: View,
+    /** The photo's title and the band behind it, shown only in the screensaver. */
+    private val caption: View,
     private val backdrop: BackdropController,
     /** Runs when the screensaver has fully faded in (at once with animations off). */
     private val onShown: Runnable,
@@ -113,6 +116,7 @@ class HomeChrome(
         // The buttons are gone by the middle of the fade, before the clock
         // slides over to the screen's safe margin where the gear was.
         buttons.alpha = (1f - saver * BUTTON_FADE_SPEED).coerceAtLeast(0f)
+        caption.alpha = saver
         placeClock()
     }
 

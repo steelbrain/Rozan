@@ -83,6 +83,43 @@ threads, and the contract between the core and the platform.
 - Leak tests, memory and APK size budgets, and how to profile are in
   [PERFORMANCE.md](PERFORMANCE.md).
 
+## Testing automatic updates
+
+Debug builds can point the updater at a server on the computer instead of
+GitHub, set from adb (`DebugEventsReceiver`, `UPDATE_URL`; it stays set
+until cleared). Only debug builds allow plain HTTP, and only to `127.0.0.1`
+(`src/debug/res/xml/network_security_config.xml`); `adb reverse` maps that
+address on the device to the computer. Both debug APKs below are signed with
+the same debug key, so one installs over the other.
+
+```sh
+P=ai.aneesiqbal.rozan.launcher
+./gradlew :app:launcher:assembleDebug
+adb install -r app/launcher/build/outputs/apk/debug/launcher-debug.apk
+adb shell appops set $P REQUEST_INSTALL_PACKAGES allow
+
+# A newer version to offer: -Prozan.version overrides gradle.properties.
+mkdir -p /tmp/rozan-update
+./gradlew :app:launcher:assembleDebug -Prozan.version=0.1.1
+cp app/launcher/build/outputs/apk/debug/launcher-debug.apk /tmp/rozan-update/rozan-launcher-0.1.1.apk
+python3 scripts/update-test-release.py /tmp/rozan-update 0.1.1 8765
+python3 -m http.server 8765 --bind 127.0.0.1 --directory /tmp/rozan-update &
+
+adb reverse tcp:8765 tcp:8765
+adb shell am broadcast -f 0x20 -p $P -a $P.debug.UPDATE_URL --es url http://127.0.0.1:8765/latest.json
+```
+
+Then turn on "Update automatically" in Rozan's settings. The server's log
+shows `latest.json`, `SHA256SUMS` and the APK being fetched, and
+`adb logcat -s RozanUpdate` shows the decision (`update 0.1.1:
+WAIT_FOR_SCREEN` while the settings are open). On API 31 and later the
+update installs once no Rozan screen is started: open another app
+(`adb shell am start -a android.settings.SETTINGS`) or put the device to
+sleep (`adb shell input keyevent KEYCODE_SLEEP`). Pressing Home does not
+count while Rozan is the home screen. `adb shell dumpsys package $P | grep
+versionName` then reads 0.1.1. The same broadcast without `--es url` goes
+back to GitHub.
+
 ## Translations
 
 Strings are translated into zh-Hans, fr, it, ja, pt-BR, ru and es
@@ -133,7 +170,9 @@ own `MediaCodec` decoders. Every downloaded artifact is pinned by SHA-256 in
 `gradle/verification-metadata.xml`. After adding or bumping a dependency,
 run `scripts/update-verification-metadata.sh` and review the diff.
 [SECURITY.md](../SECURITY.md) explains why, and AGENTS.md has the rules for
-new dependencies.
+new dependencies. A library that ends up in the launcher's APK also needs an
+entry in `notices/OpenSourceNotices.kt` in `:app:launcher`, with its licence
+text in `res/raw`, so that it appears under "Open-source notices".
 
 ## Backdrop photos
 

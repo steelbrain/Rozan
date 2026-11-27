@@ -147,13 +147,19 @@ class HomeRedirectService :
         if (action == HomeRedirector.Action.START_ROZAN) startRozan()
     }
 
-    /** 6.5: an explicit start from the service's own context, never `GLOBAL_ACTION_HOME`. */
+    /**
+     * 6.5: an explicit start from the service's own context, never `GLOBAL_ACTION_HOME`. Without the
+     * open animation: the system's cross-fade into Rozan would keep the stock home on screen for its
+     * whole length.
+     */
     private fun startRozan() {
         val intent =
             Intent(Intent.ACTION_MAIN)
                 .setComponent(ComponentName(this, HomeActivity::class.java))
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
-                .putExtra(HomeActivity.EXTRA_FROM_REDIRECT, true)
+                .addFlags(
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED or
+                        Intent.FLAG_ACTIVITY_NO_ANIMATION,
+                ).putExtra(HomeActivity.EXTRA_FROM_REDIRECT, true)
         // HOME as the only category makes Rozan's task a home task on Android 11+, so Back from
         // an app returns to Rozan. Fire OS only; untested on Google TV (6.5, A5).
         if (fireOs) intent.addCategory(Intent.CATEGORY_HOME)

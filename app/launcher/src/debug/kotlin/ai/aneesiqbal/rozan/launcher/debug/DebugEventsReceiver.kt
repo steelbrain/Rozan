@@ -20,21 +20,36 @@ import android.content.Intent
  * Without the extra, the broadcast clears the override (an empty `""` is
  * lost on the way through `adb shell`).
  *
- * The broadcast's result data (printed by `am broadcast`) is the override now stored.
+ * It also points the updater at a local test server instead of GitHub; this
+ * one applies at once and stays until it is cleared:
+ *
+ * ```
+ * adb shell am broadcast -f 0x20 -p $P -a $P.debug.UPDATE_URL --es url http://127.0.0.1:8765/latest.json
+ * ```
+ *
+ * The broadcast's result data (printed by `am broadcast`) is the overrides now stored.
  */
 internal class DebugEventsReceiver : BroadcastReceiver() {
     override fun onReceive(
         context: Context,
         intent: Intent,
     ) {
-        if (intent.action == ACTION_BACKDROP) {
-            DebugOverridesProvider.store(context, backdrop = intent.getStringExtra(EXTRA_FILE).orEmpty())
+        when (intent.action) {
+            ACTION_BACKDROP -> {
+                DebugOverridesProvider.store(context, backdrop = intent.getStringExtra(EXTRA_FILE).orEmpty())
+            }
+
+            ACTION_UPDATE_URL -> {
+                DebugOverridesProvider.storeUpdateUrl(context, intent.getStringExtra(EXTRA_URL).orEmpty())
+            }
         }
-        resultData = "backdrop=${DebugOverrides.backdropFile}"
+        resultData = "backdrop=${DebugOverrides.backdropFile} update_url=${DebugOverrides.updateMetadataUrl}"
     }
 
     private companion object {
         const val ACTION_BACKDROP = "ai.aneesiqbal.rozan.launcher.debug.BACKDROP"
+        const val ACTION_UPDATE_URL = "ai.aneesiqbal.rozan.launcher.debug.UPDATE_URL"
         const val EXTRA_FILE = "file"
+        const val EXTRA_URL = "url"
     }
 }

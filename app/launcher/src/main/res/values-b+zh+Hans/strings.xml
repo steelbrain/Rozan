@@ -43,6 +43,8 @@
     <string name="settings_receiver_name_invalid">名称不能为空。已保留之前的名称。</string>
     <string name="settings_airplay_wake">有人连接时唤醒电视</string>
     <string name="settings_airplay_pin_hint">每次有新连接时，此屏幕上都会显示 PIN 码。</string>
+    <string name="settings_airplay_app_installed">已安装单独的 Rozan AirPlay 应用</string>
+    <string name="settings_airplay_app_installed_summary">你不需要它。Rozan 已内置 AirPlay，无需这个单独的应用即可使用。两者都安装时，只有其中一个能接收。选择即可卸载 Rozan AirPlay 应用。</string>
     <string name="settings_overlay">显示在其他应用的上层</string>
     <string name="settings_overlay_allowed">允许</string>
     <string name="settings_overlay_not_allowed">不允许</string>
@@ -51,9 +53,11 @@
     <string name="settings_section_about">关于</string>
     <string name="settings_version">版本</string>
     <string name="settings_license">许可证</string>
+    <string name="settings_source_code">源代码</string>
     <string name="settings_notices">开源许可</string>
     <string name="settings_notices_summary">Rozan 所含库的许可证</string>
     <string name="settings_section_credits">背景照片</string>
+    <string name="settings_credits_summary">每张照片的作者、许可证和来源</string>
     <string name="settings_credits_loading">正在加载…</string>
     <string name="settings_credits_none">未安装任何背景照片。</string>
     <string name="notices_title">开源许可</string>
@@ -62,4 +66,30 @@
     <plurals name="minutes">
         <item quantity="other">%d 分钟</item>
     </plurals>
+    <string name="settings_section_updates">更新</string>
+    <string name="settings_update_auto">自动更新</string>
+    <string name="settings_update_off_summary">每天在 GitHub 上检查一次 Rozan 的新版本并安装</string>
+    <string name="settings_update_not_checked">每天检查一次。尚未检查。</string>
+    <string name="settings_update_up_to_date">每天检查一次。已是最新：%1$s 是最新版本（检查于 %2$s）。</string>
+    <string name="settings_update_updated">每天检查一次。已于 %2$s 更新到版本 %1$s。</string>
+    <string name="settings_update_failed">每天检查一次。上次检查（%1$s）失败：%2$s</string>
+    <string name="settings_update_downloaded">版本 %1$s 已下载并通过验证。</string>
+    <string name="settings_update_waiting_screen">版本 %1$s 已下载。将在没有显示 Rozan 界面时安装，例如打开其他应用时。</string>
+    <string name="settings_update_waiting_airplay">版本 %1$s 已下载。将在不再使用 AirPlay 时安装。</string>
+    <string name="settings_update_ask">版本 %1$s 已下载。Android 需要你确认：请选择“安装更新”。</string>
+    <string name="settings_update_installing">正在安装版本 %1$s…</string>
+    <string name="settings_update_failure_network">无法连接 GitHub。</string>
+    <string name="settings_update_failure_server">GitHub 返回了 HTTP 状态码 %1$d。</string>
+    <string name="settings_update_failure_release">该版本没有 Rozan 能读取的启动器 APK 和 SHA256SUMS。</string>
+    <string name="settings_update_failure_checksum">下载的文件与其大小或 SHA256SUMS 不符。</string>
+    <string name="settings_update_failure_package">下载的文件不是用同一密钥签名的较新版 Rozan。</string>
+    <string name="settings_update_failure_storage">无法保存下载的文件。请检查可用存储空间。</string>
+    <string name="settings_update_failure_install">Android 未安装此更新。</string>
+    <string name="settings_update_install">安装更新 %1$s</string>
+    <string name="settings_update_install_summary">Android 会请你确认。安装期间 Rozan 会关闭。</string>
+    <string name="settings_update_permission">安装未知应用</string>
+    <string name="settings_update_permission_allowed">允许</string>
+    <string name="settings_update_permission_not_allowed">不允许</string>
+    <string name="settings_update_permission_allowed_summary">Rozan 可以安装它下载的更新。</string>
+    <string name="settings_update_permission_missing_summary">自动更新需要此权限。如需允许，请在装有 adb 的电脑上运行以下命令：</string>
 </resources>

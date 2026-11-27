@@ -1,5 +1,6 @@
 package ai.aneesiqbal.rozan.launcher.home
 
+import ai.aneesiqbal.rozan.launcher.AirPlaySettingsActivity
 import ai.aneesiqbal.rozan.launcher.LauncherSettingsActivity
 import ai.aneesiqbal.rozan.launcher.SystemIntents
 import ai.aneesiqbal.rozan.launcher.apps.AppEntry
@@ -18,7 +19,7 @@ class HomeActions(
         when (builtIn) {
             BuiltIn.SETTINGS -> SystemIntents.startFirst(activity, SystemIntents.systemSettings(activity))
             BuiltIn.NETWORK -> SystemIntents.startFirst(activity, SystemIntents.networkSettings(activity))
-            BuiltIn.AIRPLAY -> openLauncherSettings(LauncherSettingsActivity.SECTION_AIRPLAY)
+            BuiltIn.AIRPLAY -> activity.startActivity(Intent(activity, AirPlaySettingsActivity::class.java))
             BuiltIn.SCREENSAVER -> startScreensaver()
         }
     }

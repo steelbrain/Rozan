@@ -43,6 +43,8 @@
     <string name="settings_receiver_name_invalid">Имя не может быть пустым. Сохранено прежнее имя.</string>
     <string name="settings_airplay_wake">Включать телевизор при подключении</string>
     <string name="settings_airplay_pin_hint">При каждом новом подключении на этом экране появляется PIN-код.</string>
+    <string name="settings_airplay_app_installed">Установлено отдельное приложение Rozan AirPlay</string>
+    <string name="settings_airplay_app_installed_summary">Оно не нужно. В Rozan уже встроен AirPlay, и он работает без отдельного приложения. Пока установлены оба, принимать может только одно из них. Выберите, чтобы удалить приложение Rozan AirPlay.</string>
     <string name="settings_overlay">Поверх других приложений</string>
     <string name="settings_overlay_allowed">Разрешено</string>
     <string name="settings_overlay_not_allowed">Запрещено</string>
@@ -51,9 +53,11 @@
     <string name="settings_section_about">О приложении</string>
     <string name="settings_version">Версия</string>
     <string name="settings_license">Лицензия</string>
+    <string name="settings_source_code">Исходный код</string>
     <string name="settings_notices">Лицензии открытого ПО</string>
     <string name="settings_notices_summary">Лицензии библиотек, входящих в Rozan</string>
     <string name="settings_section_credits">Фоновые фото</string>
+    <string name="settings_credits_summary">Автор, лицензия и источник каждого фото</string>
     <string name="settings_credits_loading">Загрузка…</string>
     <string name="settings_credits_none">Фоновые фото не установлены.</string>
     <string name="notices_title">Лицензии открытого ПО</string>
@@ -65,4 +69,30 @@
         <item quantity="many">%d минут</item>
         <item quantity="other">%d минуты</item>
     </plurals>
+    <string name="settings_section_updates">Обновления</string>
+    <string name="settings_update_auto">Обновлять автоматически</string>
+    <string name="settings_update_off_summary">Раз в день ищет на GitHub новую версию Rozan и устанавливает её</string>
+    <string name="settings_update_not_checked">Проверка раз в день. Ещё не проверялось.</string>
+    <string name="settings_update_up_to_date">Проверка раз в день. Обновлений нет: %1$s — последняя версия (проверено %2$s).</string>
+    <string name="settings_update_updated">Проверка раз в день. Обновлено до версии %1$s (%2$s).</string>
+    <string name="settings_update_failed">Проверка раз в день. Последняя проверка (%1$s) не удалась: %2$s</string>
+    <string name="settings_update_downloaded">Версия %1$s загружена и проверена.</string>
+    <string name="settings_update_waiting_screen">Версия %1$s загружена. Она установится, когда на экране не будет Rozan, например пока открыто другое приложение.</string>
+    <string name="settings_update_waiting_airplay">Версия %1$s загружена. Она установится, когда AirPlay перестанет использоваться.</string>
+    <string name="settings_update_ask">Версия %1$s загружена. Android просит её подтвердить: выберите «Установить обновление».</string>
+    <string name="settings_update_installing">Установка версии %1$s…</string>
+    <string name="settings_update_failure_network">Не удалось подключиться к GitHub.</string>
+    <string name="settings_update_failure_server">GitHub ответил кодом HTTP %1$d.</string>
+    <string name="settings_update_failure_release">В выпуске нет APK лаунчера и SHA256SUMS, которые Rozan может прочитать.</string>
+    <string name="settings_update_failure_checksum">Загруженный файл не совпадает с размером или с SHA256SUMS.</string>
+    <string name="settings_update_failure_package">Загруженный файл не является более новой версией Rozan, подписанной тем же ключом.</string>
+    <string name="settings_update_failure_storage">Не удалось сохранить загруженный файл. Проверьте свободное место.</string>
+    <string name="settings_update_failure_install">Android не установил обновление.</string>
+    <string name="settings_update_install">Установить обновление %1$s</string>
+    <string name="settings_update_install_summary">Android попросит подтверждения. Во время установки Rozan закроется.</string>
+    <string name="settings_update_permission">Установка неизвестных приложений</string>
+    <string name="settings_update_permission_allowed">Разрешено</string>
+    <string name="settings_update_permission_not_allowed">Запрещено</string>
+    <string name="settings_update_permission_allowed_summary">Rozan может устанавливать загруженные обновления.</string>
+    <string name="settings_update_permission_missing_summary">Нужно для автоматического обновления. Чтобы разрешить, выполните на компьютере с adb:</string>
 </resources>

@@ -6,7 +6,9 @@
     android:paddingStart="@dimen/rozan_safe_horizontal"
     android:paddingEnd="@dimen/rozan_safe_horizontal">
 
+    <!-- The library's name, set by the screen. -->
     <TextView
+        android:id="@+id/notices_heading"
         android:layout_width="@dimen/settings_side_column"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/rozan_safe_vertical"
@@ -28,13 +30,29 @@
         android:paddingBottom="@dimen/rozan_safe_vertical"
         android:scrollbars="none">
 
-        <TextView
-            android:id="@+id/notices_text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="viewStart"
-            android:textColor="@color/rozan_text_secondary"
-            android:textIsSelectable="false"
-            android:textSize="@dimen/notices_text" />
+            android:orientation="vertical">
+
+            <!-- What the library covers, its copyright holder and its license. -->
+            <TextView
+                android:id="@+id/notices_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/notices_about_gap"
+                android:textAlignment="viewStart"
+                android:textColor="@color/rozan_text_primary"
+                android:textSize="@dimen/notices_text" />
+
+            <TextView
+                android:id="@+id/notices_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                android:textColor="@color/rozan_text_secondary"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/notices_text" />
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

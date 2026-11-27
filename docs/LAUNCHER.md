@@ -22,7 +22,7 @@ The first row holds four built-in tiles:
 | --- | --- |
 | Settings | The system settings. On Fire TV, Fire OS's own settings screen. |
 | Network | The system's Wi-Fi settings. On Fire TV, Fire OS's network page, or its settings screen where the network page cannot be opened. |
-| AirPlay | Rozan's settings, at the AirPlay section. |
+| AirPlay | A screen with only the AirPlay settings: the rows of the AirPlay section of Rozan's settings. |
 | Screensaver | The screensaver, right away. |
 
 ## Apps
@@ -92,19 +92,21 @@ round shows every photo once in a new random order, and never the same
 photo twice in a row. With animations turned off in the system settings,
 the photo changes without a crossfade.
 
-Each photo's title, author, licence and source are in Rozan's settings
-under "Backdrop photos" and in [BACKDROPS.md](BACKDROPS.md).
+Each photo's title, author, licence and source are listed on the "Backdrop
+photos" screen, opened from the About section of Rozan's settings, in
+alphabetical order of title, and in [BACKDROPS.md](BACKDROPS.md).
 
 ## Keep awake and the screensaver
 
-![The screensaver: the ridge photo full screen with only the time in the top-right corner](images/screensaver.png)
+![The screensaver: the ridge photo full screen with the time in the top-right corner and the photo's title, Blue ridges near Lake Placid, in the bottom-left corner](images/screensaver.png)
 
 - "Keep screen awake" (on by default) keeps the screen on while the home
   screen is showing. With it off, the system's own sleep settings apply.
 - With "Keep screen awake" on, the screensaver starts after "Screensaver
   after" (5 minutes by default) without a key press on the home screen.
-  The tiles and the buttons fade out, leaving the photo and the clock. The
-  photo then changes every 45 seconds.
+  The tiles and the buttons fade out, leaving the photo, its title in the
+  bottom-left corner, and the clock. The photo then changes every 45
+  seconds, and the title changes with it.
 - Any key ends the screensaver. That key does nothing else, so it does not
   also open the focused app.
 - The Screensaver tile starts it at once, even with "Keep screen awake"
@@ -130,8 +132,10 @@ forward.
 | AirPlay | "Enable AirPlay" | On | On, Off |
 | AirPlay | "Receiver name" | Four random fruit names, such as "Lychee Huckleberry Gooseberry Kumquat" | Any name, cut to 63 bytes; an empty name is refused |
 | AirPlay | "Wake TV when someone connects" | On | On, Off |
+| Updates | "Update automatically" | Off | On, Off |
 
-[AIRPLAY.md](AIRPLAY.md) explains the AirPlay rows.
+[AIRPLAY.md](AIRPLAY.md) explains the AirPlay rows, and [Updates](#updates)
+the update rows.
 
 ### Language
 
@@ -160,13 +164,70 @@ until you open another app. [INSTALL.md](INSTALL.md) explains the redirect.
 
 ![Rozan's settings further down: the Home button section reading Off with the adb commands and Open the stock home screen, then the AirPlay section with Enable AirPlay on, Receiver name "Lychee Huckleberry Gooseberry Kumquat" focused, and Wake TV when someone connects on](images/settings-airplay.png)
 
+### Updates
+
+With "Update automatically" on, Rozan checks for a new release once a day
+while the TV has a network connection, and once right after the switch is
+turned on. It asks GitHub for the latest release of Rozan that is not a
+pre-release. When that release is newer than the installed version, Rozan
+downloads its `rozan-launcher-X.Y.Z.apk` and `SHA256SUMS` and installs the
+APK only if all of these hold:
+
+- its size is the one GitHub lists, and at most 64 MiB;
+- its SHA-256 matches its line in `SHA256SUMS`;
+- it is Rozan (`ai.aneesiqbal.rozan.launcher`) with a higher version than
+  the installed one, signed with the same key.
+
+The summary under the switch shows where things stand: when the last check
+was and whether Rozan is up to date, which version is downloaded and what
+its install waits for, or why the last check failed. A failed check deletes
+the download, and the next daily check starts over.
+
+When the update installs:
+
+- On Android 12 and later, Rozan installs it without asking, but only while
+  no Rozan screen is showing (for example while another app is open, or
+  after the TV went to sleep) and AirPlay is not in use: no code on screen,
+  no mirroring, no audio. A download that arrives while either is the case
+  installs when it ends.
+- On Android 11 and earlier, including Fire OS 7 and 8, Android asks to
+  confirm every update. A row "Install update X.Y.Z" then appears under the
+  switch; selecting it opens Android's confirmation. The same row appears on
+  any version if Android asks for a confirmation.
+- Installing closes every part of Rozan, the AirPlay receiver and the Home
+  button redirect included, as an update with adb does. Afterwards check the
+  "Home button" row ([INSTALL.md](INSTALL.md#updating)).
+
+"Install unknown apps" reads "Allowed" or "Not allowed". Rozan installs
+updates without asking only while it is allowed. While it is not, a
+downloaded update waits for "Install update X.Y.Z", and the adb command that
+allows it is shown below the row
+([INSTALL.md](INSTALL.md#4-let-rozan-update-itself)). Selecting "Install
+update X.Y.Z" then opens Android's notice that Rozan may not install apps,
+whose Settings button leads to Android's "Install unknown apps" screen. On
+the Android TV emulator (API 36), that cancels the install: after allowing
+Rozan there, select "Install update X.Y.Z" again.
+
+Turning the switch off cancels the daily check, deletes any downloaded
+update and clears the status. While it is off, Rozan makes no network
+requests for updates.
+
 ### Other rows
 
 - AirPlay: "Show over other apps" reads "Allowed" or "Not allowed". While
   it is not allowed, the adb command that allows it is shown below it.
-- About: "Version", "License" (MIT) and "Open-source notices", the
-  licences of the libraries Rozan includes.
-- Backdrop photos: the title, author, licence and source of each backdrop.
+  While the separate Rozan AirPlay app is installed too, the section starts
+  with a warning in yellow, "A separate Rozan AirPlay app is installed". It
+  says that the app is not needed, that Rozan's built-in AirPlay works
+  without it, and that only one of the two can receive while both are
+  installed. Selecting it opens Android's uninstall confirmation for Rozan
+  AirPlay.
+- About: "Version", "License" (MIT), "Source code" with the address of
+  Rozan's repository, "Open-source notices" and "Backdrop photos".
+  "Open-source notices" lists the libraries Rozan includes, each with its
+  copyright holder and licence, and Select on one opens its licence text.
+  "Backdrop photos" lists the title, author, licence and source of each
+  backdrop, in alphabetical order of title.
 
 ## Game controllers
 

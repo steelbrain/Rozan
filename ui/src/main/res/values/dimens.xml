@@ -23,6 +23,9 @@
     <dimen name="rozan_row_title_text">18sp</dimen>
     <dimen name="rozan_row_summary_text">14sp</dimen>
     <dimen name="rozan_row_value_gap">16dp</dimen>
+    <dimen name="rozan_warning_icon">28dp</dimen>
+    <dimen name="rozan_warning_icon_gap">16dp</dimen>
+    <dimen name="rozan_warning_margin_bottom">8dp</dimen>
     <dimen name="rozan_section_header_text">15sp</dimen>
     <dimen name="rozan_toggle_width">40dp</dimen>
     <dimen name="rozan_toggle_height">22dp</dimen>

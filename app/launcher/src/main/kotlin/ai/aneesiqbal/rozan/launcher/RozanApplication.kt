@@ -2,6 +2,7 @@ package ai.aneesiqbal.rozan.launcher
 
 import ai.aneesiqbal.rozan.airplay.android.AppLanguage
 import ai.aneesiqbal.rozan.launcher.redirect.RedirectClient
+import ai.aneesiqbal.rozan.launcher.update.UpdateTriggers
 import android.app.Application
 import android.content.Context
 import android.util.Log
@@ -30,6 +31,7 @@ class RozanApplication : Application() {
         if (getProcessName() == packageName) installCrashReport()
         super.onCreate()
         if (showsText(packageName)) AppLanguage.install(this)
+        UpdateTriggers.install(this, getProcessName())
     }
 
     private fun showsText(packageName: String) = getProcessName() != packageName + REDIRECT_PROCESS

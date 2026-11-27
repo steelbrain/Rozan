@@ -128,7 +128,7 @@ number.
 ## NVIDIA Shield TV
 
 These checks are for an NVIDIA Shield TV. Install the launcher as in
-[INSTALL.md](INSTALL.md) steps 1 to 4, with the redirect on. Do not install
+[INSTALL.md](INSTALL.md) steps 1 to 3 and 5, with the redirect on. Do not install
 Rozan AirPlay alongside it for these checks: both use port 7000. Write down
 the model (2015, 2017, 2019 tube or 2019 Pro), the Build line under
 Settings > Device Preferences > About, and which remote and controller you
@@ -145,7 +145,7 @@ Checks S1 to S6 need only the Shield.
 | S3 | Controller: on Rozan's home, move with the stick and the D-pad. On the Screensaver tile press A, then B; Y, then B; Start, then B. Then press X. | The stick and D-pad move focus. A, Y and Start each start the screensaver, and B ends it. X does nothing. |
 | S4 | Controller: on an app tile, hold A, then press B. Press the NVIDIA button. Press the controller's Back and Home. | Holding A opens "App info" and "Uninstall", and B closes them. The NVIDIA button starts voice search. Back and Home act like the remote's. |
 | S5 | 2019 remote: on an app tile press ≡, then hold Select. Then press Netflix. | ≡ opens the Shield's quick settings and nothing in Rozan. Holding Select opens "App info" and "Uninstall". Netflix opens Netflix. |
-| S6 | Optional: make Rozan the real home (INSTALL.md section 5), restart the Shield and press Home. Then undo it (INSTALL.md section 6). | Note whether Home still opens Rozan after the restart, and whether `adb shell pm list packages -d` still lists `com.google.android.tvlauncher`. |
+| S6 | Optional: make Rozan the real home (INSTALL.md section 6), restart the Shield and press Home. Then undo it (INSTALL.md section 7). | Note whether Home still opens Rozan after the restart, and whether `adb shell pm list packages -d` still lists `com.google.android.tvlauncher`. |
 
 Checks S7 to S14 also need a Mac or iPhone. Start the log first
 ([Logs](#logs)).

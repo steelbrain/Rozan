@@ -60,6 +60,8 @@
     <string name="settings_receiver_name_invalid">The name can\'t be empty. The previous name was kept.</string>
     <string name="settings_airplay_wake">Wake TV when someone connects</string>
     <string name="settings_airplay_pin_hint">A PIN appears on this screen for every new connection.</string>
+    <string name="settings_airplay_app_installed">A separate Rozan AirPlay app is installed</string>
+    <string name="settings_airplay_app_installed_summary">You don\'t need it. Rozan has AirPlay built in, and it works without the separate app. While both are installed, only one of them can receive. Select to uninstall the Rozan AirPlay app.</string>
     <string name="settings_overlay">Show over other apps</string>
     <string name="settings_overlay_allowed">Allowed</string>
     <string name="settings_overlay_not_allowed">Not allowed</string>
@@ -69,9 +71,12 @@
     <string name="settings_version">Version</string>
     <string name="settings_license">License</string>
     <string name="settings_license_value" translatable="false">MIT</string>
+    <string name="settings_source_code">Source code</string>
+    <string name="settings_source_code_url" translatable="false">https://github.com/steelbrain/Rozan</string>
     <string name="settings_notices">Open-source notices</string>
     <string name="settings_notices_summary">Licenses of the libraries Rozan includes</string>
     <string name="settings_section_credits">Backdrop photos</string>
+    <string name="settings_credits_summary">Author, license and source of each photo</string>
     <string name="settings_credits_loading">Loading…</string>
     <string name="settings_credits_none">No backdrop photos are installed.</string>
     <string name="notices_title">Open-source notices</string>
@@ -84,4 +89,39 @@
         <item quantity="one">%d minute</item>
         <item quantity="other">%d minutes</item>
     </plurals>
+
+    <!-- Launcher settings: Updates. Each status below is the summary under "Update automatically" and
+         must fit in two lines. %1$s in them is a version such as 0.2.0; times look like "26 Nov, 14:02". -->
+    <string name="settings_section_updates">Updates</string>
+    <string name="settings_update_auto">Update automatically</string>
+    <string name="settings_update_off_summary">Checks GitHub for a new Rozan release once a day and installs it</string>
+    <string name="settings_update_not_checked">Checks once a day. Not checked yet.</string>
+    <!-- %1$s: the latest release's version. %2$s: when the check ended. -->
+    <string name="settings_update_up_to_date">Checks once a day. Up to date: %1$s is the latest release (checked %2$s).</string>
+    <!-- %1$s: the version Rozan was updated to. %2$s: when. -->
+    <string name="settings_update_updated">Checks once a day. Updated to version %1$s on %2$s.</string>
+    <!-- %1$s: when the check ended. %2$s: one of the settings_update_failure_* sentences. -->
+    <string name="settings_update_failed">Checks once a day. The last check (%1$s) failed: %2$s</string>
+    <string name="settings_update_downloaded">Version %1$s is downloaded and verified.</string>
+    <string name="settings_update_waiting_screen">Version %1$s is downloaded. It installs when no Rozan screen is showing, such as while another app is open.</string>
+    <string name="settings_update_waiting_airplay">Version %1$s is downloaded. It installs when AirPlay is no longer in use.</string>
+    <string name="settings_update_ask">Version %1$s is downloaded. Android asks to confirm it: select Install update.</string>
+    <string name="settings_update_installing">Installing version %1$s…</string>
+    <string name="settings_update_failure_network">Could not reach GitHub.</string>
+    <!-- %1$d: an HTTP status code such as 404. -->
+    <string name="settings_update_failure_server">GitHub answered with HTTP status %1$d.</string>
+    <string name="settings_update_failure_release">The release has no launcher APK and SHA256SUMS that Rozan can read.</string>
+    <string name="settings_update_failure_checksum">The download did not match its size or SHA256SUMS.</string>
+    <string name="settings_update_failure_package">The download is not a newer Rozan signed with the same key.</string>
+    <string name="settings_update_failure_storage">The download could not be saved. Check the free storage.</string>
+    <string name="settings_update_failure_install">Android did not install the update.</string>
+    <!-- %1$s: the version to install. -->
+    <string name="settings_update_install">Install update %1$s</string>
+    <string name="settings_update_install_summary">Android asks you to confirm. Rozan closes while it installs.</string>
+    <!-- The permission, as Android's settings name it ("Install unknown apps" in AOSP). -->
+    <string name="settings_update_permission">Install unknown apps</string>
+    <string name="settings_update_permission_allowed">Allowed</string>
+    <string name="settings_update_permission_not_allowed">Not allowed</string>
+    <string name="settings_update_permission_allowed_summary">Rozan may install the updates it downloads.</string>
+    <string name="settings_update_permission_missing_summary">Needed to update automatically. To allow it, run this on a computer with adb:</string>
 </resources>

@@ -55,6 +55,7 @@ public class ReceiverService :
     // Main thread.
     private var appliedName: String? = null
     private var mediaForeground = false
+    private var publishedInUse = false
     private var languageWatch: AutoCloseable? = null
 
     // Control thread.
@@ -123,6 +124,12 @@ public class ReceiverService :
     override fun onSessionChanged() {
         val media = runtime.session.isMirroring || runtime.session.audioClient != null
         if (media != mediaForeground) enterForeground(media, appliedName ?: runtime.settings.deviceName)
+        // Other processes (the launcher's updater) read this from the status file; written off the main thread.
+        val inUse = media || runtime.session.pinPrompt != null
+        if (inUse != publishedInUse) {
+            publishedInUse = inUse
+            control.post { ReceiverStatus.update(this) { if (it.running) it.copy(inUse = inUse) else it } }
+        }
     }
 
     private fun applySettings() {
@@ -161,6 +168,7 @@ public class ReceiverService :
                 receiverName = name,
                 deviceId = id.deviceIdText(),
                 port = config.controlPort,
+                inUse = it.inUse,
             )
         }
         val failure =

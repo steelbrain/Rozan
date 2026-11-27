@@ -61,11 +61,18 @@ there.
 
 ## Settings
 
-The AirPlay tile on Rozan's home screen opens the AirPlay part of Rozan's
-settings. Rozan AirPlay has the same settings on its one screen, under
-slightly different names.
+The AirPlay tile on Rozan's home screen opens a screen with only the
+AirPlay settings. The same rows are the AirPlay section of Rozan's full
+settings, behind the gear. Rozan AirPlay has the same settings on its one
+screen, under slightly different names.
 
-![Rozan's settings scrolled to the AirPlay section: Enable AirPlay on, Receiver name "Lychee Huckleberry Gooseberry Kumquat" focused, and Wake TV when someone connects on, with the end of the Home button section above](images/settings-airplay.png)
+Rozan does not need the separate Rozan AirPlay app: its built-in AirPlay
+works without it, and only one of the two can receive at a time. While both
+are installed, Rozan's AirPlay settings start with a warning in yellow, "A
+separate Rozan AirPlay app is installed", that says so. Selecting it opens
+Android's uninstall confirmation for Rozan AirPlay.
+
+![The screen the AirPlay tile opens, titled AirPlay: Enable AirPlay focused and on, Receiver name "Bilberry Melon Guava Lemon", Wake TV when someone connects on, the note that a PIN appears for every new connection, and Show over other apps reading Allowed](images/airplay-settings.png)
 
 | In Rozan | In Rozan AirPlay | Default | What it does |
 | --- | --- | --- | --- |

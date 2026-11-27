@@ -6,4 +6,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
     <string name="rozan_on">Activado</string>
     <string name="rozan_off">Desactivado</string>
+    <!-- Spoken before a warning row's title. -->
+    <string name="rozan_warning">Advertencia</string>
 </resources>

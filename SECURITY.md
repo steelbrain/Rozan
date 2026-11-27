@@ -31,6 +31,8 @@ seeing the on-screen PIN, and cannot crash it into an unusable state.
 | Decrypted H.264/HEVC and AAC bitstreams | paired client (see Known limits) | Android `MediaCodec` (platform decoders) |
 | Decrypted ALAC frames | paired client (see Known limits) | Rozan Kotlin code (`:airplay:alac`) |
 | Backdrop images | shipped inside the APK | Android `ImageDecoder` (platform) |
+| Release information (JSON) and `SHA256SUMS`, only with "Update automatically" on | GitHub, over HTTPS | Rozan Kotlin code (launcher `update/`) |
+| Downloaded launcher APK, only with "Update automatically" on | whoever publishes Rozan's GitHub releases | Android's APK parser and package installer (platform) |
 
 ### Measures
 
@@ -98,7 +100,40 @@ seeing the on-screen PIN, and cannot crash it into an unusable state.
   turns on when a sender asks for a code, not when a host opens a connection
   or probes `/info`.
 - **No remote content at runtime.** Backdrops are bundled and decoded from the
-  APK; the launcher makes no network requests of its own.
+  APK. The launcher's only network requests of its own are the update checks
+  below, and only while "Update automatically" is on (it is off by default).
+- **Update channel.** With "Update automatically" on, the launcher asks
+  GitHub once a day for the latest release of `steelbrain/Rozan` that is not
+  a draft or pre-release
+  (`https://api.github.com/repos/steelbrain/Rozan/releases/latest`), and
+  downloads `rozan-launcher-X.Y.Z.apk` and `SHA256SUMS` from it when it is
+  newer than the installed version.
+  - Every request, and every redirect it follows (at most 5), is HTTPS,
+    checked against the system's certificate authorities. The release build
+    allows no cleartext traffic. Debug builds alone allow plain HTTP to
+    `127.0.0.1`, for a local test server set from adb.
+  - Sizes are bounded before anything is kept: the release information at
+    1 MiB, `SHA256SUMS` at 64 KiB, and the APK at 64 MiB and exactly the
+    size the release lists. The JSON and `SHA256SUMS` parsers are Kotlin,
+    bound their input, nesting and entry counts, and are tested with
+    truncated, oversized and random input.
+  - The APK's SHA-256 must match its line in `SHA256SUMS`. That file comes
+    from the same release, so it only guards against a corrupted or
+    truncated download, not against a malicious release.
+  - The real guarantee is the signature. Before installing, Rozan reads the
+    APK with Android's own parser and requires the package name
+    `ai.aneesiqbal.rozan.launcher`, a higher `versionCode` than the
+    installed one (no downgrades), and the same signing certificates as the
+    installed app. Android's installer checks the signature again and
+    refuses an update signed with another key.
+  - Any failure deletes the download; nothing is retried until the next
+    check. The download lives in Rozan's private storage and is
+    checked again (SHA-256 and the package checks) right before it is
+    installed.
+  - An update installs without the user only on Android 12 and later, with
+    the "install unknown apps" permission granted, and only while
+    no Rozan screen is showing and AirPlay is not in use. On Android 11 and
+    earlier the user confirms every update in Android's dialog.
 - **Supply chain.** Gradle wrapper pinned by checksum, every dependency,
   plugin and build-tool artifact pinned by SHA-256 through Gradle dependency
   verification (`gradle/verification-metadata.xml`), GitHub Actions pinned by
@@ -136,3 +171,10 @@ seeing the on-screen PIN, and cannot crash it into an unusable state.
   audio are not affected.
 - The receiver must keep the network reachable while the screen is off when
   "wake on connect" is enabled, which keeps it listening at all times.
+- With "Update automatically" on, whoever holds the release signing key and
+  can publish a release in the GitHub repository can install code on the TV.
+  Control of the repository alone is not enough: an APK signed with another
+  key fails Rozan's check and Android's. A lost or leaked signing key
+  (docs/RELEASING.md) is therefore the update channel's single point of
+  failure. TLS is not pinned to GitHub's certificates; the system's
+  certificate authorities are trusted.

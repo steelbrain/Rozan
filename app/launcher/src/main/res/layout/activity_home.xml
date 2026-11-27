@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Draw order, back to front: backdrop (one opaque layer at rest, a second only
-  during a crossfade), scrims, grid, top bar, options panel. The scrims cover
+  during a crossfade), scrims, grid, top bar, screensaver caption, options
+  panel. The scrims cover
   only the bands that need darkening, to keep full-screen blending low.
   The root does not clip its children: the top bar's buttons grow on focus
   past the bar's own bounds, and their focus circle must not be cut off.
@@ -113,6 +114,39 @@
                 android:tint="@color/settings_button_tint" />
         </LinearLayout>
     </LinearLayout>
+
+    <!--
+      The screensaver's hint at what the photo shows: its title in the bottom
+      corner, over a band that darkens like the clock's scrim. Invisible on the
+      home screen; it fades in with the screensaver.
+    -->
+    <FrameLayout
+        android:id="@+id/screensaver_caption_band"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scrim_top_height"
+        android:layout_gravity="bottom"
+        android:alpha="0"
+        android:background="@drawable/scrim_caption"
+        android:forceHasOverlappingRendering="false"
+        android:importantForAccessibility="noHideDescendants">
+
+        <TextView
+            android:id="@+id/screensaver_caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="@dimen/rozan_safe_horizontal"
+            android:layout_marginEnd="@dimen/rozan_safe_horizontal"
+            android:layout_marginBottom="@dimen/rozan_safe_vertical"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:shadowColor="@color/screensaver_caption_shadow"
+            android:shadowDy="1"
+            android:shadowRadius="4"
+            android:textAlignment="viewStart"
+            android:textColor="@color/rozan_text_primary"
+            android:textSize="@dimen/screensaver_caption_text" />
+    </FrameLayout>
 
     <ai.aneesiqbal.rozan.launcher.inputs.InputsPanel
         android:id="@+id/inputs_panel"

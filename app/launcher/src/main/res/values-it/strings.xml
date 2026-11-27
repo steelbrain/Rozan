@@ -43,6 +43,8 @@
     <string name="settings_receiver_name_invalid">Il nome non può essere vuoto. È stato mantenuto il nome precedente.</string>
     <string name="settings_airplay_wake">Riattiva la TV quando qualcuno si connette</string>
     <string name="settings_airplay_pin_hint">Per ogni nuova connessione compare un PIN su questo schermo.</string>
+    <string name="settings_airplay_app_installed">È installata un\'app Rozan AirPlay separata</string>
+    <string name="settings_airplay_app_installed_summary">Non ti serve. Rozan ha AirPlay integrato, che funziona senza l\'app separata. Finché sono installate entrambe, solo una delle due può ricevere. Seleziona per disinstallare l\'app Rozan AirPlay.</string>
     <string name="settings_overlay">Mostra sopra altre app</string>
     <string name="settings_overlay_allowed">Autorizzata</string>
     <string name="settings_overlay_not_allowed">Non autorizzata</string>
@@ -51,9 +53,11 @@
     <string name="settings_section_about">Informazioni</string>
     <string name="settings_version">Versione</string>
     <string name="settings_license">Licenza</string>
+    <string name="settings_source_code">Codice sorgente</string>
     <string name="settings_notices">Licenze open source</string>
     <string name="settings_notices_summary">Licenze delle librerie incluse in Rozan</string>
     <string name="settings_section_credits">Foto di sfondo</string>
+    <string name="settings_credits_summary">Autore, licenza e fonte di ogni foto</string>
     <string name="settings_credits_loading">Caricamento…</string>
     <string name="settings_credits_none">Nessuna foto di sfondo installata.</string>
     <string name="notices_title">Licenze open source</string>
@@ -64,4 +68,30 @@
         <item quantity="many">%d minuti</item>
         <item quantity="other">%d minuti</item>
     </plurals>
+    <string name="settings_section_updates">Aggiornamenti</string>
+    <string name="settings_update_auto">Aggiorna automaticamente</string>
+    <string name="settings_update_off_summary">Cerca una nuova versione di Rozan su GitHub una volta al giorno e la installa</string>
+    <string name="settings_update_not_checked">Controlla una volta al giorno. Non ancora controllato.</string>
+    <string name="settings_update_up_to_date">Controlla una volta al giorno. Aggiornato: %1$s è la versione più recente (controllato il %2$s).</string>
+    <string name="settings_update_updated">Controlla una volta al giorno. Aggiornato alla versione %1$s il %2$s.</string>
+    <string name="settings_update_failed">Controlla una volta al giorno. L\'ultimo controllo (%1$s) non è riuscito: %2$s</string>
+    <string name="settings_update_downloaded">La versione %1$s è stata scaricata e verificata.</string>
+    <string name="settings_update_waiting_screen">La versione %1$s è stata scaricata. Verrà installata quando non è visibile nessuna schermata di Rozan, ad esempio mentre è aperta un\'altra app.</string>
+    <string name="settings_update_waiting_airplay">La versione %1$s è stata scaricata. Verrà installata quando AirPlay non sarà più in uso.</string>
+    <string name="settings_update_ask">La versione %1$s è stata scaricata. Android chiede di confermarla: seleziona Installa aggiornamento.</string>
+    <string name="settings_update_installing">Installazione della versione %1$s…</string>
+    <string name="settings_update_failure_network">Impossibile raggiungere GitHub.</string>
+    <string name="settings_update_failure_server">GitHub ha risposto con lo stato HTTP %1$d.</string>
+    <string name="settings_update_failure_release">La release non contiene un APK del launcher e un SHA256SUMS che Rozan possa leggere.</string>
+    <string name="settings_update_failure_checksum">Il download non corrisponde alla sua dimensione o a SHA256SUMS.</string>
+    <string name="settings_update_failure_package">Il download non è una versione più recente di Rozan firmata con la stessa chiave.</string>
+    <string name="settings_update_failure_storage">Impossibile salvare il download. Controlla lo spazio di archiviazione libero.</string>
+    <string name="settings_update_failure_install">Android non ha installato l\'aggiornamento.</string>
+    <string name="settings_update_install">Installa aggiornamento %1$s</string>
+    <string name="settings_update_install_summary">Android ti chiede di confermare. Rozan si chiude durante l\'installazione.</string>
+    <string name="settings_update_permission">Installa app sconosciute</string>
+    <string name="settings_update_permission_allowed">Autorizzata</string>
+    <string name="settings_update_permission_not_allowed">Non autorizzata</string>
+    <string name="settings_update_permission_allowed_summary">Rozan può installare gli aggiornamenti che scarica.</string>
+    <string name="settings_update_permission_missing_summary">Necessaria per l\'aggiornamento automatico. Per consentirla, esegui questo comando su un computer con adb:</string>
 </resources>

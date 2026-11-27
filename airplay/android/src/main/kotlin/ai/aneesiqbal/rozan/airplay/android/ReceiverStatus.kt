@@ -59,6 +59,11 @@ public class ReceiverStatus(
         val failure: Failure? = null,
         /** TCP port the receiver listens on, or tried to; 0 when unknown. */
         val port: Int = 0,
+        /**
+         * Whether a sender is using the receiver: a code is on screen for it, or it is mirroring or
+         * playing audio. False whenever the receiver is not running.
+         */
+        val inUse: Boolean = false,
     )
 
     /** Observer of status changes. */
@@ -106,6 +111,7 @@ public class ReceiverStatus(
         private const val KEY_PID = "pid"
         private const val KEY_FAILURE = "failure"
         private const val KEY_PORT = "port"
+        private const val KEY_IN_USE = "in_use"
 
         private val STOPPED =
             Snapshot(running = false, advertising = Advertising.OFF, receiverName = null, deviceId = null)
@@ -138,6 +144,7 @@ public class ReceiverStatus(
                 deviceId = properties.getProperty(KEY_DEVICE_ID),
                 failure = failure,
                 port = properties.getProperty(KEY_PORT)?.toIntOrNull() ?: 0,
+                inUse = properties.getProperty(KEY_IN_USE)?.toBooleanStrictOrNull() ?: false,
             )
         }
 
@@ -152,6 +159,7 @@ public class ReceiverStatus(
             snapshot.deviceId?.let { properties.setProperty(KEY_DEVICE_ID, it) }
             snapshot.failure?.let { properties.setProperty(KEY_FAILURE, it.name) }
             if (snapshot.port != 0) properties.setProperty(KEY_PORT, snapshot.port.toString())
+            if (snapshot.inUse) properties.setProperty(KEY_IN_USE, true.toString())
             properties.setProperty(KEY_PID, Process.myPid().toString())
         }
     }

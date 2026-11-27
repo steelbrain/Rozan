@@ -6,4 +6,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
     <string name="rozan_on">开启</string>
     <string name="rozan_off">关闭</string>
+    <!-- Spoken before a warning row's title. -->
+    <string name="rozan_warning">警告</string>
 </resources>

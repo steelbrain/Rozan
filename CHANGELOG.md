@@ -6,6 +6,53 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-26
+
+### Added
+- "Update automatically" in the launcher settings, under the new Updates
+  section, off by default. While it is on, Rozan checks GitHub once a day
+  for a new release, downloads the launcher APK and keeps it only if its
+  size and SHA-256 match the release and it is a newer Rozan signed with the
+  same key. On Android 12 and later it installs the update without asking,
+  once no Rozan screen is showing and AirPlay is not in use; on Android 11
+  and earlier, including Fire OS 7 and 8, "Install update X.Y.Z" opens
+  Android's confirmation. The switch's summary shows the last check and what
+  a downloaded update waits for. Turning it off cancels the checks and
+  deletes the download. Tested only on the Android TV emulator (API 36),
+  against a local copy of a release: the install without asking, the
+  confirmation while "Install unknown apps" is not allowed, and turning the
+  switch off.
+- An "Install unknown apps" row under Updates that shows whether Rozan may
+  install its updates, with the adb command that allows it, and a new step
+  in docs/INSTALL.md for that permission. The later steps there are
+  renumbered.
+- The screensaver shows the photo's title in the bottom-left corner.
+- While the separate Rozan AirPlay app is installed too, Rozan's AirPlay
+  settings start with a warning in yellow, "A separate Rozan AirPlay app is
+  installed": the app is not needed, Rozan's built-in AirPlay works without
+  it, and only one of the two can receive while both are installed.
+  Selecting the warning opens Android's uninstall confirmation for Rozan
+  AirPlay.
+- "Source code" in the About section of Rozan's settings shows the address
+  of Rozan's repository.
+
+### Changed
+- The AirPlay tile opens a screen with only the AirPlay settings, instead of
+  Rozan's full settings scrolled to the AirPlay section.
+- The backdrop photo credits are no longer listed at the end of Rozan's
+  settings. "Backdrop photos" in the About section opens them on a screen of
+  their own, in alphabetical order of title.
+- "Open-source notices" lists one row per library with its copyright holder
+  and licence, instead of one long text. Selecting a row opens that
+  library's licence.
+- The bright edge of the focused tile reaches a little further along the
+  sides from its top-left and bottom-right corners.
+- The Home button redirect opens Rozan without the system's open animation.
+  After a Home press the stock home screen shows for about 50 ms instead of
+  about 400 ms on the Android TV emulator (API 36). It still shows briefly:
+  only making Rozan the real default home, where the device allows it,
+  removes it.
+
 ## [0.1.0] - 2026-11-26
 
 The first release: the Rozan launcher and the standalone Rozan AirPlay

@@ -31,6 +31,7 @@ import android.os.Looper
 import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
+import android.widget.TextView
 import android.window.OnBackInvokedDispatcher
 import androidx.annotation.RequiresApi
 import kotlinx.coroutines.Job
@@ -55,6 +56,7 @@ class HomeActivity :
     private lateinit var root: HomeLayout
     private lateinit var grid: TileGridView
     private lateinit var settingsButton: View
+    private lateinit var caption: TextView
     private lateinit var inputsButton: View
     private lateinit var inputs: InputsController
     private lateinit var chrome: HomeChrome
@@ -80,6 +82,7 @@ class HomeActivity :
         root = findViewById(R.id.home_root)
         grid = findViewById(R.id.app_grid)
         settingsButton = findViewById(R.id.settings_button)
+        caption = findViewById(R.id.screensaver_caption)
         inputsButton = findViewById(R.id.inputs_button)
         options = findViewById(R.id.app_options)
         backdrop =
@@ -90,6 +93,7 @@ class HomeActivity :
                 scope = scope,
                 fallback = { requireNotNull(getDrawable(R.drawable.backdrop_fallback)) },
                 listener = ::onBackdropCoverageChanged,
+                onPhotoShown = { image -> caption.text = image?.title.orEmpty() },
             )
         chrome =
             HomeChrome(
@@ -98,6 +102,7 @@ class HomeActivity :
                 gridScrim = findViewById(R.id.scrim_grid),
                 buttons = findViewById(R.id.top_buttons),
                 clock = findViewById(R.id.clock),
+                caption = findViewById(R.id.screensaver_caption_band),
                 backdrop = backdrop,
                 onShown = ::onScreensaverShown,
             )
@@ -376,6 +381,9 @@ class HomeActivity :
         chrome.setScreensaver(active = false, animate = resumed)
         backdrop.intervalMs = settings.backdropIntervalMs
     }
+
+    /** The title of the backdrop photo on screen, if any (for tests). */
+    internal val shownBackdropTitle: String? get() = backdrop.shownImage?.title
 
     /** Whether the screensaver is showing (for tests). */
     internal val isScreensaverActive: Boolean get() = idle.isScreensaverActive

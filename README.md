@@ -28,8 +28,8 @@ The backdrop changes between 24 landscape photos that come with the app
 ## Settings and screensaver
 
 The gear opens Rozan's settings: the language, keeping the screen awake,
-the screensaver delay, how often the backdrop changes, the Home button, and
-AirPlay.
+the screensaver delay, how often the backdrop changes, the Home button,
+AirPlay, and automatic updates (off by default).
 
 ![Rozan's settings: Language focused, reading System default (English), then Keep screen awake switched on, Screensaver after 5 minutes, Change backdrop every 10 minutes, and the Home button section reading Off with the adb commands that turn it on](docs/images/settings.png)
 
@@ -69,8 +69,9 @@ adb shell appops set ai.aneesiqbal.rozan.launcher SYSTEM_ALERT_WINDOW allow
 ```
 
 The second command lets the AirPlay code and mirroring show over other
-apps. [Installing](docs/INSTALL.md) covers making the Home button open
-Rozan, Rozan AirPlay, and going back to the stock home screen.
+apps. [Installing](docs/INSTALL.md) covers letting Rozan update itself,
+making the Home button open Rozan, Rozan AirPlay, and going back to the
+stock home screen.
 
 ## Documentation
 

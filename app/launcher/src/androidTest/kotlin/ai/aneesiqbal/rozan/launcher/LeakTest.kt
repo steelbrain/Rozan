@@ -87,6 +87,21 @@ class LeakTest {
     }
 
     @Test
+    fun airPlayScreensAreReleased() {
+        launchHome().use { scenario ->
+            repeat(AIRPLAY_COLUMN) { device.pressDPadRight() }
+            waitUntil("focus on AirPlay") { scenario.focusedTileLabel() == "AirPlay" }
+            openAndCloseSettings(scenario, focusBack = { it.focusedTileLabel() == "AirPlay" })
+            val before = MemorySample.take()
+
+            repeat(CYCLES) { openAndCloseSettings(scenario, focusBack = { it.focusedTileLabel() == "AirPlay" }) }
+
+            assertOnlyLiveActivitiesRemain(expectedAlive = 1)
+            MemorySample.take().assertGrowthFrom(before)
+        }
+    }
+
+    @Test
     fun screensaverCyclesLeaveNothingBehind() {
         launchHome().use { scenario ->
             repeat(SCREENSAVER_COLUMN) { device.pressDPadRight() }
@@ -142,12 +157,18 @@ class LeakTest {
         }
     }
 
-    private fun openAndCloseSettings(scenario: ActivityScenario<HomeActivity>) {
+    /** Opens the focused item's settings screen and goes back; [focusBack] says home has its focus again. */
+    private fun openAndCloseSettings(
+        scenario: ActivityScenario<HomeActivity>,
+        focusBack: (ActivityScenario<HomeActivity>) -> Boolean = { s ->
+            s.read { it.currentFocus?.id == R.id.settings_button }
+        },
+    ) {
         device.pressDPadCenter()
         assertTrue("settings opened", device.wait(Until.hasObject(By.res(PACKAGE, "settings_list")), TIMEOUT))
         device.pressBack()
         assertTrue("home is back", device.wait(Until.hasObject(By.res(PACKAGE, "app_grid")), TIMEOUT))
-        waitUntil("settings button focused again") { scenario.read { it.currentFocus?.id == R.id.settings_button } }
+        waitUntil("focus is back where it was") { focusBack(scenario) }
     }
 
     private fun enterAndLeaveScreensaver(scenario: ActivityScenario<HomeActivity>) {
@@ -222,6 +243,7 @@ class LeakTest {
 
     private companion object {
         const val CYCLES = 10
+        const val AIRPLAY_COLUMN = 2
         const val SCREENSAVER_COLUMN = 3
         const val TOTAL_PSS = "summary.total-pss"
         const val TAG = "LeakTest"
