@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="airplay_receiver_line">%1$s への AirPlay</string>
+    <string name="airplay_pin_prompt">%1$s が AirPlay で接続しようとしています。デバイスでこのコードを入力してください。</string>
+    <string name="airplay_unknown_client">デバイス</string>
+    <string name="airplay_now_playing_from">%1$s から再生中</string>
+    <string name="airplay_now_playing_untitled">オーディオ</string>
+    <string name="airplay_artwork_description">アルバムアートワーク</string>
+    <string name="airplay_mirror_description">%1$s からミラーリングされた画面</string>
+    <string name="airplay_notification_channel">AirPlay レシーバー</string>
+    <string name="airplay_notification_title">AirPlay レシーバーはオンです</string>
+    <string name="airplay_notification_text">AirPlay メニューに %1$s と表示されます</string>
+</resources>

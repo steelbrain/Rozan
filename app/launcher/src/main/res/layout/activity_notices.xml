@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/rozan_safe_horizontal"
+    android:paddingEnd="@dimen/rozan_safe_horizontal">
+
+    <TextView
+        android:layout_width="@dimen/settings_side_column"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/rozan_safe_vertical"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/notices_title"
+        android:textAlignment="viewStart"
+        android:textColor="@color/rozan_text_primary"
+        android:textSize="@dimen/settings_title_text" />
+
+    <!-- Focusable so the D-pad scrolls it; the text itself has nothing to focus. -->
+    <ScrollView
+        android:id="@+id/notices_scroll"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:focusable="true"
+        android:paddingTop="@dimen/rozan_safe_vertical"
+        android:paddingBottom="@dimen/rozan_safe_vertical"
+        android:scrollbars="none">
+
+        <TextView
+            android:id="@+id/notices_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewStart"
+            android:textColor="@color/rozan_text_secondary"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/notices_text" />
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Built-in tiles: muted, distinct tints behind white glyphs. -->
+    <color name="tile_settings">#FF3A3A3E</color>
+    <color name="tile_network">#FF1F3A5A</color>
+    <color name="tile_airplay">#FF33305A</color>
+    <color name="tile_screensaver">#FF1E4038</color>
+
+    <!-- Dims the whole backdrop while the grid is scrolled past the first row. -->
+    <color name="scrim_grid">#B3000000</color>
+    <color name="options_panel">#FF2C2C2E</color>
+</resources>

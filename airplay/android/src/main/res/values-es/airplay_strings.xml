@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="airplay_receiver_line">AirPlay en %1$s</string>
+    <string name="airplay_pin_prompt">%1$s quiere usar AirPlay. Introduce este código en tu dispositivo.</string>
+    <string name="airplay_unknown_client">Un dispositivo</string>
+    <string name="airplay_now_playing_from">Reproduciendo desde %1$s</string>
+    <string name="airplay_now_playing_untitled">Audio</string>
+    <string name="airplay_artwork_description">Carátula del álbum</string>
+    <string name="airplay_mirror_description">Pantalla duplicada desde %1$s</string>
+    <string name="airplay_notification_channel">Receptor AirPlay</string>
+    <string name="airplay_notification_title">El receptor AirPlay está activado</string>
+    <string name="airplay_notification_text">Aparece como %1$s en el menú AirPlay</string>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The languages Rozan is translated into, for the system's per-app language
+  settings (API 33+). Keep in step with AppLanguage.Language and the res/values-*
+  directories.
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="en" />
+    <locale android:name="zh-Hans" />
+    <locale android:name="fr" />
+    <locale android:name="it" />
+    <locale android:name="ja" />
+    <locale android:name="pt-BR" />
+    <locale android:name="ru" />
+    <locale android:name="es" />
+</locale-config>

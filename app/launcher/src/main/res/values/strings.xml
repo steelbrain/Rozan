@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Rozan</string>
+
+    <!-- Home -->
+    <string name="home_settings_button">Launcher settings</string>
+    <string name="tile_settings">Settings</string>
+    <string name="tile_network">Network</string>
+    <string name="tile_airplay" translatable="false">AirPlay</string>
+    <string name="tile_screensaver">Screensaver</string>
+    <string name="options_app_info">App info</string>
+    <string name="options_uninstall">Uninstall</string>
+
+    <!-- Inputs: the button next to the gear and the menu it opens, listing the TV's HDMI and other inputs.
+         Wording as in the system's TV settings (Settings > Inputs). -->
+    <string name="inputs_title">Inputs</string>
+    <!-- An input whose device reports standby over HDMI-CEC. One or two words. -->
+    <string name="inputs_state_standby">Standby</string>
+    <!-- An input with nothing connected to it. One or two words. -->
+    <string name="inputs_state_disconnected">Not connected</string>
+    <!-- %1$s: the input's name, such as HDMI 2. Shown when no app on the TV switches inputs for Rozan. -->
+    <string name="inputs_switch_failed">Rozan can\'t switch to %1$s on this TV.</string>
+    <string name="inputs_open_system">Open the TV\'s input list</string>
+    <!-- Shown when the TV's own input list will not open for Rozan: from the Inputs button, which then
+         goes away, or from the menu. -->
+    <string name="inputs_picker_failed">This TV doesn\'t let Rozan open its input list.</string>
+
+    <!-- Launcher settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <!-- %1$s: the name of the system language in that language, e.g. Français. -->
+    <string name="settings_language_system">System default (%1$s)</string>
+    <string name="settings_section_home">Home screen</string>
+    <string name="settings_keep_awake">Keep screen awake</string>
+    <string name="settings_keep_awake_summary">While the home screen is showing</string>
+    <string name="settings_screensaver_after">Screensaver after</string>
+    <string name="settings_screensaver_needs_keep_awake">Turn on Keep screen awake to use the screensaver</string>
+    <string name="settings_backdrop_interval">Change backdrop every</string>
+    <string name="settings_section_home_button">Home button</string>
+    <string name="settings_home_button">Home button</string>
+    <string name="settings_home_button_opens_rozan">Opens Rozan</string>
+    <string name="settings_home_button_on">On</string>
+    <string name="settings_home_button_not_running">Turned on, not running</string>
+    <string name="settings_home_button_off">Off</string>
+    <string name="settings_home_button_checking">Checking…</string>
+    <string name="settings_home_button_native_summary">Rozan is the system\'s home app, so Home opens it directly.</string>
+    <string name="settings_home_button_stock">Stock home screen: %1$s</string>
+    <!-- In the three details below, %1$s is redirect_service_label as the system's accessibility settings show it. -->
+    <string name="settings_home_button_on_detail">The \"%1$s\" accessibility service opens Rozan whenever the stock home screen appears. It never acts on Settings or other system screens.</string>
+    <string name="settings_home_button_not_running_detail">The system lists \"%1$s\" as turned on but has not started it. Turn it off and on again in the system\'s accessibility settings, or run the adb commands below.</string>
+    <string name="settings_home_button_off_detail">Home opens the stock home screen. To open Rozan instead, turn on \"%1$s\" in the system\'s accessibility settings. Where there is no such setting (Fire TV on Fire OS 8.1.5.5 or later), run these on a computer with adb:</string>
+    <string name="settings_home_button_none_summary">Home opens a screen that Rozan does not replace, such as setup or the system\'s app chooser.</string>
+    <string name="settings_home_button_unrecognized">Not in Rozan\'s list of known home screens: %1$s</string>
+    <string name="settings_home_button_adb_note">Replace LIST with what the first command prints. If it prints null, leave out LIST and the colon after it.</string>
+    <string name="settings_open_stock_home">Open the stock home screen</string>
+    <string name="settings_open_stock_home_summary">Stays there until you open another app</string>
+    <string name="settings_section_airplay" translatable="false">AirPlay</string>
+    <string name="settings_airplay_enabled">Enable AirPlay</string>
+    <string name="settings_receiver_name">Receiver name</string>
+    <string name="settings_receiver_name_invalid">The name can\'t be empty. The previous name was kept.</string>
+    <string name="settings_airplay_wake">Wake TV when someone connects</string>
+    <string name="settings_airplay_pin_hint">A PIN appears on this screen for every new connection.</string>
+    <string name="settings_overlay">Show over other apps</string>
+    <string name="settings_overlay_allowed">Allowed</string>
+    <string name="settings_overlay_not_allowed">Not allowed</string>
+    <string name="settings_overlay_allowed_summary">The code appears over any app and mirroring takes over the screen.</string>
+    <string name="settings_overlay_missing_summary">The code and mirroring only appear while Rozan is open. To allow it, run this on a computer with adb:</string>
+    <string name="settings_section_about">About</string>
+    <string name="settings_version">Version</string>
+    <string name="settings_license">License</string>
+    <string name="settings_license_value" translatable="false">MIT</string>
+    <string name="settings_notices">Open-source notices</string>
+    <string name="settings_notices_summary">Licenses of the libraries Rozan includes</string>
+    <string name="settings_section_credits">Backdrop photos</string>
+    <string name="settings_credits_loading">Loading…</string>
+    <string name="settings_credits_none">No backdrop photos are installed.</string>
+    <string name="notices_title">Open-source notices</string>
+
+    <!-- Home button redirect (accessibility service) -->
+    <string name="redirect_service_label">Rozan home button</string>
+    <string name="redirect_service_description">Opens Rozan when the Home button shows the stock home screen. It reads only which app\'s screen is in front and acts only on the stock home screen itself, never on Settings, panels or other apps. It does not read or block keys.</string>
+
+    <plurals name="minutes">
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+</resources>

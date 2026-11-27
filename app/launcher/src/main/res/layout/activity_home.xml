@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Draw order, back to front: backdrop (one opaque layer at rest, a second only
+  during a crossfade), scrims, grid, top bar, options panel. The scrims cover
+  only the bands that need darkening, to keep full-screen blending low.
+  The root does not clip its children: the top bar's buttons grow on focus
+  past the bar's own bounds, and their focus circle must not be cut off.
+-->
+<ai.aneesiqbal.rozan.launcher.home.HomeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false">
+
+    <ai.aneesiqbal.rozan.launcher.backdrop.BackdropView
+        android:id="@+id/backdrop_lower"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ai.aneesiqbal.rozan.launcher.backdrop.BackdropView
+        android:id="@+id/backdrop_upper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0" />
+
+    <View
+        android:id="@+id/scrim_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scrim_top_height"
+        android:layout_gravity="top"
+        android:background="@drawable/scrim_top" />
+
+    <View
+        android:id="@+id/scrim_rest"
+        android:forceHasOverlappingRendering="false"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/scrim_rest_height"
+        android:layout_gravity="bottom"
+        android:background="@drawable/scrim_rest" />
+
+    <View
+        android:id="@+id/scrim_grid"
+        android:forceHasOverlappingRendering="false"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="@color/scrim_grid" />
+
+    <ai.aneesiqbal.rozan.ui.TileGridView
+        android:id="@+id/app_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/rozan_safe_horizontal"
+        android:paddingTop="@dimen/grid_min_top"
+        android:paddingEnd="@dimen/rozan_safe_horizontal"
+        android:paddingBottom="@dimen/rozan_safe_vertical" />
+
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="@dimen/rozan_safe_vertical"
+        android:layout_marginEnd="@dimen/rozan_safe_horizontal"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/clock_gap"
+            android:fontFamily="sans-serif-medium"
+            android:importantForAccessibility="yes"
+            android:textColor="@color/rozan_text_primary"
+            android:textSize="@dimen/clock_text" />
+
+        <!-- The buttons fade into the screensaver as one; the clock then slides to their end. -->
+        <LinearLayout
+            android:id="@+id/top_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Shown only while Rozan can switch inputs or open the TV's input picker (InputsController). -->
+            <ImageButton
+                android:id="@+id/inputs_button"
+                android:layout_width="@dimen/settings_button_size"
+                android:layout_height="@dimen/settings_button_size"
+                android:layout_marginEnd="@dimen/top_button_gap"
+                android:background="@drawable/settings_button_background"
+                android:contentDescription="@string/inputs_title"
+                android:padding="@dimen/settings_button_padding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_inputs"
+                android:tint="@color/settings_button_tint"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/settings_button"
+                android:layout_width="@dimen/settings_button_size"
+                android:layout_height="@dimen/settings_button_size"
+                android:background="@drawable/settings_button_background"
+                android:contentDescription="@string/home_settings_button"
+                android:padding="@dimen/settings_button_padding"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_gear"
+                android:tint="@color/settings_button_tint" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ai.aneesiqbal.rozan.launcher.inputs.InputsPanel
+        android:id="@+id/inputs_panel"
+        android:layout_width="@dimen/inputs_panel_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="@dimen/inputs_panel_top"
+        android:layout_marginEnd="@dimen/rozan_safe_horizontal"
+        android:layout_marginBottom="@dimen/rozan_safe_vertical" />
+
+    <ai.aneesiqbal.rozan.launcher.home.AppOptionsPanel
+        android:id="@+id/app_options"
+        android:layout_width="@dimen/options_panel_width"
+        android:layout_height="wrap_content" />
+</ai.aneesiqbal.rozan.launcher.home.HomeLayout>

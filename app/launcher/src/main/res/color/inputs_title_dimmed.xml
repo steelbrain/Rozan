@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- An input in standby or not connected: its name in the secondary colour, until the row is focused. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/rozan_on_focus" android:state_focused="true" />
+    <item android:color="@color/rozan_text_secondary" />
+</selector>

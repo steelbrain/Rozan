@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Shared by both apps. A resource only one app uses looks unused when the other
+  app is linted with its dependencies, so UnusedResources is not meaningful here.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
+    <!--
+      Dark, plain TV theme on the platform Material theme (no AppCompat).
+      The platform's default focus highlight is off: every focusable view draws
+      its own focus state, and the extra highlight layer would cost a draw.
+    -->
+    <style name="Theme.Rozan" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/rozan_background</item>
+        <item name="android:colorBackground">@color/rozan_background</item>
+        <item name="android:colorAccent">@color/rozan_accent</item>
+        <item name="android:colorControlActivated">@color/rozan_accent</item>
+        <item name="android:textColorPrimary">@color/rozan_text_primary</item>
+        <item name="android:textColorSecondary">@color/rozan_text_secondary</item>
+        <item name="android:windowContentTransitions">false</item>
+        <item name="android:defaultFocusHighlightEnabled">false</item>
+        <item name="android:ambientShadowAlpha">0.2</item>
+        <item name="android:spotShadowAlpha">0.5</item>
+    </style>
+
+    <style name="TextAppearance.Rozan.SectionHeader" parent="android:TextAppearance.Material">
+        <item name="android:textSize">@dimen/rozan_section_header_text</item>
+        <item name="android:textColor">@color/rozan_text_secondary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+</resources>

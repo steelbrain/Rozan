@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bottom-heavy: clear at the top of the band, dark under the first row of tiles. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:centerColor="#59000000"
+        android:centerY="0.45"
+        android:endColor="#D9000000"
+        android:startColor="#00000000" />
+</shape>

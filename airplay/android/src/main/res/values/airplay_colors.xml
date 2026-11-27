@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark, plain palette with one accent. Private copy until :ui provides shared tokens. -->
+    <color name="airplay_background">#FF0F1013</color>
+    <color name="airplay_surface">#FF1B1D22</color>
+    <color name="airplay_text_primary">#FFF2F3F5</color>
+    <color name="airplay_text_secondary">#FFA4A9B4</color>
+    <color name="airplay_accent">#FF7DC0FF</color>
+</resources>

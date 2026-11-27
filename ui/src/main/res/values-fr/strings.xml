@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Shared by both apps. A resource only one app uses looks unused when the other
+  app is linted with its dependencies, so UnusedResources is not meaningful here.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
+    <string name="rozan_on">Activé</string>
+    <string name="rozan_off">Désactivé</string>
+</resources>

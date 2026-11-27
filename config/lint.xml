@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Android Lint runs with warningsAsErrors. Only checks whose result depends on
+  the calendar (new library releases) rather than on our code are disabled, so
+  that an unchanged commit does not start failing when upstream ships.
+-->
+<lint>
+    <issue id="GradleDependency" severity="ignore" />
+    <issue id="NewerVersionAvailable" severity="ignore" />
+    <issue id="AndroidGradlePluginVersion" severity="ignore" />
+    <issue id="OldTargetApi" severity="ignore" />
+    <!--
+      Every translated language must have every string and plural form, and no
+      string the default resources do not have (these are errors by default;
+      stated here so that nothing turns them down).
+    -->
+    <issue id="MissingTranslation" severity="error" />
+    <issue id="ExtraTranslation" severity="error" />
+    <issue id="MissingQuantity" severity="error" />
+    <issue id="StringFormatInvalid" severity="error" />
+    <issue id="StringFormatCount" severity="error" />
+    <!-- Warns about SecureRandom on Android 4.3 and older; minSdk is 28. -->
+    <issue id="TrulyRandom" severity="ignore" />
+</lint>

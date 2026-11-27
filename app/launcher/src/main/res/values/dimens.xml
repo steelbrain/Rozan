@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="scrim_top_height">140dp</dimen>
+    <dimen name="scrim_rest_height">340dp</dimen>
+    <dimen name="clock_text">22sp</dimen>
+    <dimen name="clock_gap">14dp</dimen>
+    <dimen name="settings_button_size">40dp</dimen>
+    <dimen name="settings_button_padding">8dp</dimen>
+    <dimen name="grid_min_top">120dp</dimen>
+    <dimen name="top_button_gap">14dp</dimen>
+
+    <dimen name="inputs_panel_width">420dp</dimen>
+    <!-- Below the top bar: rozan_safe_vertical + settings_button_size + 13dp. -->
+    <dimen name="inputs_panel_top">80dp</dimen>
+    <dimen name="inputs_icon_size">28dp</dimen>
+    <dimen name="inputs_icon_gap">14dp</dimen>
+
+    <dimen name="options_panel_width">300dp</dimen>
+    <dimen name="options_panel_padding">10dp</dimen>
+    <dimen name="options_panel_gap">14dp</dimen>
+    <dimen name="options_panel_elevation">16dp</dimen>
+    <dimen name="options_panel_radius">14dp</dimen>
+
+    <dimen name="settings_side_column">300dp</dimen>
+    <dimen name="settings_title_text">34sp</dimen>
+    <dimen name="settings_header_top">22dp</dimen>
+    <dimen name="settings_note_bottom">10dp</dimen>
+    <dimen name="notices_text">15sp</dimen>
+</resources>

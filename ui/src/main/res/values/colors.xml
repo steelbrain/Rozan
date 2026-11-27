@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Shared by both apps. A resource only one app uses looks unused when the other
+  app is linted with its dependencies, so UnusedResources is not meaningful here.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
+    <!-- Window background: near-black, so a cold start never flashes white. -->
+    <color name="rozan_background">#FF0B0B0C</color>
+    <color name="rozan_tile_placeholder">#FF2A2A2D</color>
+    <color name="rozan_text_primary">#FFF5F5F7</color>
+    <color name="rozan_text_secondary">#FFA1A1A6</color>
+    <color name="rozan_text_disabled">#FF636366</color>
+    <!-- Focused rows invert: near-white fill with dark text, readable from the couch. -->
+    <color name="rozan_focus_fill">#FFF5F5F7</color>
+    <color name="rozan_on_focus">#FF111113</color>
+    <color name="rozan_on_focus_secondary">#FF48484A</color>
+    <!-- The one accent colour: toggles and small focus details. -->
+    <color name="rozan_accent">#FF0A84FF</color>
+    <color name="rozan_toggle_off">#FF48484A</color>
+    <color name="rozan_toggle_off_focused">#FFAEAEB2</color>
+</resources>

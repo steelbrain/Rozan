@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ascii</key>
+	<string>hello</string>
+	<key>empty</key>
+	<string></string>
+	<key>long ascii string over fifteen characters</key>
+	<string>The quick brown fox jumps over the lazy dog</string>
+	<key>unicode</key>
+	<string>Grüße, 世界 🍑</string>
+	<key>escaped</key>
+	<string>a &amp; b &lt; c &gt; d "quoted" 'single'</string>
+	<key>multiline</key>
+	<string>line one
+line two	tabbed</string>
+	<key>int 0</key>
+	<integer>0</integer>
+	<key>int 1</key>
+	<integer>1</integer>
+	<key>int 255</key>
+	<integer>255</integer>
+	<key>int 256</key>
+	<integer>256</integer>
+	<key>int 65535</key>
+	<integer>65535</integer>
+	<key>int 65536</key>
+	<integer>65536</integer>
+	<key>int 4294967295</key>
+	<integer>4294967295</integer>
+	<key>int 4294967296</key>
+	<integer>4294967296</integer>
+	<key>int max</key>
+	<integer>9223372036854775807</integer>
+	<key>int -1</key>
+	<integer>-1</integer>
+	<key>int min</key>
+	<integer>-9223372036854775808</integer>
+	<key>uint 2^63</key>
+	<integer>9223372036854775808</integer>
+	<key>uint max</key>
+	<integer>18446744073709551615</integer>
+	<key>real half</key>
+	<real>0.5</real>
+	<key>real negative</key>
+	<real>-1.25</real>
+	<key>real pi</key>
+	<real>3.141592653589793</real>
+	<key>real huge</key>
+	<real>1e300</real>
+	<key>real tiny</key>
+	<real>5e-324</real>
+	<key>real zero</key>
+	<real>0</real>
+	<key>real +inf</key>
+	<real>+infinity</real>
+	<key>real -inf</key>
+	<real>-infinity</real>
+	<key>true</key>
+	<true/>
+	<key>false</key>
+	<false/>
+	<key>date reference</key>
+	<date>2001-01-01T00:00:00Z</date>
+	<key>date leap day</key>
+	<date>2024-02-29T12:34:56Z</date>
+	<key>date before reference</key>
+	<date>1970-01-01T00:00:00Z</date>
+	<key>data empty</key>
+	<data></data>
+	<key>data short</key>
+	<data>AAECAwQFBgcICQoLDA0ODw==</data>
+	<key>repeated a</key>
+	<string>same value</string>
+	<key>repeated b</key>
+	<string>same value</string>
+</dict>
+</plist>

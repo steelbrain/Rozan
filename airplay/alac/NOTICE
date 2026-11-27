@@ -1,0 +1,14 @@
+Rozan :airplay:alac (Apple Lossless decoder)
+
+This module contains a Kotlin port of the decoder in Apple's ALAC reference
+implementation (codec/ALACDecoder.cpp, ag_dec.c, dp_dec.c, matrix_dec.c,
+ALACBitUtilities.c and ALACAudioTypes.h from
+https://github.com/macosforge/alac).
+
+Apple Lossless Audio Codec
+Copyright (c) 2011 Apple Inc. All rights reserved.
+
+Licensed under the Apache License, Version 2.0. The full licence text is in
+LICENSE-APACHE-2.0 in this directory. The ported files are marked as such in
+their headers and were modified from the original: translated to Kotlin, with
+added bounds and range checks on stream data.

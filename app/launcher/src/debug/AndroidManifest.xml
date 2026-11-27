@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <!-- Debug and benchmark builds only: applies the stored overrides when the main process starts. -->
+        <provider
+            android:name=".debug.DebugOverridesProvider"
+            android:authorities="${applicationId}.debug.overrides"
+            android:exported="false" />
+
+        <!-- Debug and benchmark builds only: changes the overrides from adb (the sender must hold DUMP, as adb's shell does). -->
+        <receiver
+            android:name=".debug.DebugEventsReceiver"
+            android:exported="true"
+            android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="ai.aneesiqbal.rozan.launcher.debug.BACKDROP" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

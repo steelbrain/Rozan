@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Same palette as :airplay:android's PIN and now-playing screens; private until :ui has shared tokens. -->
+    <color name="background">#FF0F1013</color>
+    <color name="surface">#FF1B1D22</color>
+    <color name="focus">#FF2A2F39</color>
+    <color name="outline">#FF3A3F4A</color>
+    <color name="text_primary">#FFF2F3F5</color>
+    <color name="text_secondary">#FFA4A9B4</color>
+    <color name="accent">#FF7DC0FF</color>
+    <color name="accent_dim">#667DC0FF</color>
+</resources>

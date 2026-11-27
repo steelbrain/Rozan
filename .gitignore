@@ -1,0 +1,20 @@
+# Gradle / build
+.gradle/
+.kotlin/
+build/
+!**/src/**/build/
+local.properties
+__pycache__/
+# IDE
+.idea/
+*.iml
+.vscode/
+# OS
+.DS_Store
+# Signing material never lives in the repo
+*.jks
+*.keystore
+keystore.properties
+# Captures
+captures/
+*.hprof

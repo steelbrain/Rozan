@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+
+    <!-- The "Uninstall" action on app tiles opens the system uninstall dialog. -->
+    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+    <!--
+      The Home button redirect has to tell activities from dialogs and popups in
+      every app that comes to the front (docs/research/home-button-override.md,
+      6.4 step 1), which needs every package visible, not only those with a
+      launcher entry. Rozan is sideloaded, never listed on Google Play.
+    -->
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
+    <!-- Package visibility (API 30+): every app with a TV or phone launcher entry point. -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+        <!-- What Home opens: decides the Home button redirect's mode (research doc, 6.1). -->
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.HOME" />
+        </intent>
+        <!-- Fire OS settings screens, opened by explicit component (SystemIntents). -->
+        <package android:name="com.amazon.tv.launcher" />
+        <package android:name="com.amazon.tv.settings.v2" />
+        <!--
+          The TV's own input picker, which the Inputs button opens where Rozan
+          cannot switch inputs itself (inputs/InputPickers): the Live TV action
+          that vendor pickers also answer, Fire TV Edition's inputs screen in
+          com.amazon.tv.launcher (above), and the Fire TV Cube's input chooser.
+        -->
+        <intent>
+            <action android:name="com.android.tv.action.VIEW_INPUTS" />
+        </intent>
+        <intent>
+            <action android:name="com.amazon.tv.action.NAVIGATE_TO_INPUTS" />
+        </intent>
+        <package android:name="com.amazon.tv.inputpreference.service" />
+    </queries>
+
+    <application
+        android:name=".RozanApplication"
+        android:allowBackup="false"
+        android:banner="@drawable/banner"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
+        android:fullBackupContent="false"
+        android:icon="@drawable/ic_app"
+        android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Rozan"
+        tools:targetApi="33">
+        <activity
+            android:name=".HomeActivity"
+            android:clearTaskOnLaunch="true"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:resumeWhilePausing="true"
+            android:stateNotNeeded="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LauncherSettingsActivity"
+            android:configChanges="keyboard|keyboardHidden|navigation"
+            android:exported="false" />
+        <!-- Named by the accessibility service's "Settings" link; opens the Home button section. -->
+        <activity-alias
+            android:name=".RedirectSettingsActivity"
+            android:exported="true"
+            android:targetActivity=".LauncherSettingsActivity" />
+        <activity
+            android:name=".OpenSourceNoticesActivity"
+            android:exported="false" />
+
+        <!--
+          Home button redirect (research doc, section 6). The service, its
+          provider and the probe share the :redirect process, so a crash in the
+          UI process cannot take the service or its breaker state with it.
+        -->
+        <service
+            android:name=".redirect.HomeRedirectService"
+            android:directBootAware="true"
+            android:exported="true"
+            android:label="@string/redirect_service_label"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:process=":redirect">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/redirect_service" />
+        </service>
+        <provider
+            android:name=".redirect.RedirectProvider"
+            android:authorities="${applicationId}.redirect"
+            android:directBootAware="true"
+            android:exported="false"
+            android:process=":redirect" />
+        <activity
+            android:name=".redirect.RedirectProbeActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:noHistory="true"
+            android:process=":redirect"
+            android:taskAffinity=""
+            android:theme="@style/Theme.Rozan.Probe" />
+    </application>
+</manifest>

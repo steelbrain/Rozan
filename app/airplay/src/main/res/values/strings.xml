@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Rozan AirPlay</string>
+    <string name="row_enabled">AirPlay receiver</string>
+    <string name="row_wake">Wake TV on connect</string>
+    <string name="row_wake_hint">Wakes this device when another device asks to connect and its code appears. If HDMI-CEC is on, the TV turns on with it. Also keeps Wi-Fi awake while the screen is off.</string>
+    <string name="row_name">Receiver name</string>
+    <string name="value_on">On</string>
+    <string name="value_off">Off</string>
+    <string name="status_off">Off</string>
+    <string name="status_starting">Running, not announced on the network yet</string>
+    <string name="status_waiting">Waiting for a network connection</string>
+    <string name="status_registering">Announcing on the network</string>
+    <string name="status_advertising">Announced on the network</string>
+    <string name="status_failed">Could not announce on the network. Retries when the network changes.</string>
+    <string name="status_port_in_use">Port %1$d is in use by another app, so Apple devices cannot connect. Close that app and come back to this screen.</string>
+    <string name="status_start_failed">The receiver could not start. Come back to this screen to try again.</string>
+    <string name="overlay_title">Show over other apps</string>
+    <string name="overlay_granted">Allowed. The code appears over any app and mirroring takes over the screen.</string>
+    <string name="overlay_missing">Not allowed. The code and mirroring only appear while this app is open. To allow it, run this on a computer with adb:</string>
+</resources>

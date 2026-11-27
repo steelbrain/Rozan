@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="row_enabled">Ricevitore AirPlay</string>
+    <string name="row_wake">Riattiva la TV alla connessione</string>
+    <string name="row_wake_hint">Riattiva questo dispositivo quando un altro dispositivo chiede di connettersi e compare il suo codice. Se HDMI-CEC è attivo, si accende anche la TV. Mantiene inoltre attivo il Wi-Fi a schermo spento.</string>
+    <string name="row_name">Nome del ricevitore</string>
+    <string name="value_on">Attivo</string>
+    <string name="value_off">Non attivo</string>
+    <string name="status_off">Non attivo</string>
+    <string name="status_starting">In esecuzione, non ancora annunciato sulla rete</string>
+    <string name="status_waiting">In attesa di una connessione di rete</string>
+    <string name="status_registering">Annuncio sulla rete in corso</string>
+    <string name="status_advertising">Annunciato sulla rete</string>
+    <string name="status_failed">Impossibile annunciare il ricevitore sulla rete. Nuovo tentativo quando cambia la rete.</string>
+    <string name="status_port_in_use">La porta %1$d è usata da un\'altra app, quindi i dispositivi Apple non possono connettersi. Chiudi quell\'app e torna a questa schermata.</string>
+    <string name="status_start_failed">Impossibile avviare il ricevitore. Torna a questa schermata per riprovare.</string>
+    <string name="overlay_title">Mostra sopra altre app</string>
+    <string name="overlay_granted">Autorizzata. Il codice compare sopra qualsiasi app e la duplicazione dello schermo occupa tutto lo schermo.</string>
+    <string name="overlay_missing">Non autorizzata. Il codice e la duplicazione dello schermo compaiono solo mentre questa app è aperta. Per consentirlo, esegui questo comando su un computer con adb:</string>
+</resources>

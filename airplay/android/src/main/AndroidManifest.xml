@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Control/media sockets, and network state to re-advertise when the network changes. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- mDNS while published; also what qualifies the connectedDevice foreground service type. -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <!-- Partial/screen wake locks and the Wi-Fi lock (wake on connect, reachable while the screen is off). -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- App-op granted over adb: PIN over other apps, and starting the mirror screen from the background. -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- Wi-Fi locks are used when there is Wi-Fi; Ethernet-only TVs work just as well. -->
+    <uses-feature android:name="android.hardware.wifi" android:required="false" />
+
+    <application android:supportsRtl="true">
+        <!-- The receiver runs in its own process: its crashes never touch the launcher's home process. -->
+        <service
+            android:name=".ReceiverService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice|mediaPlayback"
+            android:process=":airplay" />
+
+        <receiver
+            android:name=".BootReceiver"
+            android:exported="false"
+            android:process=":airplay">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".ui.MirrorActivity"
+            android:configChanges="density|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:process=":airplay"
+            android:taskAffinity="${applicationId}.airplay.mirror"
+            android:theme="@style/Theme.AirPlay.Mirror" />
+
+        <activity
+            android:name=".ui.PinActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:process=":airplay"
+            android:taskAffinity="${applicationId}.airplay.pin"
+            android:theme="@style/Theme.AirPlay.Pin" />
+
+        <activity
+            android:name=".ui.NowPlayingActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:process=":airplay"
+            android:taskAffinity="${applicationId}.airplay.nowplaying"
+            android:theme="@style/Theme.AirPlay.NowPlaying" />
+    </application>
+</manifest>

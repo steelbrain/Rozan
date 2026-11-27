@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="row_enabled">AirPlay 接收器</string>
+    <string name="row_wake">连接时唤醒电视</string>
+    <string name="row_wake_hint">当其他设备请求连接并显示其代码时唤醒此设备。如果 HDMI-CEC 已开启，电视也会随之开启。屏幕关闭时也会保持 WLAN 连接。</string>
+    <string name="row_name">接收器名称</string>
+    <string name="value_on">开启</string>
+    <string name="value_off">关闭</string>
+    <string name="status_off">关闭</string>
+    <string name="status_starting">正在运行，尚未在网络上发布</string>
+    <string name="status_waiting">正在等待网络连接</string>
+    <string name="status_registering">正在网络上发布</string>
+    <string name="status_advertising">已在网络上发布</string>
+    <string name="status_failed">无法在网络上发布。网络变化时会重试。</string>
+    <string name="status_port_in_use">端口 %1$d 正被其他应用占用，因此 Apple 设备无法连接。请关闭该应用，然后返回此界面。</string>
+    <string name="status_start_failed">接收器无法启动。返回此界面即可重试。</string>
+    <string name="overlay_title">显示在其他应用的上层</string>
+    <string name="overlay_granted">允许。代码会显示在任何应用的上层，屏幕镜像会占据整个屏幕。</string>
+    <string name="overlay_missing">不允许。代码和屏幕镜像仅在此应用打开时显示。如需允许，请在装有 adb 的电脑上运行以下命令：</string>
+</resources>

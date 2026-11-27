@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TV safe area: 5% of a 960x540 dp screen is 48 dp; content starts a little further in. -->
+    <dimen name="airplay_edge">96dp</dimen>
+    <dimen name="airplay_text_label">22sp</dimen>
+    <dimen name="airplay_text_body">34sp</dimen>
+    <dimen name="airplay_text_pin">168sp</dimen>
+    <dimen name="airplay_text_title">44sp</dimen>
+    <dimen name="airplay_text_subtitle">28sp</dimen>
+    <dimen name="airplay_prompt_width">720dp</dimen>
+    <dimen name="airplay_artwork">320dp</dimen>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A screen with signal arcs: the receiver's notification icon. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:pathData="M5,4h14a2,2 0,0 1,2 2v10a2,2 0,0 1,-2 2h-14a2,2 0,0 1,-2 -2v-10a2,2 0,0 1,2 -2zM9,21h6"
+        android:strokeWidth="1.8"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M9.53,12.53A3.5,3.5 0,0 1,14.47 12.53M7.4,10.4A6.5,6.5 0,0 1,16.6 10.4"
+        android:strokeWidth="1.8"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeLineCap="round" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M10.8,15a1.2,1.2 0,1 0,2.4 0a1.2,1.2 0,1 0,-2.4 0z" />
+</vector>

@@ -1,0 +1,30 @@
+# Overrides on top of detekt's default configuration (buildUponDefaultConfig).
+# Keep this list short; every relaxation needs a reason.
+
+complexity:
+  LongParameterList:
+    # Protocol messages and Android constructors routinely carry many fields.
+    allowedFunctionParameters: 8
+    allowedConstructorParameters: 10
+  TooManyFunctions:
+    allowedFunctionsPerFile: 25
+    allowedFunctionsPerClass: 25
+    allowedFunctionsPerInterface: 15
+    allowedFunctionsPerObject: 25
+  LongMethod:
+    # Crypto and codec routines are long straight-line sequences.
+    allowedLines: 80
+
+style:
+  MagicNumber:
+    # Wire formats are full of offsets and sizes; they are named where they
+    # carry meaning and documented against docs/protocol/ otherwise.
+    active: false
+  ReturnCount:
+    max: 4
+  MaxLineLength:
+    maxLineLength: 120
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated: ['Test', 'ParameterizedTest']

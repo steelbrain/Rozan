@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="row_enabled">Приёмник AirPlay</string>
+    <string name="row_wake">Включать телевизор при подключении</string>
+    <string name="row_wake_hint">Пробуждает это устройство, когда другое устройство запрашивает подключение и появляется код. Если включён HDMI-CEC, вместе с ним включается и телевизор. Также сохраняет Wi-Fi активным при выключенном экране.</string>
+    <string name="row_name">Имя приёмника</string>
+    <string name="value_on">Вкл.</string>
+    <string name="value_off">Выкл.</string>
+    <string name="status_off">Выкл.</string>
+    <string name="status_starting">Работает, ещё не объявлен в сети</string>
+    <string name="status_waiting">Ожидание подключения к сети</string>
+    <string name="status_registering">Объявление в сети</string>
+    <string name="status_advertising">Объявлен в сети</string>
+    <string name="status_failed">Не удалось объявить приёмник в сети. Повторная попытка будет при смене сети.</string>
+    <string name="status_port_in_use">Порт %1$d занят другим приложением, поэтому устройства Apple не могут подключиться. Закройте это приложение и вернитесь на этот экран.</string>
+    <string name="status_start_failed">Не удалось запустить приёмник. Вернитесь на этот экран, чтобы повторить попытку.</string>
+    <string name="overlay_title">Поверх других приложений</string>
+    <string name="overlay_granted">Разрешено. Код появляется поверх любого приложения, а повтор экрана занимает весь экран.</string>
+    <string name="overlay_missing">Запрещено. Код и повтор экрана появляются, только пока открыто это приложение. Чтобы разрешить, выполните на компьютере с adb:</string>
+</resources>

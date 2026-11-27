@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/airplay_background"
+    android:gravity="center_vertical|start"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/airplay_edge"
+    android:paddingEnd="@dimen/airplay_edge">
+
+    <TextView
+        android:id="@+id/airplay_pin_receiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxWidth="@dimen/airplay_prompt_width"
+        android:singleLine="true"
+        android:textColor="@color/airplay_text_secondary"
+        android:textSize="@dimen/airplay_text_label" />
+
+    <!-- Four lines: a 63-byte sender name and the longer translations (Russian) need them. -->
+    <TextView
+        android:id="@+id/airplay_pin_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ellipsize="end"
+        android:lineSpacingMultiplier="1.15"
+        android:maxWidth="@dimen/airplay_prompt_width"
+        android:maxLines="4"
+        android:textColor="@color/airplay_text_primary"
+        android:textSize="@dimen/airplay_text_body" />
+
+    <TextView
+        android:id="@+id/airplay_pin_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFeatureSettings="tnum"
+        android:includeFontPadding="false"
+        android:letterSpacing="0.12"
+        android:singleLine="true"
+        android:textColor="@color/airplay_accent"
+        android:textSize="@dimen/airplay_text_pin" />
+</LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stand-ins for the Home button redirect tests. They live in the test APK, so
+  their package is not Rozan's, like a real stock launcher. A third-party app
+  cannot become the device's stock home, so the tests point the redirect at
+  them through RedirectProvider's debug-only test setup instead.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity
+            android:name="ai.aneesiqbal.rozan.launcher.redirect.FakeStockHomeActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Material.NoActionBar" />
+        <activity
+            android:name="ai.aneesiqbal.rozan.launcher.redirect.FakeStockSettingsActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Material.NoActionBar" />
+        <activity
+            android:name="ai.aneesiqbal.rozan.launcher.redirect.FakeAppActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.Material.NoActionBar" />
+
+        <!--
+          A TV input of the test APK, so the inputs tests run against the real
+          TvInputManager (list, labels, hidden flag, callbacks). An app's own
+          input is always a tuner, never a passthrough input; only the system
+          creates those for its hardware (docs/research/tv-inputs.md).
+        -->
+        <service
+            android:name="ai.aneesiqbal.rozan.launcher.inputs.TestTunerInputService"
+            android:exported="true"
+            android:icon="@drawable/test_input_icon"
+            android:label="Rozan test tuner"
+            android:permission="android.permission.BIND_TV_INPUT">
+            <intent-filter>
+                <action android:name="android.media.tv.TvInputService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.media.tv.input"
+                android:resource="@xml/test_tv_input" />
+        </service>
+    </application>
+</manifest>

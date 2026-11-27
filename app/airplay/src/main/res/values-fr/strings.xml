@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="row_enabled">Récepteur AirPlay</string>
+    <string name="row_wake">Allumer la TV à la connexion</string>
+    <string name="row_wake_hint">Réveille cet appareil lorsqu\'un autre appareil demande à se connecter et que son code s\'affiche. Si HDMI-CEC est activé, la TV s\'allume aussi. Garde aussi le Wi-Fi actif quand l\'écran est éteint.</string>
+    <string name="row_name">Nom du récepteur</string>
+    <string name="value_on">Activé</string>
+    <string name="value_off">Désactivé</string>
+    <string name="status_off">Désactivé</string>
+    <string name="status_starting">En cours d\'exécution, pas encore annoncé sur le réseau</string>
+    <string name="status_waiting">En attente d\'une connexion réseau</string>
+    <string name="status_registering">Annonce sur le réseau en cours</string>
+    <string name="status_advertising">Annoncé sur le réseau</string>
+    <string name="status_failed">Impossible d\'annoncer le récepteur sur le réseau. Nouvel essai quand le réseau change.</string>
+    <string name="status_port_in_use">Le port %1$d est utilisé par une autre appli, les appareils Apple ne peuvent donc pas se connecter. Fermez cette appli et revenez sur cet écran.</string>
+    <string name="status_start_failed">Le récepteur n\'a pas pu démarrer. Revenez sur cet écran pour réessayer.</string>
+    <string name="overlay_title">Superposer aux autres applications</string>
+    <string name="overlay_granted">Autorisé. Le code s\'affiche par-dessus toutes les applis et la recopie de l\'écran occupe tout l\'écran.</string>
+    <string name="overlay_missing">Non autorisé. Le code et la recopie de l\'écran ne s\'affichent que lorsque cette appli est ouverte. Pour l\'autoriser, exécutez ceci sur un ordinateur avec adb\u00A0:</string>
+</resources>

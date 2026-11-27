@@ -1,0 +1,641 @@
+{
+ "_note": "FairPlay session-state scenarios (revision 2), observed by driving the reference dispatch layer on this machine. Each scenario starts from a fresh per-connection FairPlay context and runs its steps in order. op is setup (16-byte request), handshake (164-byte request) or decrypt (72-byte blob). expect_ok says whether the call must succeed; when it succeeds, expect_output is the exact reply (142 or 32 bytes) or the 16-byte key. For v2 setup steps, inject_receiver_sap is the receiver SAP the implementation must use for that setup (in production it is random); later v2 steps were built against it. Synthetic inputs; equivalence with the reference, not Apple clients.",
+ "scenarios": [
+  {
+   "name": "v2-decrypt-failure-keeps-session",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020002bb",
+     "expect_ok": true,
+     "expect_output": "46504c59020102000000008202023ab76f47f78c0e787cc0cbf9d2910b3c781682d5a06a5db00f6bde508b33a522412e8bfa6638a0f53dd22e207996ae455fcd7a36546a77527c7b7b174223be79ae6f958bbe9eafc1f215caa2042fac3deb6fb14355137fe9819c968a7060a3abf58b41ec028fc252ccc2520e8bbc97d562d88be460d47116c23e5981379527c2",
+     "inject_receiver_sap": "0001f65b2a451a3428d678783efeaeb1662afdc423333fef90c79688d54f6ed7426369ea37133c237beaebf5b47b39efb465111a9a42b123db0b026ea8bf558aa4ba4047aa80121b0eafa246153c8e9e8b484129b2e5b3bfde0a38c612c094baefb7492d6e9af0a62b639d08b0c08fcdccc7d1fa07c3af3c102bd8ca2e00d6ca"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098028f1a9c8dcf3cfb9fd0236d05bd792a9a748320f87150d536496054c629260e4f688cfb982d4b9c1a89990aa903540a302a70542339df0049166cc826bc7095b09cfafebb69f2b6d3d9f8d3b67888bbd831b6b06abc594d452e7a78e1e012e07cecc1fd93037a91e73179384603a94938a74dadb21335f032bd78dc7a24cc42314e5c57efb2b00f9a254817699f0294115dacbf5b9f57f8",
+     "expect_ok": true,
+     "expect_output": "46504c590201040000000014efb2b00f9a254817699f0294115dacbf5b9f57f8"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000e0962e89ecd1b8b2a11e69e786bcee7a0000001029c1f14e9cd5908870df6726f753767f0d0db1acf7d80b832a1cf740d42cbd3df932a48f",
+     "expect_ok": false,
+     "note": "corrupted tag"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000c982f48c352dd714fdd69dd108afd6d900000010e69a96ea8f7379b47644a0d99e59553ce4c535f9f31e7e8ca6e2b3720a2aa252e3b0ec5e",
+     "expect_ok": true,
+     "expect_output": "6c829135f8bf1b80c786f29d8b652883",
+     "note": "valid after failure; key ok=True"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000027d37a9edfa66be0398f7e00fe31dea4000000101022ad16bdc5e438af0e920a69220671a64112bddbc4f32bce63c457b76a64d9c3c50b89",
+     "expect_ok": false,
+     "note": "corrupted wrapped"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000fd627fb0f485454004a9e076ef35972f00000010dda3ca4434d197a56544ed6d9c40753191d7e9c283c2d94dae502d9dceda00ab2e421383",
+     "expect_ok": true,
+     "expect_output": "2ece27435f84dbaf1ec1982a561cf08a",
+     "note": "valid after failure; key ok=True"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000cdf8397c029418aba02adeb7b387cc95000000100377252fb613bb05c8066f187118e1a2cafccda6d60a1868ac6e60e96bef3da2d510df20",
+     "expect_ok": false,
+     "note": "corrupted blind"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000cf9d78b0a349f57890e452acc7fa6c7a00000010c066ecbca8ffc12d1a1d123c3b3c2ae79eed27e0951e7c5932f0bb7405f441ed73e6419a",
+     "expect_ok": true,
+     "expect_output": "a887df15bbe19e5b5d44c2a2d1d842a8",
+     "note": "valid after failure; key ok=True"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003d000000004c131950bd99112abeabf1e5ebf8e11f00000010e87088eb823ae7e5ccafdc5d3f68a04d15a931a8e4e382905310551312f89295ee776015",
+     "expect_ok": false,
+     "note": "corrupted framing"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c000000003f25036ecc50457fa2c8edee5c332be900000010a8aaada054c92545bf3167fe87398c0e82e3519a03745561a2fceb6d5c3a8ecebf12165b",
+     "expect_ok": true,
+     "expect_output": "4985a2c7b70903018504faa12ebeee61",
+     "note": "valid after failure; key ok=True"
+    }
+   ],
+   "topic": "Q3 v2 decrypt failure"
+  },
+  {
+   "name": "v2-handshake-failure-then-retry",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020001bb",
+     "expect_ok": true,
+     "expect_output": "46504c59020102000000008202013e279f6dff86ddca19dddc851204d1c9788a56e291ddd941930258055f6848c652d28214889ac638938fd7ee33c50ba52aa9812254e36132fcb4c674b4826616709a803b6f722634ecff44e9f5b7b5bfbda24acb197e622838b14fdbc8dbfede016903c2b08584584286f8a504fad38800e251e9abe80069255bfc2d02f1dfb1",
+     "inject_receiver_sap": "0001da92d2e99e145fefe1c12e2200544e97672ca1a4c25bc03fda46a58dd3c6ee865a9c22194d90f32fcf6e6002b1019039603b26ddc606b52cf26fc0241dba0edf083cd6442a623dd666b1ebd3b4a1a346da36ca37bed8cd00fc49cff50edb75c438993c7942fd2ad4bde9d169ac4413c24206777b8f39024f0a6ad57293d5"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098018f1a9c6a04c8fbb7f5c946f6dd7effdf0059359befea934d0ab2bf032a7c1f5d9705e7e0f1bf8d407e4b20da0db887b91a5e2027e5e8edb5e9c1f9634192f06644cd37195e7b6b178c943190e1f34b371cf5b9c34797955a61fc8d148732cb11376893d0a81e564b8269f238c89d52c8cb33d70dd394c6266d34221276d49417783265da2db375762d430cc401cd06cf576496a4cc85aa",
+     "expect_ok": false,
+     "note": "bad confirmation tag"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000f5949b3edd3f291be5e1c20c566d0d3d0000001075b8f201aa59b02ea1ccb96685065020abd690a3e006c4801a236cb8cc6ba4efd0a01084",
+     "expect_ok": false,
+     "note": "decrypt after failed handshake"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098018f1a9cf8eb96ba2de08dc1a36b7eb5c88384674d11c07acbbc2a477e5eef06c2ea3073cf88a05778b402fa620374758c93c41dfedf92184dba7e335e0a33e0c0d67b7fcad8d7c742a83d6baa8b81204b700b62ee1e0591f0d59dcb57776de12dcbf099349ba39785302de897dfb9a8072fe9a733c5b8fa3375936b605644cb93931445681e04c25497c716699949a0e16fd3ac06ef1182",
+     "expect_ok": true,
+     "expect_output": "46504c590201040000000014681e04c25497c716699949a0e16fd3ac06ef1182",
+     "note": "valid retry, same setup"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000b6fc1220afd53a1a05561da15e0ae4cc0000001019b244d01fd6a690bce7392eb5a49c4c2a4c131730523fa8c02bb3ff0ed8a8c4b6e7904a",
+     "expect_ok": true,
+     "expect_output": "828791b31d3a208e2af9243a6955023e",
+     "note": "key ok=True"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v2-handshake-mode-mismatch",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020001bb",
+     "expect_ok": true,
+     "expect_output": "46504c5902010200000000820201d3a7d2e6676e28f878c1f2f69b980d93aaa58e7252aca3a7a836a7b13308091dbbdb77fa1ad07d96ea766a6490b43be4ed52d046dcd424cb9a5450fa4c6886644831859a92bc77041024e5089ab9d5fb36d00fe65a5655c91837ab38ea172461441f09471ff3881e74c8a8f84d874a0372d3598849aabcc9fbc5e106d415ba62",
+     "inject_receiver_sap": "0001a37cf08fc4f4bd3cb12065e58b4c658001129b37967571a4f3f0884f3c656ca80430167dbac063d6c3aca4275aa64915cca961f2a7dfd246854b8e1290ed42e1dd4b139f3ecb44ef167c0acc253d617f3576d8ccab6f2d1978b2a22b8faded90144828fa6634ebce9ca28c566b956b30ad943eda624b89d5667bd4b5a528"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098028f1a9c2ab66ce84af51a72f24b95f08abd31bb81eb393cc5beea5005467063bed82b59aaa5506b915b8320a5a85e47c8a296cbe21ac4b254650559249095dba4f4e2ff358be9f0503abf5f6f7ff687d8644fd6edd26ee8ab713c8861c0b4ccc3f16958dec763345491ff91e89abd354b3f4f05ed0d4518bfd2a0ab37ac28b0848da0c2ee66a265003f3f6cf478805279ad8e6814e53c4d",
+     "expect_ok": false,
+     "note": "handshake mode 2 after setup mode 1"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098018f1a9ce79652537c92adb63806561940a852ea079db2ddbc85ba730032f001b3c6d8a8e2c1aa866d97bb91ffd6a446c963d0a701bc7063c1149368698fdf6586d643218836c8e4607da5f652b138726ee1894f2f390fa3b7c29a84fe26b9375ae7ba161f80b0b78a6f02a70442eedd6a299a87ea1ba4848fe18f306ee5d4f33bbd874142b3711d7be2f4be78c31a3e4e5215809a490206",
+     "expect_ok": true,
+     "expect_output": "46504c59020104000000001442b3711d7be2f4be78c31a3e4e5215809a490206",
+     "note": "mode 1 retry"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000083dc4f70a25a6a3da9b9c8abd36fe29700000010735c2e75b34713df388a4905225ca0499b07818ddbd1d27b9cf42c685c5b1990aa03fcba",
+     "expect_ok": true,
+     "expect_output": "9b5fab0d28fadd074662810177b4607c",
+     "note": "key ok=True"
+    }
+   ],
+   "topic": "Q4 v3 handshake vs setup mode"
+  },
+  {
+   "name": "v2-decrypt-before-handshake",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020000bb",
+     "expect_ok": true,
+     "expect_output": "46504c59020102000000008202001e5ef19d456844b0f28ffd904fdf9601d2f0c795f47a7a7ea4dcdc8b2cb498fe76cc250705123fd61238deb2d9e94618e82d0488fd711e859ce6ced88eb86035cc29c0818fb88f934e155b07f2757673ac8170a7bc71dae9dfe55eaa4954fef4e63c8f83650080cac4cf873d2e1a580cb6f655411a3e6c135428207963f83257",
+     "inject_receiver_sap": "0001017e16610c4ec42eaab737a8a264666bc37561f28a7be942b47fc6a1029a5faaaaf1574565f678abf9a762cacb0d9d7e0ecd8b0e8a4795e8c0d3a9cea49185a9a5630e9779cda16b5fa3425466397c2bb35f6d6cd26fd7b855a25b1322679ccf8a344c6764a2465c1f4d17b1a50dbf0ff7c2ac8dad1dd0c4e2f74294884e"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000c3d4bd76b90449a1dc6fd29a14842b09000000109674b31d89b9a4f307c3e0153eac0293bf6ab42095849f9e5f325392ecfea8d1bd440173",
+     "expect_ok": false,
+     "note": "no handshake yet"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v2-second-handshake",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020003bb",
+     "expect_ok": true,
+     "expect_output": "46504c590201020000000082020300855e596f5907a58778555a93028c24441a5f4647dab1672a15e3593dc23dedf244d72e2a09a619ba5d6e834e557a87bb0636237202f9b084dd7dc6aaa9a727d891ae8a10045858e7d62294dd2d878ff72724d9170aff57cff9f483765384a946d8a32e70b7dc61f52f6d78f1f91524aa892345d4da3c301a07c4dea9a5d03b",
+     "inject_receiver_sap": "0001f5c1ec3bd4d09314afbfd278041dffea1a3322c2dcf4b1fdca9fbb356aaf6277cecdf683843b2de04d7c5029e1fb402644425dc231a1deed8baca633ea54afa20ff9f105a78d00f315efc04226959271c662f7c04be53568ed1ecc625e6028b8eace9b0ffdf976aa74bc744422037d7eb99619d7729f0aa43065b48dad8f"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098038f1a9c78491056e3db2c3a1d54531490c507683ccde79fb78ee602ff0a78026d36b26cbccb2b379b8c869478b2eea59f77e6a80283fab977de10614ee838be58d49e0254f2ffa23c321a000357c57cecc124c50f5d657b7cae3bc74ad2e2c7d1f1f0cb7b8664fc8040b39cceb754402808cdb554fe134e6ecc3e99f325ac35fcb3a81c49b202b7ad1ac6aea4093ca211a44fb9147059e1",
+     "expect_ok": true,
+     "expect_output": "46504c59020104000000001449b202b7ad1ac6aea4093ca211a44fb9147059e1",
+     "note": "handshake A"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000079c6a136ea31b3ddeffca1d51158ba460000001077b3041eb0efa825afe32e88036a6c2526228d1c61cdf188519e68338ba16c19c52ef2e8",
+     "expect_ok": true,
+     "expect_output": "3587acf182efc7ecc3f1d8f4464eb23e",
+     "note": "key A ok=True"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098038f1a9cba26a9a89f2c5d6155ee4fe3da78e0ed331a1b78645c4e9cd14ac217c364f297b2e9eda36efb83f179a37c97cc2a941271bc8ef8d7d7c1ed71f61e6d468e880ff17b120cbefb3f81647fc629ca058a9fd4281cd446aec92cf8e013c8f277a8cfab67650f345893c8ab5fb6dd47fbc1e5d2582758d6f50329a321a06361deb184759d49f59b3e1d2dfe77bcbfe9cb02ed75662024",
+     "expect_ok": true,
+     "expect_output": "46504c590201040000000014759d49f59b3e1d2dfe77bcbfe9cb02ed75662024",
+     "note": "handshake B on same setup"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000079c6a136ea31b3ddeffca1d51158ba460000001077b3041eb0efa825afe32e88036a6c2526228d1c61cdf188519e68338ba16c19c52ef2e8",
+     "expect_ok": false,
+     "note": "old key blob from A"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000466a71c1de9e1eee26e27875f46f97e400000010ecf4882e94d4c61a64273c879013d2d6bcc5da64ca0c3894d2a6d4a6d74a86df277e17e4",
+     "expect_ok": true,
+     "expect_output": "e219e96cd40bd9e9d1807e1346590e22",
+     "note": "key B ok=True"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v2-second-setup",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020000bb",
+     "expect_ok": true,
+     "expect_output": "46504c59020102000000008202009b0244cbf9b2a23158096de47f65920b43b8ea8eb28028d4139596ce8c081e235c579ba4f53ab72180c7b0949bd89c801ad026212529c0d5563619bd8597701c1aa0405af94e02a46d52b1252e916554ee5196e925199aca35ecbe22ab43263fbf0aa7748de563cc72085d851001dee72bcb002fbcf122f7167512fb0a9d512c",
+     "inject_receiver_sap": "000139994b2c7e5ba2bbdb16ae745f22ba32b5ee3cab4a93c9485420a88efe1f318ce4c9d3683ae80725d8fe2e9c5c5405c38a824d9d3517d43e536bc2d51f3391b9bc8c660f53c130c67a7765c1e931c2bde75d54df8be6f2c03811d65db711ac6545522af6f490449e636b918295488e96fafcd54f4804e9bc1638ce2d23a6"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098008f1a9c2b80f4a75fda1c69d16108c84ce94da6ab6201ada38fe96afa72c9290d6ee07247766e7662bec29472e1ec132b50f3eae250d9602b8c1ca5dd37cf9885171e72fddbdaadc6ed1f23197a9078762d2051371ebad6b837157709c54cbeff1d9516281ea3856f6733fc0539e98c1b549077cd570571e517e478552458f21e569ef844f1b09f915edc7f3aaa3b08d290034ef0df6a8f",
+     "expect_ok": true,
+     "expect_output": "46504c59020104000000001444f1b09f915edc7f3aaa3b08d290034ef0df6a8f"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c000000004d9e6abb5c844eb93a04b34dc3e11d7800000010b95780877262ea9ee8216452bcbdd34248366f34db021120da75a7048696efe9efebf978",
+     "expect_ok": true,
+     "expect_output": "0f71d1c5fc11f64f1022fc925a23f22a",
+     "note": "key ok=True"
+    },
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020000bb",
+     "expect_ok": true,
+     "expect_output": "46504c5902010200000000820200d0176366ae648e4ae2cc10cb135e8a9391c61987d85c887cf8e89c0a2faba18f4d5c3b2b2dd28a1a441c1cfe8edda3dfc01f4a3745ad47fae4c3a819a4933798597e2b3fa35208947b2cf61f45f4c722ce365b6c763d59e221bf5cb0bb730a9aa966f59a88ade0de3bcd46c0b0cbd5ccc4286d5c064129f35a66f2bb24fe8c88",
+     "note": "second setup (new receiver SAP)",
+     "inject_receiver_sap": "000178b02abdb34f6a2637f545c6a3c1a6a0c23e183cce7313b706f11922fa40f08584f6a3548f7ef61a6abcba60c5cc45519169be17e303a956476d05f1e3507ce83b8689daaf0595ea9a411bbd76408d88c72cf0f3ce3d5c2ebae5baf7f7d17950467abb9f83975166c7a087a86947c26a0150d05bd1895b05d6aece5b7207"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c000000004d9e6abb5c844eb93a04b34dc3e11d7800000010b95780877262ea9ee8216452bcbdd34248366f34db021120da75a7048696efe9efebf978",
+     "expect_ok": false,
+     "note": "old blob after second setup"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098008f1a9c2b80f4a75fda1c69d16108c84ce94da6ab6201ada38fe96afa72c9290d6ee07247766e7662bec29472e1ec132b50f3eae250d9602b8c1ca5dd37cf9885171e72fddbdaadc6ed1f23197a9078762d2051371ebad6b837157709c54cbeff1d9516281ea3856f6733fc0539e98c1b549077cd570571e517e478552458f21e569ef844f1b09f915edc7f3aaa3b08d290034ef0df6a8f",
+     "expect_ok": false,
+     "note": "old handshake replayed after second setup"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098008f1a9c9b374c8dcecb451a3ad99a75aae37312ad614c0d3dc3a6883be29a522931f405fc0deef364026f639785d5ab8bb72200341ff299e0f5bb6ba0491cafdd78cd22ca7b0dcd454b32989f7e25fde7bcfac8c5bcd38ac3dd3ca0ffbabe4986518973ed1a96bc4c0fe2b7c3c593e2007600712e8a963c1f03b766f4d7f43aa49531b11fd0ed98f4690c18ef2ae2d720560cf1b2c3ff74",
+     "expect_ok": true,
+     "expect_output": "46504c5902010400000000141fd0ed98f4690c18ef2ae2d720560cf1b2c3ff74",
+     "note": "new handshake"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000090fe3cdb8ce622ab7c9aaf907bb49e9000000010b7f80ada2d9ab87a410a3c502cb43099eededadf119e0506eab4c77fa8ed74545f9d13e4",
+     "expect_ok": true,
+     "expect_output": "09a6aa10eb551d3225ef84d7c8d2939d",
+     "note": "key ok=True"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "invalid-setup-resets",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020002bb",
+     "expect_ok": true,
+     "expect_output": "46504c59020102000000008202027f4c2bab2bd0a421d2ed64e22da70c554823cb4e4e9ebd50d34fab0301b4533d1302c4d72ee010869e61dc0f5b953b7c65e65e0648a8604f88cd8deea9c3fb0adf29a78a01bd1f61b2559549ba72b7f7baabcb0faf5c8a6a952419edd24a1fd6e8d0521ffe4ca23aceca10279476b6a2459480641c5883052c9813c9e22a4bd4",
+     "inject_receiver_sap": "0001b37a2bcaea8eee93396382eee12d6c766ebf42cea231da4e0b8a1b98829274ef3911783979e91fc8f87c706a94b17635bd566c2744e39ae2943128d633b048d914d82f08b2c06ab2993a8e0f8bf683c6cac2aa296066adc2f2fb7f0c2048e13394e71c629d03b64029dcb9b122977c41798610b847978e94453ffb416d04"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098028f1a9c174af1605abf0a4bfd7de87027065791f09c66e375ecd2cafd64b2c61b60db33a38f7849af4dc0784811cf698dfd0668ffa4879cefc46c009eb9411cca71fd8a616293ab02c9995cc7cdcdc5e8d55ede8b207b04e552d5c97b9ad1de177e337779d8b89c30f2eceecbe1b4982c6ef6a9605e1f1807a0065771c54365979a1d9d727b2d45ac1710763968b91a85e84982038fc461",
+     "expect_ok": true,
+     "expect_output": "46504c590201040000000014727b2d45ac1710763968b91a85e84982038fc461"
+    },
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020002bc",
+     "expect_ok": false,
+     "note": "invalid v2 setup (byte 15 != bb)"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000004f2f8dcd5605887112581b1be882a7700000010043d4184249f384f61a01ea3d05c10f77e5d0af051afbcd25e13e8ff249d400b219f11ce",
+     "expect_ok": false,
+     "note": "decrypt after invalid setup"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v2-setup-then-v3-handshake",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020001bb",
+     "expect_ok": true,
+     "expect_output": "46504c5902010200000000820201e630e8387f8c50377018dd45fd4017ffe595ede31b5bb72774cb4ee364036eaa14f7fb6aaf56f2023291e7a81e9b863d30d2cdf73debfeef373370b92826cb7187cf0994774f4056fc04650418f29a2ca03e88082c20cf5cb41dda977cbbec1fd798449f28bebd0f50e9d60a5641bff283eb40575fee685c948bc5405ba380b3",
+     "inject_receiver_sap": "000151b2c36e2643bf833232cfd97a68303f6097074c011478513454dc0b03b02f22dbb160a3d1f39a7ce67fa8557cac7df60f39336af590094ce76b3342f7a70d5819bd29eb1717bac3e0132a6ba758c1ab5a4510b37b70fc0150456fc732cdd8cb7217abc0a75a26f2bcd20d86b0b11101b35963db442cab114e9d24e98fe6"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c59030103000000009801811cfa2c6c84d40d8216f34122a1f1c257cd1902781f5445158879c2ce372bb79b2a232527300670f2c898cf0388a8789a230ae74d6be0d343739358ff64b4e1c76555a95d3e88693e260afb368899efbeb5e629739783827e88bdd00cdb913c35edd374a2a4a64615f0a6ccb534f92ceb43881368decba609f293efea4f0c88ec6e7bfd624948b08904c3fa14bf942e6b0c8f68966f08",
+     "expect_ok": true,
+     "expect_output": "46504c590301040000000014fd624948b08904c3fa14bf942e6b0c8f68966f08",
+     "note": "v3 handshake after v2 setup"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c000000004b82a50fcfa0a77971eacabc22064fda00000010bea46e9e2c33f37771308b89dceea66ae6d98f0c37c2daa218474bec4985680e3a12dc20",
+     "expect_ok": true,
+     "expect_output": "f2c83653a4c6212c136fcc1e69ffae64",
+     "note": "v3 decrypt; equals v3 algorithm=True"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v3-session-then-v2-handshake",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590301010000000004020000bb",
+     "expect_ok": true,
+     "expect_output": "46504c59030102000000008202000f9f3f9e0a2521dbdf312ab2bfb29e8d232b6376a8c818701d22ae93d82737feaf9db4fdf41c2dba9d1f49caaabf6591ac1f7bc6f7e0663d21afe01565953eab81f418ceed095adb7c3d0e254909a79831d49c3982973434facb42c63a1cd911a6fe941a8a6d4a743b46c3a7649e44c78955e49d8155009549c4e2f7a3f6d5ba"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c59030103000000009800865c5b09ce258b7e9e2442011e237896172d36c974bb4741c4df24ee733c820b89cf163bd1476b0713aaf14478165c74f104b40a694294cb3ff26c872d337b8d27a9d66d8df9a1624e1b3fc33b02a6c437e8d6b99a1c9f2856f4e86bd07fa3b9b8fe9f3d6af4fefc9bd1424ccb6312da107e49770fd073aef11f0f1b5312652243c05cf3994e159df0f8fa90762c9d6d6b95b89ef6271b",
+     "expect_ok": true,
+     "expect_output": "46504c590301040000000014f3994e159df0f8fa90762c9d6d6b95b89ef6271b",
+     "note": "valid v3 handshake"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098008f1a9cd0b3e5fe8ebf1b5be2c506b3c18ede47f5c5bd2077fdfa9f8624ae13f00c98d5f96ad4c2bb2489fc1dbb479d35ba16e1cd1ab11f0ea3afd6d3331bdb3f28a933b0caba21a52e1076d0310201697a21b5997aa1eb58acc77fb6610d640dc7c487d188b80c78af0a8c8f32386d94678ea9edfe10f17e77c40aae6cf5481b3a25bcff048ad82208646e7e85715cb3a15362ef652a1e",
+     "expect_ok": false,
+     "note": "v2 handshake on a v3 session"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000035206c9068ba4a364b09ee950a7bf7cf000000107fff5b9557a523aec4a5ab11a8f07006747661f888e5a5cd254665060f73ed4a887f5ccd",
+     "expect_ok": false,
+     "note": "decrypt after rejected v2 handshake"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v3-mode-mismatch-accepted",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590301010000000004020000bb",
+     "expect_ok": true,
+     "expect_output": "46504c59030102000000008202000f9f3f9e0a2521dbdf312ab2bfb29e8d232b6376a8c818701d22ae93d82737feaf9db4fdf41c2dba9d1f49caaabf6591ac1f7bc6f7e0663d21afe01565953eab81f418ceed095adb7c3d0e254909a79831d49c3982973434facb42c63a1cd911a6fe941a8a6d4a743b46c3a7649e44c78955e49d8155009549c4e2f7a3f6d5ba",
+     "note": "setup mode 0"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590301030000000098026d5bf343e283878e21e4a453680a23c3762bf73a3d60fc2604507b1579b46f744b5aaf0d39d7bfe602456d51cdbaa1d184485ae66306f226a644a0903c5715edef309e0a6a14cfaa386fd733919be32f54b9366cc0f3631bedbd1458f5e367f077bd67a5dadf5d51e25d3cdedb95c2d1a80db474a4a89f96dd4b332f3d11e5caa33e02655124dd77f3ee862118e008ca0e403825b5d75f",
+     "expect_ok": true,
+     "expect_output": "46504c590301040000000014655124dd77f3ee862118e008ca0e403825b5d75f",
+     "note": "handshake mode 2"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c000000005473dc92b475dbf042611a891776ff0a00000010cfcf6fd9820f43db66ea25331d6d3913bbc4381a5d52730aafc58841657a775c99088736",
+     "expect_ok": true,
+     "expect_output": "3458f03df4988fd7c3ac4b02ac708557",
+     "note": "uses handshake mode: True"
+    }
+   ],
+   "topic": "Q4 v3 handshake vs setup mode"
+  },
+  {
+   "name": "v3-handshake-without-setup",
+   "steps": [
+    {
+     "op": "handshake",
+     "input": "46504c59030103000000009803482f6511bc0263dacb6b07a24f09817f1ccf668884cd23d17ade96f827707efbb67ce7f66f9551f67675484d91131b9aacdff447f8675e2112187965690c1498a3412ff3b736dcc84009aa3d71c1be03f70ecc4a613a727115e4df7339ab9bae0be9d4f0506fbf618b8317a68a7545a5f65c4f49ac2c7b28e2d468ee694558d5e2a80a74b87fa54f7b0367bf2192103484186a9274e369",
+     "expect_ok": true,
+     "expect_output": "46504c59030104000000001474b87fa54f7b0367bf2192103484186a9274e369",
+     "note": "no prior setup"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000458a5bc627d1aef78f2408dc1c8433f400000010cb1551e3bee6cc275800a522503473f9b0dc9e5839d16ebd3a3e9a5600440046538e6cce",
+     "expect_ok": true,
+     "expect_output": "9f862a7b60c8131679068f0679b99cd8",
+     "note": "ok=True"
+    }
+   ],
+   "topic": "Q4 v3 handshake vs setup mode"
+  },
+  {
+   "name": "v3-second-handshake",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590301010000000004020001bb",
+     "expect_ok": true,
+     "expect_output": "46504c5903010200000000820201cf32a25714b2524f8aa0ad7af164e37bcf4424e200047efc0ad67afcd95ded1c2730bb591b962ed63a9c4ded88ba8fc78de64d91ccfd5c7b56da88e31f5cceafc7431995a01665a54e1939d25b94db64b9e45d8d063e1e6af07e9656162b0efa404275ea5a44d9591c7256b9fbe6513898b80227721988571650942ad946688a"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c5903010300000000980161314241db0ad4ef38e34f7161171b074150a35f14cdcf7b0537e97131c93a22153555a5e4e94cd0e91a074131a2bb1400886b719839a2c1d1355b5743730e835a4367c0ece2e8a39d0f5ccb6df76cee86d33208e401901e9bc8453381a3c5adc847bdca87b01acac58024b48daa26f5624708c2c5db4ebbeaf93b26cd998bbc5d9a17c04747dbd827837b2f1ed53a495308d64c5feeee",
+     "expect_ok": true,
+     "expect_output": "46504c590301040000000014c04747dbd827837b2f1ed53a495308d64c5feeee",
+     "note": "handshake A"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c5903010300000000980139417e2fd24a33179297160b32901344174409abed7e1a8c46dc6136e1dce2b38484ab31bd32d749994c1e1d5a2dd43ebd3f3326a87a7cc1130e3550cd8653e30cfbbabd3dfe71155809851ea46cdeef9d0f41925e4683efd158fd16347b4d47e07d7b3414b31b92470f0ce40796f19929eeae78d9f135b3e3412da2e40e13d7757bff503630e4a444b7106a3056d38e816a5926038b11",
+     "expect_ok": true,
+     "expect_output": "46504c590301040000000014503630e4a444b7106a3056d38e816a5926038b11",
+     "note": "handshake B"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c00000000256cd381fd2721d3d2df2c5a7a028070000000106235ba511135beceadbacf4447e6cf6ffb0fd09047b41c0a45de19df6d2a4df08a2e04ab",
+     "expect_ok": true,
+     "expect_output": "ef865ec47b4b1d2e2bc28369acf68586",
+     "note": "uses B=True, A=False"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v3-second-setup",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590301010000000004020002bb",
+     "expect_ok": true,
+     "expect_output": "46504c5903010200000000820202c169a352eeed35b18cdd9c58d64f16c1519a89eb5317bd0d4336cd68f638ff9d016a5b52b7fa9216b2b65482c78444118121a2c7fed83db7119e9182aad7d18c7063e2a457555910af9e0efc76347d164043807f581ee4fbe42ca9dedc1b5eb2a3aa3d2ecd59e7eee70b3629f22afd161d877353ddb99adc8e07006e56f850ce"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c5903010300000000980253058be1b441f7df3a9b286490429d49c7fd9b20e9f49833b932ddbec2462fccfbfd1fb428b73b883a3d4d5e4a75694d73fc98dd564b0947b815986663c7569e0e7fabddb518a896f9da2aef8a1cdce680630c7fcd594e2b27dab3fd1709282d6388d8e2d5215c1d5a2449dd13fbe9712f8a0a2cd562fdddf6f55f84877e117d05dcb59cb124fcaefd28c606a86c7b6425e4179aad9b10",
+     "expect_ok": true,
+     "expect_output": "46504c5903010400000000149cb124fcaefd28c606a86c7b6425e4179aad9b10"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c000000001fcc1d1c2db83fd4e6a7bcf2c90e86b400000010305040c9d73faed1da5e9850a5e08cf9d48f49568f3469094fffcfb14f1a80761402b73c",
+     "expect_ok": true,
+     "expect_output": "626b532d66569c6cf92acd4a6382d99c",
+     "note": "before second setup"
+    },
+    {
+     "op": "setup",
+     "input": "46504c590301010000000004020002bb",
+     "expect_ok": true,
+     "expect_output": "46504c5903010200000000820202c169a352eeed35b18cdd9c58d64f16c1519a89eb5317bd0d4336cd68f638ff9d016a5b52b7fa9216b2b65482c78444118121a2c7fed83db7119e9182aad7d18c7063e2a457555910af9e0efc76347d164043807f581ee4fbe42ca9dedc1b5eb2a3aa3d2ecd59e7eee70b3629f22afd161d877353ddb99adc8e07006e56f850ce",
+     "note": "second setup"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c000000001fcc1d1c2db83fd4e6a7bcf2c90e86b400000010305040c9d73faed1da5e9850a5e08cf9d48f49568f3469094fffcfb14f1a80761402b73c",
+     "expect_ok": false,
+     "note": "after second setup, no new handshake"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c5903010300000000980253058be1b441f7df3a9b286490429d49c7fd9b20e9f49833b932ddbec2462fccfbfd1fb428b73b883a3d4d5e4a75694d73fc98dd564b0947b815986663c7569e0e7fabddb518a896f9da2aef8a1cdce680630c7fcd594e2b27dab3fd1709282d6388d8e2d5215c1d5a2449dd13fbe9712f8a0a2cd562fdddf6f55f84877e117d05dcb59cb124fcaefd28c606a86c7b6425e4179aad9b10",
+     "expect_ok": true,
+     "expect_output": "46504c5903010400000000149cb124fcaefd28c606a86c7b6425e4179aad9b10",
+     "note": "handshake again"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c000000001fcc1d1c2db83fd4e6a7bcf2c90e86b400000010305040c9d73faed1da5e9850a5e08cf9d48f49568f3469094fffcfb14f1a80761402b73c",
+     "expect_ok": true,
+     "expect_output": "626b532d66569c6cf92acd4a6382d99c",
+     "note": "after new handshake"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v3-invalid-messages-reset",
+   "steps": [
+    {
+     "op": "handshake",
+     "input": "46504c59030103000000009800f6f850d72c849af29b2055c335df8a6f10d3af54b5216f829167990e06f9c1dd72913d24e3ca1c5e7c0c82be11872cd63f5cb842b712e359f1ec76e3954484a885a4b1f3e1a4288059b363bf151d3ea37bf7d8eadb2b84693943139afaa1e485f5a7c630486e3040f99ffe504dfb4bb204a9367894a6686dbcbb898f9118e8359c3c23fa1ff0744762d22f5634f1773675ccf65418f145",
+     "expect_ok": true,
+     "expect_output": "46504c590301040000000014fa1ff0744762d22f5634f1773675ccf65418f145"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590301030000000098041cebdb1578165b1f74062b615781d27f38a2ce3d27972e8d1cb874cebc4e52eb68a284c7d5a5bd3a73c4b5b70827071072ea23de326ae1b521af9756ad05c11751abf92209503419def59e57777f2366ba371bb08b9e1e024894e01da7b6fe21ea951ffeba042f5315bb55c95e77eee0620e8bd250f9cd523a41dc877171c46da485badf683d7cdf3d3e0a59dba1128422edad302b0c24",
+     "expect_ok": false,
+     "note": "mode byte 4"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c000000003b2007b3cce78ac920b827828f167a1f00000010138b3fbdd2a0f3e201fc1cc1f8361a83b350f1d81a8e2fb8aaf94ac2c3b83ae0a308c7bd",
+     "expect_ok": false,
+     "note": "after rejected handshake"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c59030103000000009800f6f850d72c849af29b2055c335df8a6f10d3af54b5216f829167990e06f9c1dd72913d24e3ca1c5e7c0c82be11872cd63f5cb842b712e359f1ec76e3954484a885a4b1f3e1a4288059b363bf151d3ea37bf7d8eadb2b84693943139afaa1e485f5a7c630486e3040f99ffe504dfb4bb204a9367894a6686dbcbb898f9118e8359c3c23fa1ff0744762d22f5634f1773675ccf65418f145",
+     "expect_ok": true,
+     "expect_output": "46504c590301040000000014fa1ff0744762d22f5634f1773675ccf65418f145",
+     "note": "valid handshake again"
+    },
+    {
+     "op": "setup",
+     "input": "46504c590301010000000004020004bb",
+     "expect_ok": false,
+     "note": "setup mode 4"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c000000003b2007b3cce78ac920b827828f167a1f00000010138b3fbdd2a0f3e201fc1cc1f8361a83b350f1d81a8e2fb8aaf94ac2c3b83ae0a308c7bd",
+     "expect_ok": false,
+     "note": "after rejected setup"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v3-decrypt-ignores-framing",
+   "steps": [
+    {
+     "op": "handshake",
+     "input": "46504c59030103000000009801d12e834c5150505152b739760d5dac432edc5b0ae07cb0e82cd93a0c80cdc43b216ad91c9d3d872688e1feb7f395af7583beccbd8658f1d6bbc276164ddbdebc6900daccfe9bad2c1599fd2ec27b98401bb49e8f02f5afa7127640d9f845a5a37b771e4e3b5c1e7c9b29e2bbafaa35e266ffd898ff9b2bd4e0407bc22c8e87c6191e4a4c60b2d7f7154ba2efec8a9ac0a5c731b75c95e9",
+     "expect_ok": true,
+     "expect_output": "46504c5903010400000000144c60b2d7f7154ba2efec8a9ac0a5c731b75c95e9"
+    },
+    {
+     "op": "decrypt",
+     "input": "835b1dd8d485bf12f43a97155be73860c280cd33d3f7ba347f9554108de1e70beb7a619e6ae22a63077fcc91edd153b34d014848484eca63dbbafed481999e3114425c61b3a6ee4c",
+     "expect_ok": true,
+     "expect_output": "1f7415632ce61e63e96584e233b1f54b",
+     "note": "random framing; ok=True"
+    },
+    {
+     "op": "decrypt",
+     "input": "835b1dd8d485bf12f43a97155be73860c280cd33d3f7ba347f9554108de1e70beb7a619e6ae22a63077fcc91edd153b34d014848484eca63dbbafed481999e3114425c61b3a6ee4c",
+     "expect_ok": true,
+     "expect_output": "1f7415632ce61e63e96584e233b1f54b",
+     "note": "same blob again; same key=True"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "decrypt-without-session",
+   "steps": [
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000030a2a7a73f28c3d78a34c3c27d4c8d6800000010c8e608ffcbc0a18374aceeea15613f7e3300f9e0c284807caa44f42c79b1f43115852968",
+     "expect_ok": false,
+     "note": "fresh connection"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v2-failed-second-handshake",
+   "steps": [
+    {
+     "op": "setup",
+     "input": "46504c590201010000000004020002bb",
+     "expect_ok": true,
+     "expect_output": "46504c590201020000000082020250e043caba79965ff9021e530ecd73297916159175122fc06ffe49c1f04c7865aebcf6ccc012908a8bc0f632d53cfc7753b4d76c2a9be6337a97a4d2acf0ce67a97a46bf554e86063213ba424d0f4a7f773cc7885fc0118f7bc52a6d46fb9bee71f9d34db0ce551480b5d7c2741eb2b3491df1ccfa7134a055d2c4825c3f65fe",
+     "inject_receiver_sap": "00012de19559b0ae9faadcda61db07f37683091b2654d9414f2f6620fa14921d0a82ff585a2ee96d9ee8128699fae18ae45ccbc779b44e7c1cd7a1bd0aead9709b340821bcb088943ae281fdde1e8ede1c7faa05a5671201c92a6e37f7b843d00e82cf7edccd0aea0d7e1bb97f157d81e7fe9a2f606909e05432dc5548373617"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098028f1a9cc88c3f4d6d854038919c5f7aff6e55426eee7a60c2f898fd443b69fb4e5b7cb15670b9bb17c5f11ccd9803c620e8f62d8df38933bef0405962fc80f26048c969de2c17babbd3f0ea03135792d6f25e054ecda672c63913286c4118790e70ace75b4080852bdce221311baf81fae16c0c3da509eeb1926c174284d6a0b0c6c7e68653d5e42d42eb0424b9e49ac57cc960b940d869",
+     "expect_ok": true,
+     "expect_output": "46504c5902010400000000148653d5e42d42eb0424b9e49ac57cc960b940d869",
+     "note": "valid handshake"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000062fd3efede5eafb00d3ecf69767ef29f000000102789497c268bfb1c80f32e5d9eb101be3c2b86adf505c61d91794c2fd7f992a88e2d699a",
+     "expect_ok": true,
+     "expect_output": "33766314496736e8731d291e8e147bbc",
+     "note": "key ok=True"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098028f1a9caf67309d393c11de2b714c034ddcdba011fec2bd2bce94511b3605120ef0aa948119b1960953232c268e4c8f5c68f591931a0d34058eab996e9d9abfa07a5a138db881f6f0c90c4e3f78faa1a3c58effeae9e0053f78f3911c6fb34e470c8042e1a0a0679af0bfd41efc16b287b74e792d29a68fcc244494d148b398e17a27569ccc552472719b5c891b1389e3c0360b47c31cb5",
+     "expect_ok": false,
+     "note": "second handshake, bad tag"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000062fd3efede5eafb00d3ecf69767ef29f000000102789497c268bfb1c80f32e5d9eb101be3c2b86adf505c61d91794c2fd7f992a88e2d699a",
+     "expect_ok": false,
+     "note": "previously valid blob after failed second handshake"
+    },
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098028f1a9cc88c3f4d6d854038919c5f7aff6e55426eee7a60c2f898fd443b69fb4e5b7cb15670b9bb17c5f11ccd9803c620e8f62d8df38933bef0405962fc80f26048c969de2c17babbd3f0ea03135792d6f25e054ecda672c63913286c4118790e70ace75b4080852bdce221311baf81fae16c0c3da509eeb1926c174284d6a0b0c6c7e68653d5e42d42eb0424b9e49ac57cc960b940d869",
+     "expect_ok": true,
+     "expect_output": "46504c5902010400000000148653d5e42d42eb0424b9e49ac57cc960b940d869",
+     "note": "first handshake replayed"
+    },
+    {
+     "op": "decrypt",
+     "input": "46504c59010201000000003c0000000062fd3efede5eafb00d3ecf69767ef29f000000102789497c268bfb1c80f32e5d9eb101be3c2b86adf505c61d91794c2fd7f992a88e2d699a",
+     "expect_ok": true,
+     "expect_output": "33766314496736e8731d291e8e147bbc",
+     "note": "blob again; key ok=True"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  },
+  {
+   "name": "v2-handshake-without-setup",
+   "steps": [
+    {
+     "op": "handshake",
+     "input": "46504c590201030000000098008f1a9cab8225ed8ff50c32b0e0ec6865644db07e025f13cad026c28afd2353f922c9caf8de2de897761c0e0862e7355f59b123763dad69749d7e6b48c6903d7016b9ccf6d2a3b7ea3bbae25f7fbbab228dc5300a1c53aa18c6a5034d95d88f958fc552d19a940d37676ec9beab8221da5bfa7e2bac82da3b49962dfc15e55840ecb7523585f6278c009a2d316a5c45f25ab7a43e3156c7",
+     "expect_ok": false,
+     "note": "v2 handshake on a fresh connection"
+    }
+   ],
+   "topic": "Q5 repeated / out-of-order messages"
+  }
+ ]
+}

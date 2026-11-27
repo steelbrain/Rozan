@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      The Home button redirect's probe (RedirectProbeActivity): a transparent
+      window that takes focus and finishes at once, with no animation.
+    -->
+    <style name="Theme.Rozan.Probe" parent="android:Theme.Translucent.NoTitleBar">
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:windowContentTransitions">false</item>
+    </style>
+</resources>

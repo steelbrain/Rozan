@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- One row of the inputs menu (InputRowView): icon, name, the port of a CEC device, and the state. -->
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:orientation="horizontal"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <ImageView
+        android:id="@+id/input_icon"
+        android:layout_width="@dimen/inputs_icon_size"
+        android:layout_height="@dimen/inputs_icon_size"
+        android:layout_marginEnd="@dimen/inputs_icon_gap"
+        android:duplicateParentState="true"
+        android:importantForAccessibility="no"
+        android:scaleType="fitCenter"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:duplicateParentState="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:duplicateParentState="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAlignment="viewStart"
+            android:textColor="@color/rozan_row_title"
+            android:textSize="@dimen/rozan_row_title_text" />
+
+        <TextView
+            android:id="@+id/input_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:duplicateParentState="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAlignment="viewStart"
+            android:textColor="@color/rozan_row_summary"
+            android:textSize="@dimen/rozan_row_summary_text"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/input_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/rozan_row_value_gap"
+        android:duplicateParentState="true"
+        android:maxLines="1"
+        android:textColor="@color/rozan_row_summary"
+        android:textSize="@dimen/rozan_row_title_text"
+        android:visibility="gone" />
+</merge>

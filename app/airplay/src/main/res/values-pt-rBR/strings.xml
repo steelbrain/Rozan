@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="row_enabled">Receptor AirPlay</string>
+    <string name="row_wake">Ligar a TV ao conectar</string>
+    <string name="row_wake_hint">Ativa este dispositivo quando outro dispositivo pede para se conectar e o código aparece. Se o HDMI-CEC estiver ativado, a TV também liga. Também mantém o Wi-Fi ativo com a tela desligada.</string>
+    <string name="row_name">Nome do receptor</string>
+    <string name="value_on">Ativado</string>
+    <string name="value_off">Desativado</string>
+    <string name="status_off">Desativado</string>
+    <string name="status_starting">Em execução, ainda não anunciado na rede</string>
+    <string name="status_waiting">Aguardando uma conexão de rede</string>
+    <string name="status_registering">Anunciando na rede</string>
+    <string name="status_advertising">Anunciado na rede</string>
+    <string name="status_failed">Não foi possível anunciar na rede. Tenta de novo quando a rede mudar.</string>
+    <string name="status_port_in_use">A porta %1$d está sendo usada por outro app, então os dispositivos Apple não conseguem se conectar. Feche esse app e volte a esta tela.</string>
+    <string name="status_start_failed">Não foi possível iniciar o receptor. Volte a esta tela para tentar de novo.</string>
+    <string name="overlay_title">Sobrepor a outros apps</string>
+    <string name="overlay_granted">Permitido. O código aparece sobre qualquer app e o espelhamento de tela ocupa a tela inteira.</string>
+    <string name="overlay_missing">Não permitido. O código e o espelhamento de tela só aparecem enquanto este app está aberto. Para permitir, execute isto em um computador com adb:</string>
+</resources>

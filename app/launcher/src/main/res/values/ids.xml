@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Lets the window give focus back to the language row after the screen is recreated in a new language. -->
+    <item name="settings_language" type="id" />
+</resources>

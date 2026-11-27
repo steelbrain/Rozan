@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Shared by both apps. A resource only one app uses looks unused when the other
+  app is linted with its dependencies, so UnusedResources is not meaningful here.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="UnusedResources">
+    <!-- TV overscan-safe margins: 5% of a 960x540 dp screen. -->
+    <dimen name="rozan_safe_horizontal">48dp</dimen>
+    <dimen name="rozan_safe_vertical">27dp</dimen>
+
+    <dimen name="rozan_tile_corner_radius">10dp</dimen>
+    <dimen name="rozan_tile_focused_elevation">14dp</dimen>
+    <dimen name="rozan_tile_label_text">15sp</dimen>
+    <dimen name="rozan_tile_label_gap">8dp</dimen>
+    <dimen name="rozan_grid_column_gap">20dp</dimen>
+    <dimen name="rozan_grid_row_gap">46dp</dimen>
+    <dimen name="rozan_grid_peek">30dp</dimen>
+
+    <dimen name="rozan_row_corner_radius">10dp</dimen>
+    <dimen name="rozan_row_min_height">56dp</dimen>
+    <dimen name="rozan_row_padding_horizontal">18dp</dimen>
+    <dimen name="rozan_row_padding_vertical">10dp</dimen>
+    <dimen name="rozan_row_title_text">18sp</dimen>
+    <dimen name="rozan_row_summary_text">14sp</dimen>
+    <dimen name="rozan_row_value_gap">16dp</dimen>
+    <dimen name="rozan_section_header_text">15sp</dimen>
+    <dimen name="rozan_toggle_width">40dp</dimen>
+    <dimen name="rozan_toggle_height">22dp</dimen>
+    <dimen name="rozan_scroll_focus_margin">72dp</dimen>
+</resources>

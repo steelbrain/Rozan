@@ -1,0 +1,712 @@
+{
+  "schema": 1,
+  "about": [
+    "Performance budgets, checked by scripts/perf/check-budgets.py (docs/PERFORMANCE.md).",
+    "budget is the ceiling; measured is the value it was set from (budget = measured plus margin_percent, at least margin_floor).",
+    "A value over budget but within tolerance_percent warns; above that the check fails. Raise a budget only with the reason in the commit."
+  ],
+  "tolerance_percent": {
+    "apk": 0,
+    "memory": 5
+  },
+  "margin_percent": {
+    "apk": 2,
+    "memory": 10
+  },
+  "margin_floor": {
+    "apk": 16384,
+    "memory": 1024
+  },
+  "apk": {
+    "launcher": {
+      "apk_bytes": {
+        "budget": 8113152,
+        "measured": 7953856
+      },
+      "dex_bytes": {
+        "budget": 590848,
+        "measured": 574168
+      }
+    },
+    "airplay": {
+      "apk_bytes": {
+        "budget": 546816,
+        "measured": 529594
+      },
+      "dex_bytes": {
+        "budget": 417792,
+        "measured": 401104
+      }
+    }
+  },
+  "memory": {
+    "emulator-api36-arm64-v8a": {
+      "airplay_audio": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 41216,
+            "measured": 37400
+          },
+          "java_heap_kb": {
+            "budget": 4096,
+            "measured": 2856
+          },
+          "native_heap_kb": {
+            "budget": 18688,
+            "measured": 16960
+          },
+          "gralloc_estimate_kb": {
+            "budget": 28416,
+            "measured": 25706
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 42752,
+            "measured": 38840
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1400
+          },
+          "native_heap_kb": {
+            "budget": 28160,
+            "measured": 25452
+          },
+          "gralloc_estimate_kb": {
+            "budget": 11264,
+            "measured": 10036
+          }
+        }
+      },
+      "airplay_mirror": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 27904,
+            "measured": 25356
+          },
+          "java_heap_kb": {
+            "budget": 3072,
+            "measured": 1916
+          },
+          "native_heap_kb": {
+            "budget": 9216,
+            "measured": 7976
+          },
+          "gralloc_estimate_kb": {
+            "budget": 42752,
+            "measured": 38700
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 43520,
+            "measured": 39477
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1396
+          },
+          "native_heap_kb": {
+            "budget": 28160,
+            "measured": 25524
+          },
+          "gralloc_estimate_kb": {
+            "budget": 11264,
+            "measured": 10036
+          }
+        }
+      },
+      "home_browsed": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 11264,
+            "measured": 10159
+          },
+          "java_heap_kb": {
+            "budget": 2304,
+            "measured": 1180
+          },
+          "native_heap_kb": {
+            "budget": 2816,
+            "measured": 1700
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 45056,
+            "measured": 40748
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1400
+          },
+          "native_heap_kb": {
+            "budget": 28160,
+            "measured": 25552
+          },
+          "gralloc_estimate_kb": {
+            "budget": 37888,
+            "measured": 34336
+          }
+        }
+      },
+      "home_idle": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 11520,
+            "measured": 10436
+          },
+          "java_heap_kb": {
+            "budget": 2304,
+            "measured": 1184
+          },
+          "native_heap_kb": {
+            "budget": 2816,
+            "measured": 1692
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 46848,
+            "measured": 42417
+          },
+          "java_heap_kb": {
+            "budget": 4608,
+            "measured": 3428
+          },
+          "native_heap_kb": {
+            "budget": 28160,
+            "measured": 25392
+          },
+          "gralloc_estimate_kb": {
+            "budget": 37888,
+            "measured": 34336
+          }
+        }
+      },
+      "screensaver": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 11264,
+            "measured": 10170
+          },
+          "java_heap_kb": {
+            "budget": 2304,
+            "measured": 1184
+          },
+          "native_heap_kb": {
+            "budget": 2816,
+            "measured": 1712
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 45056,
+            "measured": 40800
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1400
+          },
+          "native_heap_kb": {
+            "budget": 28160,
+            "measured": 25576
+          },
+          "gralloc_estimate_kb": {
+            "budget": 37888,
+            "measured": 34336
+          }
+        }
+      }
+    },
+    "emulator-api31-arm64-v8a": {
+      "airplay_audio": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 37888,
+            "measured": 34414
+          },
+          "java_heap_kb": {
+            "budget": 3840,
+            "measured": 2744
+          },
+          "native_heap_kb": {
+            "budget": 18176,
+            "measured": 16340
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 40192,
+            "measured": 36375
+          },
+          "java_heap_kb": {
+            "budget": 3072,
+            "measured": 1808
+          },
+          "native_heap_kb": {
+            "budget": 27648,
+            "measured": 25048
+          }
+        }
+      },
+      "airplay_mirror": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 29952,
+            "measured": 27156
+          },
+          "java_heap_kb": {
+            "budget": 3072,
+            "measured": 2028
+          },
+          "native_heap_kb": {
+            "budget": 12544,
+            "measured": 11240
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 40448,
+            "measured": 36666
+          },
+          "java_heap_kb": {
+            "budget": 3072,
+            "measured": 1808
+          },
+          "native_heap_kb": {
+            "budget": 27648,
+            "measured": 25112
+          }
+        }
+      },
+      "home_browsed": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 13056,
+            "measured": 11716
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1332
+          },
+          "native_heap_kb": {
+            "budget": 2816,
+            "measured": 1576
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 40960,
+            "measured": 37028
+          },
+          "java_heap_kb": {
+            "budget": 2816,
+            "measured": 1736
+          },
+          "native_heap_kb": {
+            "budget": 27904,
+            "measured": 25164
+          }
+        }
+      },
+      "home_idle": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 13056,
+            "measured": 11712
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1328
+          },
+          "native_heap_kb": {
+            "budget": 2816,
+            "measured": 1576
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 40704,
+            "measured": 36833
+          },
+          "java_heap_kb": {
+            "budget": 2816,
+            "measured": 1740
+          },
+          "native_heap_kb": {
+            "budget": 27648,
+            "measured": 25052
+          }
+        }
+      },
+      "screensaver": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 13056,
+            "measured": 11720
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1336
+          },
+          "native_heap_kb": {
+            "budget": 2816,
+            "measured": 1576
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 40960,
+            "measured": 37070
+          },
+          "java_heap_kb": {
+            "budget": 2816,
+            "measured": 1740
+          },
+          "native_heap_kb": {
+            "budget": 27904,
+            "measured": 25156
+          }
+        }
+      }
+    },
+    "emulator-api36-x86_64": {
+      "airplay_audio": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 36864,
+            "measured": 33331
+          },
+          "java_heap_kb": {
+            "budget": 3840,
+            "measured": 2800
+          },
+          "native_heap_kb": {
+            "budget": 18688,
+            "measured": 16832
+          },
+          "gralloc_estimate_kb": {
+            "budget": 28416,
+            "measured": 25706
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 38912,
+            "measured": 35165
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1384
+          },
+          "native_heap_kb": {
+            "budget": 27904,
+            "measured": 25332
+          },
+          "gralloc_estimate_kb": {
+            "budget": 11008,
+            "measured": 9821
+          }
+        }
+      },
+      "airplay_mirror": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 23296,
+            "measured": 20984
+          },
+          "java_heap_kb": {
+            "budget": 3072,
+            "measured": 1972
+          },
+          "native_heap_kb": {
+            "budget": 9216,
+            "measured": 8008
+          },
+          "gralloc_estimate_kb": {
+            "budget": 74496,
+            "measured": 67500
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 39168,
+            "measured": 35473
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1384
+          },
+          "native_heap_kb": {
+            "budget": 28160,
+            "measured": 25460
+          },
+          "gralloc_estimate_kb": {
+            "budget": 10752,
+            "measured": 9606
+          }
+        }
+      },
+      "home_browsed": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 8960,
+            "measured": 7780
+          },
+          "java_heap_kb": {
+            "budget": 2304,
+            "measured": 1168
+          },
+          "native_heap_kb": {
+            "budget": 2816,
+            "measured": 1696
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 39680,
+            "measured": 35861
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1368
+          },
+          "native_heap_kb": {
+            "budget": 28160,
+            "measured": 25436
+          },
+          "gralloc_estimate_kb": {
+            "budget": 37888,
+            "measured": 34336
+          }
+        }
+      },
+      "home_idle": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 9216,
+            "measured": 8153
+          },
+          "java_heap_kb": {
+            "budget": 2304,
+            "measured": 1180
+          },
+          "native_heap_kb": {
+            "budget": 2816,
+            "measured": 1688
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 39936,
+            "measured": 36089
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1452
+          },
+          "native_heap_kb": {
+            "budget": 27904,
+            "measured": 25280
+          },
+          "gralloc_estimate_kb": {
+            "budget": 37376,
+            "measured": 33906
+          }
+        }
+      },
+      "screensaver": {
+        "airplay": {
+          "total_pss_kb": {
+            "budget": 8960,
+            "measured": 7877
+          },
+          "java_heap_kb": {
+            "budget": 2304,
+            "measured": 1168
+          },
+          "native_heap_kb": {
+            "budget": 2816,
+            "measured": 1696
+          }
+        },
+        "main": {
+          "total_pss_kb": {
+            "budget": 39680,
+            "measured": 35913
+          },
+          "java_heap_kb": {
+            "budget": 2560,
+            "measured": 1368
+          },
+          "native_heap_kb": {
+            "budget": 28160,
+            "measured": 25516
+          },
+          "gralloc_estimate_kb": {
+            "budget": 37376,
+            "measured": 33906
+          }
+        }
+      }
+    }
+  },
+  "timing": {
+    "gating": false,
+    "why": [
+      "Frame and startup times are recorded per profile but never fail the check.",
+      "On emulators the GPU is the host's behind a translation layer (frame times follow the host GPU and its load, not the app),",
+      "the CPU is a fast desktop core, and CI runners share their cores with other jobs, so run-to-run spread is larger than the regressions worth catching.",
+      "Memory and APK size do not depend on the host's speed, so those are the gated budgets. Timing is judged with the Macrobenchmark suite on a device (docs/PERFORMANCE.md)."
+    ],
+    "emulator-api36-arm64-v8a": {
+      "airplay_audio": {
+        "main": {
+          "janky_percent": 100.0,
+          "frame_p50_ms": 16,
+          "frame_p90_ms": 16,
+          "frame_p99_ms": 16
+        }
+      },
+      "airplay_mirror": {
+        "airplay": {
+          "janky_percent": 100.0,
+          "frame_p50_ms": 17,
+          "frame_p90_ms": 17,
+          "frame_p99_ms": 17
+        },
+        "main": {
+          "janky_percent": 0.0,
+          "frame_p50_ms": 17,
+          "frame_p90_ms": 18,
+          "frame_p99_ms": 19
+        }
+      },
+      "home_browsed": {
+        "main": {
+          "janky_percent": 2.0,
+          "frame_p50_ms": 17,
+          "frame_p90_ms": 18,
+          "frame_p99_ms": 20
+        }
+      },
+      "home_idle": {
+        "main": {
+          "janky_percent": 0.0,
+          "frame_p50_ms": 18,
+          "frame_p90_ms": 20,
+          "frame_p99_ms": 34,
+          "start_ms": 98
+        }
+      },
+      "screensaver": {
+        "main": {
+          "janky_percent": 1.12,
+          "frame_p50_ms": 17,
+          "frame_p90_ms": 17,
+          "frame_p99_ms": 20
+        }
+      }
+    },
+    "emulator-api31-arm64-v8a": {
+      "airplay_audio": {
+        "main": {
+          "janky_percent": 0.0,
+          "frame_p50_ms": 5,
+          "frame_p90_ms": 5,
+          "frame_p99_ms": 5
+        }
+      },
+      "airplay_mirror": {
+        "airplay": {
+          "janky_percent": 0.0,
+          "frame_p50_ms": 5,
+          "frame_p90_ms": 5,
+          "frame_p99_ms": 5
+        }
+      },
+      "home_browsed": {
+        "main": {
+          "janky_percent": 0.0,
+          "frame_p50_ms": 5,
+          "frame_p90_ms": 6,
+          "frame_p99_ms": 11
+        }
+      },
+      "home_idle": {
+        "main": {
+          "janky_percent": 0.0,
+          "frame_p50_ms": 19,
+          "frame_p90_ms": 21,
+          "frame_p99_ms": 24,
+          "start_ms": 146
+        }
+      },
+      "screensaver": {
+        "main": {
+          "janky_percent": 0.0,
+          "frame_p50_ms": 5,
+          "frame_p90_ms": 6,
+          "frame_p99_ms": 9
+        }
+      }
+    },
+    "emulator-api36-x86_64": {
+      "airplay_audio": {
+        "airplay": {
+          "janky_percent": 100.0,
+          "frame_p50_ms": 700,
+          "frame_p90_ms": 700,
+          "frame_p99_ms": 700
+        },
+        "main": {
+          "janky_percent": 100.0,
+          "frame_p50_ms": 200,
+          "frame_p90_ms": 200,
+          "frame_p99_ms": 200
+        }
+      },
+      "airplay_mirror": {
+        "airplay": {
+          "janky_percent": 100.0,
+          "frame_p50_ms": 350,
+          "frame_p90_ms": 350,
+          "frame_p99_ms": 350
+        },
+        "main": {
+          "janky_percent": 100.0,
+          "frame_p50_ms": 150,
+          "frame_p90_ms": 300,
+          "frame_p99_ms": 300
+        }
+      },
+      "home_browsed": {
+        "main": {
+          "janky_percent": 100.0,
+          "frame_p50_ms": 150,
+          "frame_p90_ms": 250,
+          "frame_p99_ms": 450
+        }
+      },
+      "home_idle": {
+        "main": {
+          "janky_percent": 100.0,
+          "frame_p50_ms": 200,
+          "frame_p90_ms": 250,
+          "frame_p99_ms": 350,
+          "start_ms": 3266
+        }
+      },
+      "screensaver": {
+        "main": {
+          "janky_percent": 100.0,
+          "frame_p50_ms": 200,
+          "frame_p90_ms": 250,
+          "frame_p99_ms": 450
+        }
+      }
+    }
+  }
+}

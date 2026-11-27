@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="airplay_receiver_line">AirPlay на %1$s</string>
+    <string name="airplay_pin_prompt">%1$s хочет подключиться по AirPlay. Введите этот код на своём устройстве.</string>
+    <string name="airplay_unknown_client">Устройство</string>
+    <string name="airplay_now_playing_from">Воспроизводится с устройства %1$s</string>
+    <string name="airplay_now_playing_untitled">Аудио</string>
+    <string name="airplay_artwork_description">Обложка альбома</string>
+    <string name="airplay_mirror_description">Повтор экрана с устройства %1$s</string>
+    <string name="airplay_notification_channel">Приёмник AirPlay</string>
+    <string name="airplay_notification_title">Приёмник AirPlay включён</string>
+    <string name="airplay_notification_text">Отображается как %1$s в меню AirPlay</string>
+</resources>

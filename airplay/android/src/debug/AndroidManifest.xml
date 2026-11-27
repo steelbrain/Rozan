@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application>
+        <!-- Debug builds only: fake receiver events from adb (the sender must hold DUMP, as adb's shell does). -->
+        <receiver
+            android:name=".debug.DebugEventsReceiver"
+            android:exported="true"
+            android:permission="android.permission.DUMP"
+            android:process=":airplay">
+            <intent-filter>
+                <action android:name="ai.aneesiqbal.rozan.airplay.debug.SHOW_PIN" />
+                <action android:name="ai.aneesiqbal.rozan.airplay.debug.PIN_DONE" />
+                <action android:name="ai.aneesiqbal.rozan.airplay.debug.START_MIRROR" />
+                <action android:name="ai.aneesiqbal.rozan.airplay.debug.STOP_MIRROR" />
+                <action android:name="ai.aneesiqbal.rozan.airplay.debug.START_AUDIO" />
+                <action android:name="ai.aneesiqbal.rozan.airplay.debug.STOP_AUDIO" />
+                <action android:name="ai.aneesiqbal.rozan.airplay.debug.STATS" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
