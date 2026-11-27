@@ -111,7 +111,7 @@ assembleDebug` passes.
   in `docs/protocol/vectors/`.
 
 ### Git
-- Work on `development` or a branch off it. Never commit to `main` directly.
+- Work on `development` or a branch off it. Never commit to `master` directly.
 - No merge commits: rebase, then fast-forward.
 - Commit messages: imperative subject under 72 chars, body explains why.
 - Update `CHANGELOG.md` (Unreleased section) for user-visible changes.

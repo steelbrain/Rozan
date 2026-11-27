@@ -148,7 +148,7 @@ setup, the checks to run with real devices, and the results so far.
 
 ## CI
 
-`.github/workflows/ci.yml` runs on pushes to `main` and `development` and on
+`.github/workflows/ci.yml` runs on pushes to `master` and `development` and on
 every pull request:
 
 - Lint, unit tests, build: `./gradlew check assembleDebug assembleRelease`,
