@@ -1,3 +1,5 @@
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+
 plugins {
     `kotlin-dsl`
 }
@@ -14,6 +16,21 @@ dependencies {
     compileOnly(libs.kotlin.gradle.plugin)
     implementation(libs.spotless.gradle.plugin)
     implementation(libs.detekt.gradle.plugin)
+
+    // For the translation check's tests: the JUnit and kotlin-test versions the modules' tests use
+    // (kotlin-dsl's embedded Kotlin is the project's Kotlin version), so nothing new is downloaded.
+    testImplementation(platform(libs.junit.bom))
+    testImplementation(libs.junit.jupiter)
+    testImplementation(kotlin("test-junit5"))
+    testRuntimeOnly(libs.junit.platform.launcher)
+}
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("failed", "skipped")
+        exceptionFormat = TestExceptionFormat.FULL
+    }
 }
 
 gradlePlugin {
@@ -41,6 +58,10 @@ gradlePlugin {
         register("quality") {
             id = "rozan.quality"
             implementationClass = "QualityConventionPlugin"
+        }
+        register("translations") {
+            id = "rozan.translations"
+            implementationClass = "TranslationsConventionPlugin"
         }
     }
 }

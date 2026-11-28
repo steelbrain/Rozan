@@ -32,7 +32,7 @@
     <string name="settings_home_button_stock">Tela inicial original: %1$s</string>
     <string name="settings_home_button_on_detail">O serviço de acessibilidade \"%1$s\" abre o Rozan sempre que a tela inicial original aparece. Ele nunca age nas Configurações nem em outras telas do sistema.</string>
     <string name="settings_home_button_not_running_detail">O sistema mostra \"%1$s\" como ativado, mas não o iniciou. Desative e ative de novo nas configurações de acessibilidade do sistema ou execute os comandos adb abaixo.</string>
-    <string name="settings_home_button_off_detail">O botão Início abre a tela inicial original. Para abrir o Rozan, ative \"%1$s\" nas configurações de acessibilidade do sistema. Onde essa configuração não existe (Fire TV com Fire OS 8.1.5.5 ou mais recente), execute estes comandos em um computador com adb:</string>
+    <string name="settings_home_button_off_detail">O botão Início abre a tela inicial original. Para abrir o Rozan em vez dela, ative \"%1$s\" nas configurações de acessibilidade do sistema. Onde essa configuração não existe (Fire TV com Fire OS 8.1.5.5 ou mais recente), execute estes comandos em um computador com adb:</string>
     <string name="settings_home_button_none_summary">O botão Início abre uma tela que o Rozan não substitui, como a configuração inicial ou o seletor de apps do sistema.</string>
     <string name="settings_home_button_unrecognized">Não está na lista de telas iniciais conhecidas do Rozan: %1$s</string>
     <string name="settings_home_button_adb_note">Substitua LIST pelo que o primeiro comando mostrar. Se mostrar null, omita LIST e os dois-pontos depois dele.</string>

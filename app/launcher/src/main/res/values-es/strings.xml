@@ -43,8 +43,8 @@
     <string name="settings_receiver_name_invalid">El nombre no puede estar vacío. Se ha mantenido el nombre anterior.</string>
     <string name="settings_airplay_wake">Encender la TV cuando alguien se conecte</string>
     <string name="settings_airplay_pin_hint">Aparece un PIN en esta pantalla con cada nueva conexión.</string>
-    <string name="settings_airplay_app_installed">Hay una app Rozan AirPlay separada instalada</string>
-    <string name="settings_airplay_app_installed_summary">No la necesitas. Rozan tiene AirPlay integrado, que funciona sin la app separada. Mientras las dos estén instaladas, solo una de ellas puede recibir. Selecciona para desinstalar la app Rozan AirPlay.</string>
+    <string name="settings_airplay_app_installed">Está instalada la aplicación independiente Rozan AirPlay</string>
+    <string name="settings_airplay_app_installed_summary">No la necesitas. Rozan tiene AirPlay integrado, que funciona sin la aplicación independiente. Mientras las dos estén instaladas, solo una de ellas puede recibir. Selecciona para desinstalar la aplicación Rozan AirPlay.</string>
     <string name="settings_overlay">Mostrar sobre otras aplicaciones</string>
     <string name="settings_overlay_allowed">Permitido</string>
     <string name="settings_overlay_not_allowed">No permitido</string>

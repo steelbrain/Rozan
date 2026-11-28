@@ -46,8 +46,9 @@ export ANDROID_HOME=/opt/homebrew/share/android-commandlinetools
 | Instrumented tests (emulator running) | `./gradlew connectedDebugAndroidTest` |
 
 `check` runs unit tests, Android Lint (warnings are errors), ktlint (via
-Spotless) and detekt. A change is not done until `./gradlew check
-assembleDebug` passes.
+Spotless), detekt and the translation check (`validateTranslations`, rules
+in `config/translations.xml`, described in `docs/DEVELOPMENT.md`). A change
+is not done until `./gradlew check assembleDebug` passes.
 
 ## Rules
 

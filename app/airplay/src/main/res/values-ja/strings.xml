@@ -16,5 +16,5 @@
     <string name="status_start_failed">レシーバーを起動できませんでした。この画面に戻ると再試行します。</string>
     <string name="overlay_title">他のアプリの上に重ねて表示</string>
     <string name="overlay_granted">許可済み。コードはどのアプリの上にも表示され、画面ミラーリングは画面全体に表示されます。</string>
-    <string name="overlay_missing">許可しない。コードと画面ミラーリングはこのアプリを開いている間のみ表示されます。許可するには、adb を使用できるパソコンで次のコマンドを実行してください。</string>
+    <string name="overlay_missing">許可されていません。コードと画面ミラーリングはこのアプリを開いている間のみ表示されます。許可するには、adb を使用できるパソコンで次のコマンドを実行してください。</string>
 </resources>

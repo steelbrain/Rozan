@@ -8,8 +8,8 @@
     <string name="options_uninstall">卸载</string>
     <string name="inputs_title">输入端口</string>
     <string name="inputs_state_standby">待机</string>
-    <string name="inputs_state_disconnected">已断开连接</string>
-    <string name="inputs_switch_failed">Rozan 无法在这台电视上切换到%1$s。</string>
+    <string name="inputs_state_disconnected">未连接</string>
+    <string name="inputs_switch_failed">Rozan 无法在这台电视上切换到 %1$s。</string>
     <string name="inputs_open_system">打开电视的输入端口列表</string>
     <string name="inputs_picker_failed">这台电视不允许 Rozan 打开它的输入端口列表。</string>
     <string name="settings_title">设置</string>
@@ -44,7 +44,7 @@
     <string name="settings_airplay_wake">有人连接时唤醒电视</string>
     <string name="settings_airplay_pin_hint">每次有新连接时，此屏幕上都会显示 PIN 码。</string>
     <string name="settings_airplay_app_installed">已安装单独的 Rozan AirPlay 应用</string>
-    <string name="settings_airplay_app_installed_summary">你不需要它。Rozan 已内置 AirPlay，无需这个单独的应用即可使用。两者都安装时，只有其中一个能接收。选择即可卸载 Rozan AirPlay 应用。</string>
+    <string name="settings_airplay_app_installed_summary">您不需要它。Rozan 已内置 AirPlay，无需这个单独的应用即可使用。两者都安装时，只有其中一个能接收。选择即可卸载 Rozan AirPlay 应用。</string>
     <string name="settings_overlay">显示在其他应用的上层</string>
     <string name="settings_overlay_allowed">允许</string>
     <string name="settings_overlay_not_allowed">不允许</string>
@@ -76,7 +76,7 @@
     <string name="settings_update_downloaded">版本 %1$s 已下载并通过验证。</string>
     <string name="settings_update_waiting_screen">版本 %1$s 已下载。将在没有显示 Rozan 界面时安装，例如打开其他应用时。</string>
     <string name="settings_update_waiting_airplay">版本 %1$s 已下载。将在不再使用 AirPlay 时安装。</string>
-    <string name="settings_update_ask">版本 %1$s 已下载。Android 需要你确认：请选择“安装更新”。</string>
+    <string name="settings_update_ask">版本 %1$s 已下载。Android 需要您确认：请选择“安装更新”。</string>
     <string name="settings_update_installing">正在安装版本 %1$s…</string>
     <string name="settings_update_failure_network">无法连接 GitHub。</string>
     <string name="settings_update_failure_server">GitHub 返回了 HTTP 状态码 %1$d。</string>
@@ -86,7 +86,7 @@
     <string name="settings_update_failure_storage">无法保存下载的文件。请检查可用存储空间。</string>
     <string name="settings_update_failure_install">Android 未安装此更新。</string>
     <string name="settings_update_install">安装更新 %1$s</string>
-    <string name="settings_update_install_summary">Android 会请你确认。安装期间 Rozan 会关闭。</string>
+    <string name="settings_update_install_summary">Android 会请您确认。安装期间 Rozan 会关闭。</string>
     <string name="settings_update_permission">安装未知应用</string>
     <string name="settings_update_permission_allowed">允许</string>
     <string name="settings_update_permission_not_allowed">不允许</string>

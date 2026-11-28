@@ -6,7 +6,7 @@
     <string name="tile_screensaver">Salvaschermo</string>
     <string name="options_app_info">Informazioni app</string>
     <string name="options_uninstall">Disinstalla</string>
-    <string name="inputs_title">Input</string>
+    <string name="inputs_title">Ingressi</string>
     <string name="inputs_state_standby">In standby</string>
     <string name="inputs_state_disconnected">Non collegato</string>
     <string name="inputs_switch_failed">Rozan non può passare a %1$s su questa TV.</string>
@@ -32,7 +32,7 @@
     <string name="settings_home_button_stock">Schermata Home originale: %1$s</string>
     <string name="settings_home_button_on_detail">Il servizio di accessibilità \"%1$s\" apre Rozan ogni volta che compare la schermata Home originale. Non agisce mai su Impostazioni o su altre schermate di sistema.</string>
     <string name="settings_home_button_not_running_detail">Il sistema indica \"%1$s\" come attivo, ma non l\'ha avviato. Disattivalo e riattivalo nelle impostazioni di accessibilità del sistema oppure esegui i comandi adb qui sotto.</string>
-    <string name="settings_home_button_off_detail">Il tasto Home apre la schermata Home originale. Per aprire Rozan, attiva \"%1$s\" nelle impostazioni di accessibilità del sistema. Se questa impostazione non c\'è (Fire TV con Fire OS 8.1.5.5 o versioni successive), esegui questi comandi su un computer con adb:</string>
+    <string name="settings_home_button_off_detail">Il tasto Home apre la schermata Home originale. Per aprire invece Rozan, attiva \"%1$s\" nelle impostazioni di accessibilità del sistema. Se questa impostazione non c\'è (Fire TV con Fire OS 8.1.5.5 o versioni successive), esegui questi comandi su un computer con adb:</string>
     <string name="settings_home_button_none_summary">Il tasto Home apre una schermata che Rozan non sostituisce, come la configurazione o il selettore di app del sistema.</string>
     <string name="settings_home_button_unrecognized">Non presente nell\'elenco delle schermate Home note a Rozan: %1$s</string>
     <string name="settings_home_button_adb_note">Sostituisci LIST con l\'output del primo comando. Se l\'output è null, ometti LIST e i due punti che lo seguono.</string>

@@ -8,8 +8,8 @@
     <string name="options_uninstall">Удалить</string>
     <string name="inputs_title">Входы</string>
     <string name="inputs_state_standby">Режим ожидания</string>
-    <string name="inputs_state_disconnected">Отключен</string>
-    <string name="inputs_switch_failed">Rozan не может переключиться на %1$s на этом телевизоре.</string>
+    <string name="inputs_state_disconnected">Не подключён</string>
+    <string name="inputs_switch_failed">Rozan не может переключить этот телевизор на %1$s.</string>
     <string name="inputs_open_system">Открыть список входов телевизора</string>
     <string name="inputs_picker_failed">Этот телевизор не позволяет Rozan открыть список входов.</string>
     <string name="settings_title">Настройки</string>
@@ -34,7 +34,7 @@
     <string name="settings_home_button_not_running_detail">Система показывает, что «%1$s» включён, но не запустила его. Выключите и снова включите его в настройках специальных возможностей системы или выполните команды adb ниже.</string>
     <string name="settings_home_button_off_detail">Кнопка главного экрана открывает стандартный главный экран. Чтобы вместо него открывался Rozan, включите «%1$s» в настройках специальных возможностей системы. Если такой настройки нет (Fire TV с Fire OS 8.1.5.5 или новее), выполните эти команды на компьютере с adb:</string>
     <string name="settings_home_button_none_summary">Кнопка главного экрана открывает экран, который Rozan не заменяет, например настройку устройства или системный выбор приложения.</string>
-    <string name="settings_home_button_unrecognized">Нет в списке известных Rozan главных экранов: %1$s</string>
+    <string name="settings_home_button_unrecognized">Нет в списке главных экранов, известных Rozan: %1$s</string>
     <string name="settings_home_button_adb_note">Замените LIST тем, что выведет первая команда. Если она выведет null, уберите LIST и двоеточие после него.</string>
     <string name="settings_open_stock_home">Открыть стандартный главный экран</string>
     <string name="settings_open_stock_home_summary">Остаётся открытым, пока вы не откроете другое приложение</string>
@@ -84,7 +84,7 @@
     <string name="settings_update_failure_network">Не удалось подключиться к GitHub.</string>
     <string name="settings_update_failure_server">GitHub ответил кодом HTTP %1$d.</string>
     <string name="settings_update_failure_release">В выпуске нет APK лаунчера и SHA256SUMS, которые Rozan может прочитать.</string>
-    <string name="settings_update_failure_checksum">Загруженный файл не совпадает с размером или с SHA256SUMS.</string>
+    <string name="settings_update_failure_checksum">Загруженный файл не совпадает с ожидаемым размером или с SHA256SUMS.</string>
     <string name="settings_update_failure_package">Загруженный файл не является более новой версией Rozan, подписанной тем же ключом.</string>
     <string name="settings_update_failure_storage">Не удалось сохранить загруженный файл. Проверьте свободное место.</string>
     <string name="settings_update_failure_install">Android не установил обновление.</string>

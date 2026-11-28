@@ -6,6 +6,19 @@ All notable changes to this project are documented here. The format follows
 
 ## [Unreleased]
 
+### Fixed
+- Translations. Japanese: the description of the Home button accessibility
+  service said it reads the screen of the app in front; it now says, as in
+  English, that it reads only which app is in front. Italian: the Inputs
+  button and menu are titled "Ingressi", as Android TV names them and as the
+  rest of the Italian input strings already said. Simplified Chinese and
+  Russian: an input with nothing connected shows "not connected" (未连接,
+  "Не подключён") rather than "disconnected". Simplified Chinese addresses
+  the user as 您 throughout. French: the spaces inside « » are
+  non-breaking, so a line can no longer start with ». Smaller wording fixes
+  in Spanish, French, Italian, Portuguese, Russian, Japanese and Simplified
+  Chinese.
+
 ## [0.1.1] - 2026-11-26
 
 ### Added

@@ -19,7 +19,7 @@
     <string name="settings_keep_awake">Garder l\'écran allumé</string>
     <string name="settings_keep_awake_summary">Tant que l\'écran d\'accueil est affiché</string>
     <string name="settings_screensaver_after">Économiseur d\'écran après</string>
-    <string name="settings_screensaver_needs_keep_awake">Activez « Garder l\'écran allumé » pour utiliser l\'économiseur d\'écran</string>
+    <string name="settings_screensaver_needs_keep_awake">Activez «\u00A0Garder l\'écran allumé\u00A0» pour utiliser l\'économiseur d\'écran</string>
     <string name="settings_backdrop_interval">Changer le fond d\'écran toutes les</string>
     <string name="settings_section_home_button">Bouton Accueil</string>
     <string name="settings_home_button">Bouton Accueil</string>
@@ -30,9 +30,9 @@
     <string name="settings_home_button_checking">Vérification…</string>
     <string name="settings_home_button_native_summary">Rozan est l\'appli d\'accueil du système, donc le bouton Accueil l\'ouvre directement.</string>
     <string name="settings_home_button_stock">Écran d\'accueil d\'origine\u00A0: %1$s</string>
-    <string name="settings_home_button_on_detail">Le service d\'accessibilité « %1$s » ouvre Rozan chaque fois que l\'écran d\'accueil d\'origine s\'affiche. Il n\'agit jamais sur Paramètres ni sur les autres écrans système.</string>
-    <string name="settings_home_button_not_running_detail">Le système indique que « %1$s » est activé, mais ne l\'a pas démarré. Désactivez-le puis réactivez-le dans les paramètres d\'accessibilité du système, ou exécutez les commandes adb ci-dessous.</string>
-    <string name="settings_home_button_off_detail">Le bouton Accueil ouvre l\'écran d\'accueil d\'origine. Pour ouvrir Rozan à la place, activez « %1$s » dans les paramètres d\'accessibilité du système. Si ce paramètre n\'existe pas (Fire TV sous Fire OS 8.1.5.5 ou version ultérieure), exécutez ces commandes sur un ordinateur avec adb\u00A0:</string>
+    <string name="settings_home_button_on_detail">Le service d\'accessibilité «\u00A0%1$s\u00A0» ouvre Rozan chaque fois que l\'écran d\'accueil d\'origine s\'affiche. Il n\'agit jamais sur Paramètres ni sur les autres écrans système.</string>
+    <string name="settings_home_button_not_running_detail">Le système indique que «\u00A0%1$s\u00A0» est activé, mais ne l\'a pas démarré. Désactivez-le puis réactivez-le dans les paramètres d\'accessibilité du système, ou exécutez les commandes adb ci-dessous.</string>
+    <string name="settings_home_button_off_detail">Le bouton Accueil ouvre l\'écran d\'accueil d\'origine. Pour ouvrir Rozan à la place, activez «\u00A0%1$s\u00A0» dans les paramètres d\'accessibilité du système. Si ce paramètre n\'existe pas (Fire TV sous Fire OS 8.1.5.5 ou version ultérieure), exécutez ces commandes sur un ordinateur avec adb\u00A0:</string>
     <string name="settings_home_button_none_summary">Le bouton Accueil ouvre un écran que Rozan ne remplace pas, comme la configuration ou le sélecteur d\'applis du système.</string>
     <string name="settings_home_button_unrecognized">Absent de la liste des écrans d\'accueil connus de Rozan\u00A0: %1$s</string>
     <string name="settings_home_button_adb_note">Remplacez LIST par ce qu\'affiche la première commande. Si elle affiche null, omettez LIST et les deux-points qui le suivent.</string>
@@ -72,17 +72,17 @@
     <string name="settings_update_auto">Mettre à jour automatiquement</string>
     <string name="settings_update_off_summary">Recherche une nouvelle version de Rozan sur GitHub une fois par jour et l\'installe</string>
     <string name="settings_update_not_checked">Vérifie une fois par jour. Pas encore vérifié.</string>
-    <string name="settings_update_up_to_date">Vérifie une fois par jour. À jour : %1$s est la dernière version (vérifié le %2$s).</string>
+    <string name="settings_update_up_to_date">Vérifie une fois par jour. À jour\u00A0: %1$s est la dernière version (vérifié le %2$s).</string>
     <string name="settings_update_updated">Vérifie une fois par jour. Mis à jour vers la version %1$s le %2$s.</string>
-    <string name="settings_update_failed">Vérifie une fois par jour. La dernière vérification (%1$s) a échoué : %2$s</string>
+    <string name="settings_update_failed">Vérifie une fois par jour. La dernière vérification (%1$s) a échoué\u00A0: %2$s</string>
     <string name="settings_update_downloaded">La version %1$s est téléchargée et vérifiée.</string>
     <string name="settings_update_waiting_screen">La version %1$s est téléchargée. Elle s\'installera quand aucun écran de Rozan ne sera affiché, par exemple pendant qu\'une autre appli est ouverte.</string>
     <string name="settings_update_waiting_airplay">La version %1$s est téléchargée. Elle s\'installera quand AirPlay ne sera plus utilisé.</string>
-    <string name="settings_update_ask">La version %1$s est téléchargée. Android demande de la confirmer : sélectionnez Installer la mise à jour.</string>
+    <string name="settings_update_ask">La version %1$s est téléchargée. Android demande de la confirmer\u00A0: sélectionnez Installer la mise à jour.</string>
     <string name="settings_update_installing">Installation de la version %1$s…</string>
     <string name="settings_update_failure_network">Impossible de joindre GitHub.</string>
     <string name="settings_update_failure_server">GitHub a répondu avec le code HTTP %1$d.</string>
-    <string name="settings_update_failure_release">La version publiée n\'a pas d\'APK du lanceur et de SHA256SUMS que Rozan peut lire.</string>
+    <string name="settings_update_failure_release">La version publiée n\'a pas d\'APK du lanceur et de SHA256SUMS lisibles par Rozan.</string>
     <string name="settings_update_failure_checksum">Le téléchargement ne correspond pas à sa taille ou à SHA256SUMS.</string>
     <string name="settings_update_failure_package">Le téléchargement n\'est pas une version plus récente de Rozan signée avec la même clé.</string>
     <string name="settings_update_failure_storage">Le téléchargement n\'a pas pu être enregistré. Vérifiez l\'espace de stockage libre.</string>
@@ -93,5 +93,5 @@
     <string name="settings_update_permission_allowed">Autorisé</string>
     <string name="settings_update_permission_not_allowed">Non autorisé</string>
     <string name="settings_update_permission_allowed_summary">Rozan peut installer les mises à jour qu\'il télécharge.</string>
-    <string name="settings_update_permission_missing_summary">Nécessaire pour la mise à jour automatique. Pour l\'autoriser, exécutez ceci sur un ordinateur avec adb :</string>
+    <string name="settings_update_permission_missing_summary">Nécessaire pour la mise à jour automatique. Pour l\'autoriser, exécutez ceci sur un ordinateur avec adb\u00A0:</string>
 </resources>

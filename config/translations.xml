@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Rules for the translation check, validateTranslations, which ./gradlew check
+  runs (build-logic: TranslationValidator). docs/DEVELOPMENT.md lists every
+  rule. Android Lint already checks for missing and extra translations, missing
+  plural quantities and format errors; this covers what it does not.
+-->
+<translations>
+    <!--
+      Protected terms. Whenever the English text of a string contains one as a
+      whole word, every translation of it must contain it too, spelled exactly
+      the same (case included). Chinese and Japanese may run a term straight
+      into their own characters. Wi-Fi is not here: Simplified Chinese
+      correctly calls it WLAN.
+    -->
+    <term>Rozan</term>
+    <term>AirPlay</term>
+    <term>GitHub</term>
+    <term>adb</term>
+    <term>LIST</term>
+    <term>null</term>
+    <term>SHA256SUMS</term>
+    <term>APK</term>
+    <term>HTTP</term>
+    <term>HDMI-CEC</term>
+    <term>Fire TV</term>
+    <term>Fire OS</term>
+    <term>Android</term>
+    <term>Apple</term>
+    <term>PIN</term>
+    <!--
+      Version numbers with three or more parts, such as 8.1.5.5. Two-part
+      numbers are left out because they may be decimals, which French and
+      others write with a comma (2,4).
+    -->
+    <term-pattern>\d+(?:\.\d+){2,}</term-pattern>
+
+    <!--
+      Quoted cross-references. The string named in string="..." quotes the
+      text of the one named in quotes="...", so in every language it must
+      contain that string's translation, without its format specifiers and
+      any brackets around them ("Install update %1$s" is quoted as "Install
+      update"). The English text must contain it too.
+    -->
+    <quote string="settings_update_ask" quotes="settings_update_install" />
+    <quote string="settings_screensaver_needs_keep_awake" quotes="settings_keep_awake" />
+
+    <!--
+      Translations that may be identical to English, because the English word
+      is also the right word in that language. Only add a word that is
+      genuinely correct there, never to silence an untranslated string. An
+      entry that no longer matches fails the check, so remove it when the
+      translation changes.
+    -->
+    <!-- "Audio" -->
+    <same-as-english locale="es" string="airplay_now_playing_untitled" />
+    <same-as-english locale="fr" string="airplay_now_playing_untitled" />
+    <same-as-english locale="it" string="airplay_now_playing_untitled" />
+    <!-- "Version" -->
+    <same-as-english locale="fr" string="settings_version" />
+    <!-- "%d minute", "%d minutes" -->
+    <same-as-english locale="fr" string="minutes" />
+</translations>

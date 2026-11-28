@@ -5,4 +5,6 @@ plugins {
     alias(libs.plugins.android.lint) apply false
     alias(libs.plugins.kotlin.jvm) apply false
     alias(libs.plugins.baselineprofile) apply false
+    // validateTranslations, which check runs; see docs/DEVELOPMENT.md.
+    id("rozan.translations")
 }

@@ -2,7 +2,7 @@
 <resources>
     <string name="row_enabled">AirPlay 接收器</string>
     <string name="row_wake">连接时唤醒电视</string>
-    <string name="row_wake_hint">当其他设备请求连接并显示其代码时唤醒此设备。如果 HDMI-CEC 已开启，电视也会随之开启。屏幕关闭时也会保持 WLAN 连接。</string>
+    <string name="row_wake_hint">当其他设备请求连接、屏幕上出现其代码时唤醒此设备。如果 HDMI-CEC 已开启，电视也会随之开启。屏幕关闭时也会保持 WLAN 连接。</string>
     <string name="row_name">接收器名称</string>
     <string name="value_on">开启</string>
     <string name="value_off">关闭</string>

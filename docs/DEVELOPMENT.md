@@ -18,7 +18,7 @@ export ANDROID_HOME=/opt/homebrew/share/android-commandlinetools
 
 | Task | Command |
 | --- | --- |
-| Unit tests, Android Lint, ktlint (through Spotless), detekt and the debug APKs. A change is not done until this passes. | `./gradlew check assembleDebug` |
+| Unit tests, Android Lint, ktlint (through Spotless), detekt, the [translation check](#translations) and the debug APKs. A change is not done until this passes. | `./gradlew check assembleDebug` |
 | Format the code | `./gradlew spotlessApply` |
 | One module's JVM tests | `./gradlew :airplay:core:test` |
 | Instrumented tests; needs a running emulator or device | `./gradlew connectedDebugAndroidTest` |
@@ -129,6 +129,34 @@ needs all seven translations, or `translatable="false"` for brand names and
 commands. `AppLanguage` in `:airplay:android` applies the app language:
 `LocaleManager` from API 33, and before that a file shared by both processes
 plus context wrapping.
+
+`./gradlew check` also runs `validateTranslations`, which checks what Lint
+does not. To run it alone: `./gradlew validateTranslations`. It lists every
+problem as `rule: module language string: problem (file:line)` and writes
+the list to `build/reports/translations/violations.txt`. Its settings are in
+`config/translations.xml`, and the code is `TranslationValidator` in
+`build-logic`, whose tests `check` runs too
+(`./gradlew :build-logic:convention:test`).
+
+| Rule | Fails when |
+| --- | --- |
+| `locales` | A module with translatable strings lacks a language that `app/launcher/src/main/res/xml/locales_config.xml` lists, or has one it does not list, or that file and `AppLanguage.Language` list different languages. `values-b+zh+Hans` is `zh-Hans` and `values-pt-rBR` is `pt-BR`. |
+| `format` | A translation's format specifiers (`%1$s`, `%d`) differ from English's. A plural item is compared with English's `other` item. Positional specifiers may change order. |
+| `term` | The English text contains a protected term (`<term>`, or a version number such as 8.1.5.5 through `<term-pattern>`) as a whole word, and the translation does not contain it spelled the same. |
+| `quote` | A string listed in a `<quote>` does not contain the translation of the string it quotes, minus that string's format specifiers and any brackets around them. |
+| `french-spacing` | French has an ordinary space before `:` `;` `?` `!` `»` or after `«`. Use U+00A0 or U+202F, raw or as `\u00A0` or `\u202F`. |
+| `untranslated` | A translation is identical to English and has no `<same-as-english>` entry. |
+| `not-translatable` | A string that English marks `translatable="false"` is translated. |
+| `config` | A config entry no longer applies: an allowed copy that differs from English, or a quote that the English text does not contain. |
+
+To allow a translation that equals English, add
+`<same-as-english locale="fr" string="settings_version" />` to the config.
+Do this only when the English word is also correct in that language, as
+"Audio" is in Spanish, French and Italian. A new string that quotes another
+string's text, such as a setting's name in a hint, needs a
+`<quote string="..." quotes="..." />` entry. The check reads only
+`values-<language>` directories, not ones with other qualifiers such as
+`values-fr-v31`.
 
 ## The dev receiver
 

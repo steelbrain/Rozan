@@ -2,7 +2,7 @@
 <resources>
     <string name="row_enabled">Приёмник AirPlay</string>
     <string name="row_wake">Включать телевизор при подключении</string>
-    <string name="row_wake_hint">Пробуждает это устройство, когда другое устройство запрашивает подключение и появляется код. Если включён HDMI-CEC, вместе с ним включается и телевизор. Также сохраняет Wi-Fi активным при выключенном экране.</string>
+    <string name="row_wake_hint">Пробуждает это устройство, когда другое устройство запрашивает подключение и появляется код. Если включён HDMI-CEC, вместе с устройством включается и телевизор. Также сохраняет Wi-Fi активным при выключенном экране.</string>
     <string name="row_name">Имя приёмника</string>
     <string name="value_on">Вкл.</string>
     <string name="value_off">Выкл.</string>

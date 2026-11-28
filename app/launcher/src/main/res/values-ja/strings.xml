@@ -62,7 +62,7 @@
     <string name="settings_credits_none">背景の写真がインストールされていません。</string>
     <string name="notices_title">オープンソース ライセンス</string>
     <string name="redirect_service_label">Rozan ホームボタン</string>
-    <string name="redirect_service_description">ホームボタンで標準のホーム画面が表示されたときに Rozan を開きます。読み取るのは前面にあるアプリの画面だけで、動作するのは標準のホーム画面のみです。設定、パネル、その他のアプリでは動作しません。キー操作の読み取りやブロックは行いません。</string>
+    <string name="redirect_service_description">ホームボタンで標準のホーム画面が表示されたときに Rozan を開きます。読み取るのはどのアプリの画面が前面にあるかだけで、動作するのは標準のホーム画面上のみです。設定、パネル、その他のアプリでは動作しません。キー操作の読み取りやブロックは行いません。</string>
     <plurals name="minutes">
         <item quantity="other">%d 分</item>
     </plurals>
